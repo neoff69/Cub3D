@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:15:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/25 16:13:06 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/25 16:26:59 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,17 @@ void	analyse_parameters(t_scub *data)
 
 void	key_compare(t_pcub *lst, t_scub *data)
 {
-	int	key_len;
-
-	key_len = ft_strlen(lst->key);
-	if (ft_memcmp(lst->key, "NO", key_len) == 0)
+	if (ft_strncmp(lst->key, "NO", ft_strlen(lst->key) + 1) == 0)
 		lst->type = NO;
-	else if (ft_memcmp(lst->key, "SO", key_len) == 0)
+	else if (ft_strncmp(lst->key, "SO", ft_strlen(lst->key) + 1) == 0)
 		lst->type = SO;
-	else if (ft_memcmp(lst->key, "WE", key_len) == 0)
+	else if (ft_strncmp(lst->key, "WE", ft_strlen(lst->key) + 1) == 0)
 		lst->type = WE;
-	else if (ft_memcmp(lst->key, "EA", key_len) == 0)
+	else if (ft_strncmp(lst->key, "EA", ft_strlen(lst->key) + 1) == 0)
 		lst->type = EA;
-	else if (ft_memcmp(lst->key, "C", key_len) == 0)
+	else if (ft_strncmp(lst->key, "C", ft_strlen(lst->key) + 1) == 0)
 		lst->type = C;
-	else if (ft_memcmp(lst->key, "F", key_len) == 0)
+	else if (ft_strncmp(lst->key, "F", ft_strlen(lst->key) + 1) == 0)
 		lst->type = F;
 	else
 		ft_exit("Invalid key identifier.", data);		
