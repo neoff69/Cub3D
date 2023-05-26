@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/25 16:02:35 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/26 17:14:40 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB_H
 
 # include "../libft/libft.h"
-# include "../mlx/mlx.h"
+// # include "../mlx/mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -29,14 +29,23 @@ int		get_parameters(t_scub *data);
 void	analyse_parameters(t_scub *data);
 
 void	ft_exit(char *info, t_scub *data);
+void	ft_return(char *info, t_scub *data);
 void	*free_2d_array(char **ptr);
 void	free_cub_list(t_pcub *lst);
+
+int     check_char(char c);
+void	check_par_map(char *str, t_scub *data);
 
 t_pcub	*new_node_cmd(char	*key, char *content, t_type id, t_valid check);
 void	lst_cmd_add_back(t_pcub **lst, t_pcub *new);
 t_pcub	*cmd_lst_last(t_pcub **lst);
 int		duplicate_key(t_pcub **lst, t_pcub *node);
 t_pcub	*get_node(t_pcub *lst, t_type type);
+t_pcub	*new_map_node(char *key);
+size_t  map_lst_size(t_pcub **lst);
 void	display_lst(t_pcub *lst);
+
+void    fill_map_array(t_scub *data);
+void    fill_map(t_scub *data);
 
 #endif

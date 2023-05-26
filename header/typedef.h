@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/25 15:53:52 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/26 17:02:37 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ typedef struct s_pcub
 typedef struct s_scub
 {
 	char	**map;
+	t_pcub	*map_fill;
 	t_pcub	*cub;
+	char	*first_wall;
 	int		fd;
 }	t_scub;
 

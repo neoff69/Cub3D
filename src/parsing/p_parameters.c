@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_parameters.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:51:39 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/25 15:24:39 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/26 16:57:54 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_parameters(t_scub *data)
 	while (find_map(data) == 0)
 		;
 	analyse_parameters(data);
-	display_lst(data->cub);
+	fill_map(data);
 	if (check_for_parameters(data->cub) == 0)
 		return (0);
 	if (find_map(data) == 1 && check_for_parameters(data->cub) == 1)
@@ -51,14 +51,16 @@ int	find_map(t_scub *data)
 
 	str = get_next_line(data->fd);
 	if (!str)
-		ft_exit("Error malloc.\n", data);
+		ft_exit("No map.", data);
+	data->first_wall = ft_strdup(str);
 	temp = ft_split(str, ' ');
 	if (!temp)
-		return (free(str), 1);
+		return (free(data->first_wall), free(str), 1);
 	if (!str || str[0] == '\n')
 		return (0);
 	if (fill_line_lst(str, temp, data) == 1)
 		return (free(str), 1);
+	free(data->first_wall);
 	free(str);
 	return (0);
 }
@@ -66,10 +68,12 @@ int	find_map(t_scub *data)
 int	has_walls(char *temp)
 {
 	size_t	index;
-	
+
 	index = check_isspace(temp);
-	if (temp[index] == '1' || temp[index] == 0)
+	if (temp[index] == '1')
+	{
 		return(1);
+	}
 	return (0);
 }
 
