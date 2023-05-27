@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:01:44 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/27 10:58:28 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 12:12:52 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	fill_map_lst(t_scub *data)
 	
 	str = get_next_line(data->fd);
 	if (!str)
-		ft_exit("Empty map.", data);
+		ft_exit("Error, empty map.", data);
 	ptr = new_map_node(str);
 	if (!ptr)
 		ft_exit("Error malloc.", data);
@@ -59,7 +59,7 @@ void	fill_map_array(t_scub *data)
 
 	size = map_lst_size(&data->map_fill);
 	if (size < 3)
-		ft_exit("Map too small", data);
+		ft_exit("Error, map too small", data);
 	data->map = malloc(sizeof(char *) * (size + 1));
 	if (!data->map)
 		ft_exit("Error malloc.", data);
@@ -73,6 +73,6 @@ void	fill_map_array(t_scub *data)
 		temp = temp->next;
 	}
 	data->map[size] = NULL;
-	free_cub_list(data->map_fill);
-	data->map_fill = NULL;
+	// free_cub_list(data->map_fill);
+	// data->map_fill = NULL;
 }

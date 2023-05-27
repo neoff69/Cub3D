@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:04:09 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/27 10:54:02 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 12:12:02 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int parsing_cub(char **arg)
 	data->player = FALSE;
 	if (check_arg(arg[1], ".cub") == 1)
 	{
-		printf("Invalid map format [%s]: *.cub is required.\n", arg[1]);
+		printf("Error, Invalid map format [%s]: *.cub is required.\n", arg[1]);
 		return (free(data), 1);
 	}
 	if (open_arg(data, arg[1], 1) == 1)
@@ -35,7 +35,7 @@ int parsing_cub(char **arg)
 	}
 	if (get_parameters(data) == 1)
 	{
-		ft_return("Invalid parameters in *.cub file.", data);
+		ft_return("Error, Invalid parameters in *.cub file.", data);
 		return (1);
 	}
 	ft_return(NULL, data);

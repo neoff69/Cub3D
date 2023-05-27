@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:16 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/27 10:57:56 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 12:12:13 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	check_par_map(char *str, t_scub *data, int row)
 	while (str[index])
 	{
 		if (check_char(str[index]))
-			ft_exit("Invalid Character", data);
+			ft_exit("Error, Invalid Character", data);
 		check_player(data, str[index], index, row);
 		index++;
 	}
