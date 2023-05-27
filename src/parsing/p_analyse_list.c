@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:15:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/27 12:13:55 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 16:07:54 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	analyse_parameters(t_scub *data)
 	{
     	key_compare(temp, data);
 		if (duplicate_key(&data->cub, temp) == 1)
-			ft_exit("Error, duplicate textures.", data);
+			ft_exit("Error\nDuplicate textures.", data);
 		temp = temp->next;
 	}
 	if (open_content_sprites(data) == 1)
-			ft_exit("Error, invalid texture path.", data);
+			ft_exit("Error\nInvalid texture path.", data);
 	if (check_colors(data) == 1)
-			ft_exit("Error, invalid color RGB code.", data);
+			ft_exit("Error\nInvalid color RGB code.", data);
 	return ;
 }
 
@@ -50,7 +50,7 @@ void	key_compare(t_pcub *lst, t_scub *data)
 	else if (ft_strncmp(lst->key, "F", ft_strlen(lst->key) + 1) == 0)
 		lst->type = F;
 	else
-		ft_exit("Error, invalid key identifier.", data);		
+		ft_exit("Error\nInvalid key identifier.", data);		
 }
 
 int	open_content_sprites(t_scub *data)
@@ -63,7 +63,7 @@ int	open_content_sprites(t_scub *data)
 		if (temp->type < 5)
 		{
 			if (check_arg(temp->content, ".xpm") == 1)
-				ft_exit("Error, nvalid parameter path.", data);
+				ft_exit("Error\nInvalid parameter path.", data);
 			if (open_arg(data, temp->content, 0) == 1)		
 				return (1);
 		}
@@ -80,9 +80,9 @@ int	split_and_check(char *content, t_scub *data)
 	i = 0;
 	colors = ft_split(content, ',');
 	if (!colors)
-		ft_exit("Error malloc", data);
+		ft_exit("Error\nMalloc", data);
 	if (colors[3])
-		ft_exit("Error, invalid RGB format", data);
+		ft_exit("Error\nInvalid RGB format", data);
 	while (i < 3)
 	{
 		if (ft_atoll(colors[i]) < 0 || ft_atoll(colors[i]) > 255)

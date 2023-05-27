@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:51:39 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/27 12:12:32 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 16:08:19 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	find_map(t_scub *data)
 
 	str = get_next_line(data->fd);
 	if (!str)
-		ft_exit("Error, no map.", data);
+		ft_exit("Error\nNo map.", data);
 	data->first_wall = ft_strdup(str);
 	temp = ft_split(str, ' ');
 	if (!temp)
@@ -89,7 +89,7 @@ int	fill_line_lst(char *str, char **temp, t_scub *data)
 	{
 		free(str);
 		free_2d_array(temp);
-		ft_exit("Error, wrong format.", data);
+		ft_exit("Error\nWrong format.", data);
 	}
 	cpy = ft_split(temp[1], '\n');
 	if (!cpy)
@@ -98,7 +98,7 @@ int	fill_line_lst(char *str, char **temp, t_scub *data)
 	free_2d_array(cpy);
 	free_2d_array(temp);
 	if (!ptr)
-		ft_exit("Error, too many arguments for paramaters.\n", data);
+		ft_exit("Error\nToo many arguments for paramaters.\n", data);
 	lst_cmd_add_back(&data->cub, ptr);
 	return (0);
 }

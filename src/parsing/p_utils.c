@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:16 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/27 12:12:13 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 16:08:45 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_player(t_scub *data, char c, int y, int x)
 {
 	if (data->player == VALID 
 		&& (c == 'N' || c == 'W' || c == 'E' || c == 'S'))
-		ft_exit("Multiple player POS", data);
+		ft_exit("Error\nMultiple player POS", data);
 	if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
 	{
 		data->pos_x = x;
@@ -58,14 +58,14 @@ void	check_par_map(char *str, t_scub *data, int row)
 
     index = 0;
     if (str[index] == '\n')
-		ft_exit("Empty line in the map.", data);
+		ft_exit("Error\nEmpty line in the map.", data);
 	index = check_isspace(str);
     if (str[index] == '\n' || str[index] == '\0')
-		ft_exit("Empty line in the map.", data);
+		ft_exit("Error\nEmpty line in the map.", data);
 	while (str[index])
 	{
 		if (check_char(str[index]))
-			ft_exit("Error, Invalid Character", data);
+			ft_exit("Error\nInvalid Character", data);
 		check_player(data, str[index], index, row);
 		index++;
 	}
