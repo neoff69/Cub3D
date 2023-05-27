@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:01:44 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/26 17:24:03 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 10:50:16 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	fill_map_array(t_scub *data)
 	while (temp)
 	{
 		data->map[size] = ft_strdup(temp->key);
-		check_par_map(data->map[size], data);
+		check_par_map(data->map[size], data, size);
 		size++;
 		temp = temp->next;
 	}

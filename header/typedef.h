@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/26 17:02:37 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 10:51:33 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ typedef enum s_type
 	EA,
 	F,
 	C,
+	N,
+	E,
+	S,
+	W,
 	SPRITE,
 	CODE
 }	t_type;
@@ -47,6 +51,10 @@ typedef struct s_scub
 	t_pcub	*map_fill;
 	t_pcub	*cub;
 	char	*first_wall;
+	t_type	player_facing;
+	t_valid	player;
+	int		pos_x;
+	int		pos_y;
 	int		fd;
 }	t_scub;
 

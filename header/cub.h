@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/26 17:14:40 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 10:50:33 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*free_2d_array(char **ptr);
 void	free_cub_list(t_pcub *lst);
 
 int     check_char(char c);
-void	check_par_map(char *str, t_scub *data);
+void	check_par_map(char *str, t_scub *data, int row);
 
 t_pcub	*new_node_cmd(char	*key, char *content, t_type id, t_valid check);
 void	lst_cmd_add_back(t_pcub **lst, t_pcub *new);

@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:16 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/26 17:27:56 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 10:54:19 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,37 @@ int check_char(char c)
     return (1);
 }
 
-void	check_par_map(char *str, t_scub *data)
+void	check_player(t_scub *data, char c, int y, int x)
+{
+	if (data->player == VALID 
+		&& (c == 'N' || c == 'W' || c == 'E' || c == 'S'))
+		ft_exit("Multiple player POS", data);
+	data->pos_x = y;
+	data->pos_y = x;
+	if (c == 'N')
+	{	
+		data->player_facing = N;
+		data->player = VALID;
+	}
+	if (c == 'S')
+	{
+		data->player_facing = S;
+		data->player = VALID;
+		
+	}
+	if (c == 'W')
+	{
+		data->player_facing = W;
+		data->player = VALID;	
+	}
+	if (c == 'E')
+	{
+		data->player_facing = E;
+		data->player = VALID;
+	}
+}
+
+void	check_par_map(char *str, t_scub *data, int row)
 {
 	int	index;
 
@@ -34,6 +64,7 @@ void	check_par_map(char *str, t_scub *data)
 	{
 		if (check_char(str[index]))
 			ft_exit("Invalid Character", data);
+		check_player(data, str[index], index, row);
 		index++;
 	}
 }
