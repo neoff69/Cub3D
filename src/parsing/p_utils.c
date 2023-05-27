@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:16 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/27 10:54:19 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/27 10:57:56 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ void	check_player(t_scub *data, char c, int y, int x)
 	if (data->player == VALID 
 		&& (c == 'N' || c == 'W' || c == 'E' || c == 'S'))
 		ft_exit("Multiple player POS", data);
-	data->pos_x = y;
-	data->pos_y = x;
+	if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
+	{
+		data->pos_x = x;
+		data->pos_y = y;
+	}
 	if (c == 'N')
 	{	
 		data->player_facing = N;
@@ -36,7 +39,6 @@ void	check_player(t_scub *data, char c, int y, int x)
 	{
 		data->player_facing = S;
 		data->player = VALID;
-		
 	}
 	if (c == 'W')
 	{
