@@ -10,7 +10,8 @@ HEADER_FILE				= cub.h	\
 
 DIR						=	src/
 SRC						=	main.c	exit.c	\
-							parsing/p_mapfile.c	parsing/parsing_cub.c	parsing/p_parameters.c parsing/p_list_utils.c	parsing/p_analyse_list.c parsing/p_map_array.c	parsing/p_map_list.c parsing/p_utils.c
+							parsing/parsing_cub.c	parsing/p_parameters.c parsing/p_list_utils.c	\
+							parsing/p_analyse_list.c parsing/p_map_array.c	parsing/p_map_list.c parsing/p_utils.c
 							
 OBJECTS					= $(SRC:%.c=$(BUILD_DIR)%.o)
 	

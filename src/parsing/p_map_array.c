@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:01:44 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/27 16:37:21 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/29 14:47:48 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	fill_map(t_scub *data)
 	lst_cmd_add_back(&data->map_fill, ptr);
 	fill_map_lst(data);
 	fill_map_array(data);
+	if (data->player == FALSE)
+			ft_exit("Error\nNo player.", data);
 	check_open_map(data);
 
 }
@@ -59,7 +61,8 @@ void	fill_map_lst(t_scub *data)
 void	fill_map_array(t_scub *data)
 {
 	t_pcub	*temp;
-
+	int		i;
+	
 	data->size = map_lst_size(&data->map_fill);
 	if (data->size < 3)
 		ft_exit("Error\nMap too small", data);
@@ -67,12 +70,12 @@ void	fill_map_array(t_scub *data)
 	if (!data->map)
 		ft_exit("Error\nMalloc.", data);
 	temp = data->map_fill;
-	data->size = 0;
+	i = 0;
 	while (temp)
 	{
-		data->map[data->size] = ft_strdup(temp->key);
-		check_par_map(data->map[data->size], data, data->size);
-		data->size++;
+		data->map[i] = ft_strdup(temp->key);
+		check_par_map(data->map[i], data);
+		i++;
 		temp = temp->next;
 	}
 	data->map[data->size] = NULL;
@@ -108,6 +111,7 @@ void	check_open_map(t_scub *data)
 		x = 0;
 		while (data->map[y][x])
 		{
+			get_position(data, x, y, data->map[y][x]);
 			is_open(data, y, x);
 			x++;
 		}

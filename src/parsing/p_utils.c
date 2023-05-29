@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:16 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/27 16:08:45 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/29 14:48:39 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,51 @@ int check_char(char c)
     return (1);
 }
 
-void	check_player(t_scub *data, char c, int y, int x)
+void	get_position(t_scub *data, int x, int y, char c)
+{
+	int	len;
+
+	if (c != 'N' && c != 'W' && c != 'E' && c != 'S')
+		return ;
+	data->pos_x = x;
+	data->pos_y = y;
+	len = (int)ft_strlen(data->map[y]);
+	if (x == 0 || y == 0 || y == data->size - 1 || x == len - 2)
+		ft_exit("Error\nPlayer is out of bounds.", data);
+	if ((data->map[y - 1][x] && data->map[y - 1][x] == ' ')
+		|| (data->map[y + 1][x] && data->map[y + 1][x] == ' ')
+		|| (data->map[y][x - 1] && data->map[y][x - 1] == ' ')
+		||  (data->map[y][x + 1] && data->map[y][x + 1] == ' '))
+		ft_exit("Error\nPlayer is out of bounds.", data);
+}
+
+static void	check_valid(t_scub *data)
+{
+	if (data->player_facing >= 7 && data->player_facing <= 10)
+		data->player = VALID;
+}
+
+static void	check_player(t_scub *data, char c)
 {
 	if (data->player == VALID 
 		&& (c == 'N' || c == 'W' || c == 'E' || c == 'S'))
 		ft_exit("Error\nMultiple player POS", data);
-	if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
-	{
-		data->pos_x = x;
-		data->pos_y = y;
-	}
-	if (c == 'N')
-	{	
+	if (c == 'N')	
 		data->player_facing = N;
-		data->player = VALID;
-	}
 	if (c == 'S')
-	{
 		data->player_facing = S;
-		data->player = VALID;
-	}
 	if (c == 'W')
-	{
 		data->player_facing = W;
-		data->player = VALID;	
-	}
 	if (c == 'E')
-	{
 		data->player_facing = E;
-		data->player = VALID;
-	}
 }
 
-void	check_par_map(char *str, t_scub *data, int row)
+void	check_par_map(char *str, t_scub *data)
 {
 	int	index;
 
     index = 0;
+	data->player = FALSE;
     if (str[index] == '\n')
 		ft_exit("Error\nEmpty line in the map.", data);
 	index = check_isspace(str);
@@ -66,7 +74,8 @@ void	check_par_map(char *str, t_scub *data, int row)
 	{
 		if (check_char(str[index]))
 			ft_exit("Error\nInvalid Character", data);
-		check_player(data, str[index], index, row);
+		check_player(data, str[index]);
+		check_valid(data);
 		index++;
-	}
+	}	
 }

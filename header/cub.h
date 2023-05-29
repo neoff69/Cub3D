@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/27 10:50:33 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/29 14:47:59 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		check_arg(char *arg, char *filetype);
 int		open_arg(t_scub *data, char *file, int x);
 int		parsing_cub(char **arg);
 int		get_parameters(t_scub *data);
+void	get_position(t_scub *data, int x, int y, char c);
 void	analyse_parameters(t_scub *data);
 
 void	ft_exit(char *info, t_scub *data);
@@ -34,7 +35,7 @@ void	*free_2d_array(char **ptr);
 void	free_cub_list(t_pcub *lst);
 
 int     check_char(char c);
-void	check_par_map(char *str, t_scub *data, int row);
+void	check_par_map(char *str, t_scub *data);
 
 t_pcub	*new_node_cmd(char	*key, char *content, t_type id, t_valid check);
 void	lst_cmd_add_back(t_pcub **lst, t_pcub *new);
@@ -43,7 +44,6 @@ int		duplicate_key(t_pcub **lst, t_pcub *node);
 t_pcub	*get_node(t_pcub *lst, t_type type);
 t_pcub	*new_map_node(char *key);
 size_t  map_lst_size(t_pcub **lst);
-void	display_lst(t_pcub *lst);
 
 void    fill_map_array(t_scub *data);
 void    fill_map(t_scub *data);

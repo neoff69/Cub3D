@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:04:09 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/27 16:09:10 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/29 14:08:44 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int parsing_cub(char **arg)
 	data->cub = NULL;
 	data->map = NULL;
 	data->map_fill = NULL;
-	data->player = FALSE;
 	if (check_arg(arg[1], ".cub") == 1)
 	{
 		printf("Error\nInvalid map format [%s]: *.cub is required.\n", arg[1]);
@@ -60,4 +59,30 @@ int	open_arg(t_scub *data, char *file, int x)
 			return (1);
 		return (0);
 	}
+}
+
+int	check_arg(char *arg, char *filetype)
+{
+	unsigned int	i;
+	unsigned int	j;
+	char			*needle;
+
+	i = 0;
+	j = 0;
+	needle = ft_strdup(filetype);
+	if (arg == NULL)
+		return (free(needle), 1);
+	while (arg[i])
+	{
+		if (arg[i] == needle[0] && i >= 1)
+		{
+			j = 0;
+			while (needle[j] && (arg[i + j] == needle[j]))
+				j++;
+			if (needle[j] == '\0' && arg[i + j] == '\0')
+				return (free(needle), 0);
+		}
+		i++;
+	}
+	return (free(needle), 1);
 }

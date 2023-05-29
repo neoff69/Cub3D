@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:41:22 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/26 16:40:02 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/29 14:07:17 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,4 @@ t_pcub	*get_node(t_pcub *lst, t_type type)
 		return (lst);
 	else
 		return (NULL);
-}
-
-void	display_lst(t_pcub *lst)
-{
-	while (lst)
-	{
-		printf("key = %s\n", lst->key);
-		// printf("content = %s\n", lst->content);
-		// printf("type = %d\n", lst->type);
-		// printf("valid = %d\n", lst->arg);
-		lst = lst->next;
-	}
-	printf("-------------------------------------------------------\n");
 }

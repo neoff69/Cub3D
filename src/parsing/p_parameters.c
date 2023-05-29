@@ -6,7 +6,7 @@
 /*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:51:39 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/27 16:08:19 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/29 14:06:02 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	has_walls(char *temp)
 	size_t	index;
 
 	index = check_isspace(temp);
-	if (temp[index] == '1')
+	if (temp[index] == '1' || temp[index] == '0')
 	{
 		return(1);
 	}
@@ -98,7 +98,7 @@ int	fill_line_lst(char *str, char **temp, t_scub *data)
 	free_2d_array(cpy);
 	free_2d_array(temp);
 	if (!ptr)
-		ft_exit("Error\nToo many arguments for paramaters.\n", data);
+		ft_exit("Error\nToo many arguments for paramaters.", data);
 	lst_cmd_add_back(&data->cub, ptr);
 	return (0);
 }
