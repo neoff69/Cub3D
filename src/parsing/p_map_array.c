@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:01:44 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/30 13:19:54 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/30 14:50:20 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,33 @@ void	fill_map_lst(t_scub *data)
 	t_pcub	*ptr;
 
 	ptr = NULL;
-	str = get_next_line(data->fd);
+	str = get_next_line(data->fd, 0);
 	if (!str)
 		ft_exit("Error\nEmpty map.", data);
 	ptr = new_map_node(str);
 	if (!ptr)
 	{
 		free(str);
+		str = get_next_line(data->fd, 1);
 		ft_exit("Error\nMalloc.", data);
 	}
 	lst_cmd_add_back(&data->map_fill, ptr);
 	while (str)
 	{
 		free(str);
-		str = get_next_line(data->fd);
+		str = get_next_line(data->fd, 0);
 		if (!str)
+		{
+			str = get_next_line(data->fd, 1);
 			break ;
+		}
 		ptr = new_map_node(str);
 		if (!ptr)
+		{
+			free(str);
+			str = get_next_line(data->fd, 1);
 			ft_exit("Error\nMalloc.", data);
+		}
 		lst_cmd_add_back(&data->map_fill, ptr);
 	}
 }

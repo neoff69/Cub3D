@@ -3,126 +3,110 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gclement <gclement@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 15:28:29 by gclement          #+#    #+#             */
-/*   Updated: 2022/12/06 13:06:13 by gclement         ###   ########.fr       */
+/*   Created: 2022/11/21 14:17:53 by jlaisne           #+#    #+#             */
+/*   Updated: 2023/05/30 14:43:40 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static char	*copy_buffer(char *oldtemp, char *newtemp)
 {
-	char	*dest;
-	size_t	len_s1;
-	size_t	len_s2;
-
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	if (!(s1 == NULL || s2 == NULL))
-	{	
-		dest = malloc((len_s1 + len_s2 + 1) * sizeof(char));
-		if (!dest)
-			return (NULL);
-		ft_strlcpy(dest, ((char *)s1), (len_s1 + 1));
-		ft_strlcat(dest, s2, (len_s1 + (len_s2 + 1)));
-		return (dest);
-	}
-	return (NULL);
-}
-
-char	*copy_line(char *str, int *bytes)
-{
-	char	*dest;
-	int		i;
+	int	i;
 
 	i = 0;
-	dest = NULL;
-	if (str == NULL)
-		return (NULL);
-	if (ft_strchr(str, '\n') != 0 || *bytes != BUFFER_SIZE)
+	while (newtemp && newtemp[i])
 	{
-		while (str[i] && str[i] != '\n')
-			i++;
-		if (str[i] == '\n')
-			i++;
-		dest = malloc((i + 1) * sizeof(char));
-		if (!dest)
-			return (NULL);
-		ft_strlcpy(dest, str, (i + 1));
+		oldtemp[i] = newtemp[i];
+		i++;
 	}
-	return (dest);
+	oldtemp[i] = '\0';
+	return (oldtemp);
 }
 
-char	*read_and_join(char *dest, int fd, int *bytes)
+static int	check_newline(char	*temp)
+{
+	int	i;
+
+	i = 0;
+	if (temp == NULL)
+		return (1);
+	while (temp[i] && temp[i] != '\n')
+		i++;
+	if (temp[i] == '\n')
+		return (1);
+	return (0);
+}
+
+static char	*extract_buffer(char **temp, char *buffer)
 {
 	char	*str;
-	char	*tmp;
-	int		tmp_bytes;
+	char	*hold;
 
-	if (fd < 0)
+	str = ft_strdup(buffer);
+	hold = *temp;
+	*temp = ft_strjoin(hold, str);
+	if (!*temp)
 		return (NULL);
-	tmp_bytes = *bytes;
-	str = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	if (*bytes != 0)
-	{
-		*bytes = read(fd, str, BUFFER_SIZE);
-		if (*bytes == -1)
-			return (NULL);
-		str[*bytes] = '\0';
-	}
-	if (*bytes == 0 && tmp_bytes == -2)
-		return (free (str), dest);
-	if (dest != NULL && str != NULL)
-	{
-		tmp = ft_strjoin(dest, str);
-		return (free(str), free(dest), tmp);
-	}
-	return (str);
+	return (*temp);
 }
 
-char	*search_line(char *str, int fd, int *bytes)
+char	*extract_line(char **line, char **temp)
 {
-	if (str == NULL || fd < 0)
+	int		i;
+	int		j;
+	int		newl;
+	char	*holder;
+	char	*str;
+
+	i = 0;
+	newl = 0;
+	while ((*temp)[i] && (*temp)[i] != '\n')
+		i++;
+	if ((*temp)[i] == '\n')
+		newl = 1;
+	holder = (char *)malloc(sizeof(char) * (i + newl + 1));
+	if (!holder)
 		return (NULL);
-	while ((*bytes == BUFFER_SIZE || *bytes == -2)
-		&& ft_strchr(str, '\n') == 0)
-	{
-		str = read_and_join(str, fd, bytes);
-		if (str == NULL)
-			return (NULL);
-	}
-	return (str);
+	j = -1;
+	while (++j < i + newl)
+		holder[j] = (*temp)[j];
+	holder[j] = '\0';
+	*line = ft_strjoin(*line, holder);
+	str = *temp;
+	*temp = ft_strdup(copy_buffer(str, ft_strchar(*temp, '\n')));
+	if ((*line) == NULL || *temp == NULL)
+		return (free(str), NULL);
+	return (free(str), (*line));
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int error)
 {
-	static char	*overflow[256];
-	char		*str;
-	char		*tmp;
-	int			bytes;
+	char		buffer[BUFFER_SIZE + 1];
+	static char	*temp;
+	char		*line;
+	int			treated;
 
-	bytes = -2;
-	if (read(fd, NULL, 0) == -1)
-		return (free(overflow[fd]), overflow[fd] = NULL, NULL);
-	if (overflow[fd] != 0)
-		str = search_line(overflow[fd], fd, &bytes);
-	else
-		str = read_and_join(NULL, fd, &bytes);
-	if (str == NULL)
-		return (NULL);
-	str = search_line(str, fd, &bytes);
-	if (str == NULL)
-		return (NULL);
-	tmp = copy_line(str, &bytes);
-	if (ft_strchr(str, '\n') != 0 && str != NULL)
-		overflow[fd] = ft_strdup(ft_strchr(str, '\n'));
-	else
-		overflow[fd] = NULL;
-	if (tmp[0] == '\0' || tmp == NULL)
-		return (free(str), free(tmp), free(overflow[fd]), NULL);
-	return (free(str), tmp);
+	line = ft_strdup("");
+	if (error_check(fd, line, temp, error) == NULL)
+		return (temp = NULL, buffer[0] = '\0', free(line), NULL);
+	treated = 0;
+	if (temp)
+		treated = check_newline(temp);
+	while (treated == 0)
+	{
+		treated = read(fd, buffer, BUFFER_SIZE);
+		if (treated == 0 || treated < 0)
+			break ;
+		buffer[treated] = '\0';
+		temp = extract_buffer(&temp, buffer);
+		treated = check_newline(temp);
+	}
+	if (line && temp && treated >= 0)
+		line = extract_line(&line, &temp);
+	if (!temp || !line || line[0] == '\0' || treated < 0)
+		return (free(temp), buffer[0] = '\0', temp = NULL, free(line), NULL);
+	return (line);
 }

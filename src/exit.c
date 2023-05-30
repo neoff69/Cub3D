@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:31:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/30 11:30:27 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/30 13:59:07 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	ft_exit(char *info, t_scub *data)
 
 void	ft_return(char *info, t_scub *data)
 {
+	if (data->first_wall)
+		free(data->first_wall);
 	if (data->cub)
 		free_cub_list(data->cub);
 	if (data->map_fill)

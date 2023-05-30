@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:51:39 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/30 11:20:17 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/30 14:48:13 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	find_map(t_scub *data)
 	char	*str;
 	char	**temp;
 
-	str = get_next_line(data->fd);
+	str = get_next_line(data->fd, 0);
 	if (!str)
 		ft_exit("Error\nNo map.", data);
 	data->first_wall = ft_strdup(str);
@@ -60,13 +60,17 @@ int	find_map(t_scub *data)
 		return (free(str), 1);
 	temp = ft_split(str, ' ');
 	if (!temp)
-		return (free(str), 1);
+	{
+		free(str);
+		str = get_next_line(data->fd, 1);
+		ft_exit("Error\nmalloc.", data);
+	}
 	if (str[0] == '\n')
 		return (free(data->first_wall), free(str), free_2d_array(temp), 0);
-	if (fill_line_lst(str, temp, data) == 1)
-		return (free(str), 1);
-	free(data->first_wall);
 	free(str);
+	if (fill_line_lst(str, temp, data) == 1)
+		return (1);
+	free(data->first_wall);
 	return (0);
 }
 
@@ -88,10 +92,11 @@ int	fill_line_lst(char *str, char **temp, t_scub *data)
 	ptr = NULL;
 	if (has_walls(temp[0]))
 		return (free_2d_array(temp), 1);
-	if (temp[0] && !temp[1])
+	if ((temp[0] && !temp[1]) || temp[2])
 	{
-		free(str);
 		free_2d_array(temp);
+		str = get_next_line(data->fd, 1);
+		free(str);
 		ft_exit("Error\nWrong format.", data);
 	}
 	cpy = ft_split(temp[1], '\n');
@@ -101,7 +106,7 @@ int	fill_line_lst(char *str, char **temp, t_scub *data)
 	free_2d_array(cpy);
 	free_2d_array(temp);
 	if (!ptr)
-		ft_exit("Error\nToo many arguments for paramaters.", data);
+		ft_exit("Error\nmalloc.", data);
 	lst_cmd_add_back(&data->cub, ptr);
 	return (0);
 }
