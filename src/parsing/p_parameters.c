@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_parameters.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:51:39 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/29 14:06:02 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/30 11:20:17 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 int check_for_parameters(t_pcub *lst);
 int	find_map(t_scub *data);
-int	has_walls(char *temp);
 int	fill_line_lst(char *str, char **temp, t_scub *data);
 
 int	get_parameters(t_scub *data)
 {
-	while (find_map(data) == 0)
-		;
+	int	res;
+
+	res = 0;
+	data->first_wall = NULL;
+	while (res == 0)
+		res = find_map(data);
 	analyse_parameters(data);
 	fill_map(data);
 	if (check_for_parameters(data->cub) == 0)
 		return (0);
-	if (find_map(data) == 1 && check_for_parameters(data->cub) == 1)
+	if (res == 1 && check_for_parameters(data->cub) == 1)
 		return (1);
 	return (0);
 }
@@ -53,11 +56,13 @@ int	find_map(t_scub *data)
 	if (!str)
 		ft_exit("Error\nNo map.", data);
 	data->first_wall = ft_strdup(str);
+	if (!data->first_wall)
+		return (free(str), 1);
 	temp = ft_split(str, ' ');
 	if (!temp)
-		return (free(data->first_wall), free(str), 1);
-	if (!str || str[0] == '\n')
-		return (0);
+		return (free(str), 1);
+	if (str[0] == '\n')
+		return (free(data->first_wall), free(str), free_2d_array(temp), 0);
 	if (fill_line_lst(str, temp, data) == 1)
 		return (free(str), 1);
 	free(data->first_wall);
@@ -65,15 +70,13 @@ int	find_map(t_scub *data)
 	return (0);
 }
 
-int	has_walls(char *temp)
+static int	has_walls(char *temp)
 {
 	size_t	index;
 
 	index = check_isspace(temp);
 	if (temp[index] == '1' || temp[index] == '0')
-	{
 		return(1);
-	}
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:09:16 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/29 14:48:39 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/30 13:21:31 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ static void	check_valid(t_scub *data)
 		data->player = VALID;
 }
 
-static void	check_player(t_scub *data, char c)
+static void	check_player(t_scub *data, char c, char **map)
 {
 	if (data->player == VALID 
 		&& (c == 'N' || c == 'W' || c == 'E' || c == 'S'))
+	{
+		free_2d_array(map);
 		ft_exit("Error\nMultiple player POS", data);
+	}
 	if (c == 'N')	
 		data->player_facing = N;
 	if (c == 'S')
@@ -59,22 +62,31 @@ static void	check_player(t_scub *data, char c)
 		data->player_facing = E;
 }
 
-void	check_par_map(char *str, t_scub *data)
+void	check_par_map(char *str, t_scub *data, char **map)
 {
 	int	index;
 
-    index = 0;
+	index = 0;
 	data->player = FALSE;
-    if (str[index] == '\n')
+	if (str[index] == '\n')
+	{
+		free_2d_array(map);
 		ft_exit("Error\nEmpty line in the map.", data);
+	}
 	index = check_isspace(str);
-    if (str[index] == '\n' || str[index] == '\0')
+	if (str[index] == '\n' || str[index] == '\0')
+	{
+		free_2d_array(map);
 		ft_exit("Error\nEmpty line in the map.", data);
+	}
 	while (str[index])
 	{
-		if (check_char(str[index]))
+		if (check_char(str[index]) )
+		{
+			free_2d_array(map);
 			ft_exit("Error\nInvalid Character", data);
-		check_player(data, str[index]);
+		}
+		check_player(data, str[index], map);
 		check_valid(data);
 		index++;
 	}	

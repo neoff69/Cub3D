@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_map_array.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:01:44 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/29 14:47:48 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/30 13:19:54 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,44 @@
 #include <stdbool.h>
 
 void	fill_map_lst(t_scub *data);
-void	fill_map_array(t_scub *data);
+char	**fill_map_array(t_scub *data);
 void	check_open_map(t_scub *data);
 
 void	fill_map(t_scub *data)
 {
     t_pcub	*ptr;
 
+	data->map_fill = NULL;
+	data->player_facing = 0;
+	ptr = NULL;
 	ptr = new_map_node(data->first_wall);
+	free(data->first_wall);
+	data->first_wall = NULL;
 	if (!ptr)
 		ft_exit("Error\nMalloc.", data);
 	lst_cmd_add_back(&data->map_fill, ptr);
 	fill_map_lst(data);
-	fill_map_array(data);
+	data->map = fill_map_array(data);
 	if (data->player == FALSE)
 			ft_exit("Error\nNo player.", data);
 	check_open_map(data);
-
 }
 
 void	fill_map_lst(t_scub *data)
 {
     char	*str;
 	t_pcub	*ptr;
-	
+
+	ptr = NULL;
 	str = get_next_line(data->fd);
 	if (!str)
 		ft_exit("Error\nEmpty map.", data);
 	ptr = new_map_node(str);
 	if (!ptr)
+	{
+		free(str);
 		ft_exit("Error\nMalloc.", data);
+	}
 	lst_cmd_add_back(&data->map_fill, ptr);
 	while (str)
 	{
@@ -58,29 +66,36 @@ void	fill_map_lst(t_scub *data)
 	}
 }
 
-void	fill_map_array(t_scub *data)
+char	**fill_map_array(t_scub *data)
 {
 	t_pcub	*temp;
+	char	**tab;
 	int		i;
-	
+
 	data->size = map_lst_size(&data->map_fill);
 	if (data->size < 3)
 		ft_exit("Error\nMap too small", data);
-	data->map = malloc(sizeof(char *) * (data->size + 1));
-	if (!data->map)
+	tab = ft_calloc((data->size + 1), sizeof(char *));
+	if (!tab)
 		ft_exit("Error\nMalloc.", data);
 	temp = data->map_fill;
 	i = 0;
 	while (temp)
 	{
-		data->map[i] = ft_strdup(temp->key);
-		check_par_map(data->map[i], data);
+		tab[i] = ft_strdup(temp->key);
+		if (!tab[i])
+		{
+			free_2d_array(tab);
+			ft_exit("Error\nMalloc.", data);
+		}
+		check_par_map(tab[i], data, tab);
 		i++;
 		temp = temp->next;
 	}
-	data->map[data->size] = NULL;
+	tab[data->size] = NULL;
 	free_cub_list(data->map_fill);
 	data->map_fill = NULL;
+	return (tab);
 }
 
 static void	is_open(t_scub *data, int y, int x)

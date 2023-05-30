@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:04:09 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/29 14:08:44 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/30 13:06:01 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int parsing_cub(char **arg)
 	if (open_arg(data, arg[1], 1) == 1)
 	{
 		printf("Error\nCannot open [%s] map.\n", arg[1]);
-		return (close(data->fd), free(data), 1);
+		return (free(data), 1);
 	}
 	if (get_parameters(data) == 1)
 	{
@@ -57,7 +57,7 @@ int	open_arg(t_scub *data, char *file, int x)
 		fd = open(file, O_RDONLY);
 		if (fd < 0)
 			return (1);
-		return (0);
+		return (close (fd), 0);
 	}
 }
 

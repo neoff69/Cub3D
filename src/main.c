@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:46 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/25 14:38:14 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/30 10:52:30 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	main(int argc, char **argv)
 	}
 	if (parsing_cub(argv) == 1)
 		return (1);
+	printf("All Good\n");
 	return (0);
 }

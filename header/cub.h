@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/29 14:47:59 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/30 13:16:51 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*free_2d_array(char **ptr);
 void	free_cub_list(t_pcub *lst);
 
 int     check_char(char c);
-void	check_par_map(char *str, t_scub *data);
+void	check_par_map(char *str, t_scub *data, char **map);
 
 t_pcub	*new_node_cmd(char	*key, char *content, t_type id, t_valid check);
 void	lst_cmd_add_back(t_pcub **lst, t_pcub *new);
@@ -45,7 +45,7 @@ t_pcub	*get_node(t_pcub *lst, t_type type);
 t_pcub	*new_map_node(char *key);
 size_t  map_lst_size(t_pcub **lst);
 
-void    fill_map_array(t_scub *data);
+char    **fill_map_array(t_scub *data);
 void    fill_map(t_scub *data);
 
 #endif

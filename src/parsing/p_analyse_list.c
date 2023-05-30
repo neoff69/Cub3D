@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_analyse_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:15:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/27 16:07:54 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/30 10:26:50 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	analyse_parameters(t_scub *data)
 	temp = data->cub;
 	while (temp)
 	{
-    	key_compare(temp, data);
+		key_compare(temp, data);
 		if (duplicate_key(&data->cub, temp) == 1)
 			ft_exit("Error\nDuplicate textures.", data);
 		temp = temp->next;
@@ -82,13 +82,17 @@ int	split_and_check(char *content, t_scub *data)
 	if (!colors)
 		ft_exit("Error\nMalloc", data);
 	if (colors[3])
+	{
+		free_2d_array(colors);
 		ft_exit("Error\nInvalid RGB format", data);
+	}
 	while (i < 3)
 	{
 		if (ft_atoll(colors[i]) < 0 || ft_atoll(colors[i]) > 255)
-			return (1);
+			return (free_2d_array(colors), 1);
 		i++;
 	}
+	free_2d_array(colors);
 	return (0);
 }
 

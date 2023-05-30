@@ -18,8 +18,8 @@ OBJECTS					= $(SRC:%.c=$(BUILD_DIR)%.o)
 LIBFT					= libft.a
 LIB_DIR					= libft/
 
-#MINILIB					= libmlx.a
-#MINILIB_DIR				= mlx/
+MINILIB					= libmlx.a
+MINILIB_DIR				= mlx/
 
 GCC						= cc
 CFLAGS					= -Wall -Werror -Wextra
@@ -32,7 +32,7 @@ $(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)* libft Makefile
 						@mkdir -p $(@D)
 						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I$(LIB_DIR) -I/usr/include -O3 -c $< -o $@
 
-all: 					clear mkbuild lib $(HEADER_DIR) $(NAME) 
+all: 					clear mkbuild lib minilibx $(HEADER_DIR) $(NAME) 
 						
 mkbuild:
 						@mkdir -p build
@@ -49,8 +49,8 @@ sanit :					$(OBJECTS) $(LIB_DIR)$(LIBFT)
 lib:
 						@make -C $(LIB_DIR)
 
-#minilibx:
-#						@make -C $(MINILIB_DIR)
+minilibx:
+						@make -C $(MINILIB_DIR)
 						
 clean:					
 						@${RM} $(OBJECTS)
