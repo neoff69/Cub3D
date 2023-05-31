@@ -1,4 +1,4 @@
-.PHONY:					all $(NAME) clear mkbuild lib minilibx clear clean fclean re sanitize
+.PHONY:					all $(NAME) clear mkbuild lib minilibx clean fclean re sanitize
 
 NAME					= cub3D
 
@@ -11,7 +11,8 @@ HEADER_FILE				= cub.h	\
 DIR						=	src/
 SRC						=	main.c	exit.c	\
 							parsing/parsing_cub.c	parsing/p_parameters.c parsing/p_list_utils.c	\
-							parsing/p_analyse_list.c parsing/p_map_array.c	parsing/p_map_utils.c parsing/p_utils.c
+							parsing/p_analyse_list.c parsing/p_map_array.c	parsing/p_map_utils.c parsing/p_utils.c	\
+							exec/exec.c
 							
 OBJECTS					= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
@@ -19,8 +20,9 @@ LIBFT					= libft.a
 LIB_DIR					= libft/
 
 MINILIB					= libmlx.a
-MINILIB_DIR				= mlx/
+MINILIB_DIR				= minilibx-linux/
 
+LINUX = -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm -lz
 GCC						= cc
 CFLAGS					= -Wall -Werror -Wextra
 SANITIZE				= $(CFLAGS) -g3 -fsanitize=address
@@ -41,7 +43,7 @@ clear:
 						$(CLEAR)
 						
 $(NAME): 				$(OBJECTS) $(LIB_DIR)$(LIBFT)
-						$(GCC) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(MINILIB_DIR)$(MINILIB)
+						$(GCC) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(MINILIB_DIR)$(MINILIB) $(LINUX)
 
 sanit :					$(OBJECTS) $(LIB_DIR)$(LIBFT)
 						$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(MINILIB_DIR)$(MINILIB)
