@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/31 12:35:31 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/31 19:01:58 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define KEY_T 116
 # define KEY_U 117
 # define KEY_V 118
-# define KEY_W 122
+# define KEY_W 119
 # define KEY_X 120
 # define KEY_Y 121
 # define KEY_Z 122
@@ -59,4 +59,5 @@
 # define KEY_9 231
 # define KEY_ESCAPE 65307
 # define KEY_SPACE 32
+# define SQUARE_SIZE 10
 #endif

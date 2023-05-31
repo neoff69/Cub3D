@@ -12,7 +12,13 @@ DIR						=	src/
 SRC						=	main.c	exit.c	\
 							parsing/parsing_cub.c	parsing/p_parameters.c parsing/p_list_utils.c	\
 							parsing/p_analyse_list.c parsing/p_map_array.c	parsing/p_map_utils.c parsing/p_utils.c	\
-							exec/exec_cub.c
+							exec/exec_cub.c \
+							exec/hook/hook.c \
+							exec/hook/hook_deplacement.c \
+							exec/display/display_game.c \
+							exec/display/display_utils.c \
+							exec/display/minimap/display_minimap.c \
+							exec/display/minimap/display_minimap_character.c \
 							
 OBJECTS					= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
@@ -22,7 +28,7 @@ LIB_DIR					= libft/
 MINILIB					= libmlx.a
 MINILIB_DIR				= minilibx-linux/
 
-LINUX = -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm -lz
+LINUX 					= -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm -lz
 GCC						= cc
 CFLAGS					= -Wall -Werror -Wextra -g3
 SANITIZE				= $(CFLAGS) -g3 -fsanitize=address

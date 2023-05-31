@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/31 12:49:21 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/31 18:40:02 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,17 @@ typedef struct s_mlx
 	void	*mlx_win;
 	void	*img;
 	char	*addr;
+	int		bit;
+	int		len;
+	int		endian;
 }	t_mlx;
 
 typedef struct s_exec
 {
 	t_mlx	mlx;
 	t_scub	data;
+	int		vertical_movement;
+	int		horizontal_movement;
 }	t_exec;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/31 12:55:13 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/31 18:54:26 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,19 @@ void	fill_map(t_scub *data);
 
 //EXEC
 int		exec_cub(t_exec *exec);
+
+//DISPLAY
+void	display_game(t_exec *exec);
+void	display_minimap(t_exec *exec);
+void	display_minimap_character(t_exec *exec);
+void	draw_square(int y, int x, int color, t_exec *exec);
+
+//HOOK
+void	hook(t_exec *exec);
+void	minimap_deplacement(t_exec *exec, int keycode);
+
+//UTILS
+void	my_mlx_pixel_put(t_exec *exec, int x, int y, int color);
+void	set_image_win(t_exec *exec);
 
 #endif
