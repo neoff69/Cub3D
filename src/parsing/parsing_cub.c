@@ -6,13 +6,13 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:04:09 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/30 13:06:01 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/31 10:08:10 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int parsing_cub(char **arg)
+int	parsing_cub(char **arg)
 {
 	t_scub	*data;
 
@@ -43,7 +43,7 @@ int parsing_cub(char **arg)
 
 int	open_arg(t_scub *data, char *file, int x)
 {
-	int fd;
+	int	fd;
 
 	if (x == 1)
 	{

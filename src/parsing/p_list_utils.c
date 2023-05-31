@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_list_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:41:22 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/29 14:07:17 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/31 10:02:31 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	duplicate_key(t_pcub **lst, t_pcub *node)
 		if (temp == node && temp->next)
 			temp = temp->next;
 		else if (temp == node && !temp->next)
-			break ;	
+			break ;
 		if (temp->type == node->type)
 			return (1);
 		temp = temp->next;

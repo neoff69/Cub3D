@@ -6,13 +6,13 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:51:39 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/30 14:48:13 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/31 10:05:51 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int check_for_parameters(t_pcub *lst);
+int	check_for_parameters(t_pcub *lst);
 int	find_map(t_scub *data);
 int	fill_line_lst(char *str, char **temp, t_scub *data);
 
@@ -80,7 +80,7 @@ static int	has_walls(char *temp)
 
 	index = check_isspace(temp);
 	if (temp[index] == '1' || temp[index] == '0')
-		return(1);
+		return (1);
 	return (0);
 }
 

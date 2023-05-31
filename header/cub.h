@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/30 13:16:51 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/31 10:10:21 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		duplicate_key(t_pcub **lst, t_pcub *node);
 t_pcub	*get_node(t_pcub *lst, t_type type);
 t_pcub	*new_map_node(char *key);
 size_t  map_lst_size(t_pcub **lst);
+void	fill_map_lst_next(char *str, t_scub *data);
 
 char    **fill_map_array(t_scub *data);
 void    fill_map(t_scub *data);

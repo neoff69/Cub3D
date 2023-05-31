@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:15:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/30 10:26:50 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/31 10:07:50 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	analyse_parameters(t_scub *data)
 		temp = temp->next;
 	}
 	if (open_content_sprites(data) == 1)
-			ft_exit("Error\nInvalid texture path.", data);
+		ft_exit("Error\nInvalid texture path.", data);
 	if (check_colors(data) == 1)
-			ft_exit("Error\nInvalid color RGB code.", data);
+		ft_exit("Error\nInvalid color RGB code.", data);
 	return ;
 }
 
@@ -50,7 +50,7 @@ void	key_compare(t_pcub *lst, t_scub *data)
 	else if (ft_strncmp(lst->key, "F", ft_strlen(lst->key) + 1) == 0)
 		lst->type = F;
 	else
-		ft_exit("Error\nInvalid key identifier.", data);		
+		ft_exit("Error\nInvalid key identifier.", data);
 }
 
 int	open_content_sprites(t_scub *data)
@@ -64,7 +64,7 @@ int	open_content_sprites(t_scub *data)
 		{
 			if (check_arg(temp->content, ".xpm") == 1)
 				ft_exit("Error\nInvalid parameter path.", data);
-			if (open_arg(data, temp->content, 0) == 1)		
+			if (open_arg(data, temp->content, 0) == 1)
 				return (1);
 		}
 		temp = temp->next;
