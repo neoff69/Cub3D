@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/27 14:45:55 by juleslaisne      ###   ########.fr       */
+/*   Updated: 2023/05/31 12:49:21 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,19 @@ typedef struct s_scub
 	int		pos_y;
 	int		fd;
 }	t_scub;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*mlx_win;
+	void	*img;
+	char	*addr;
+}	t_mlx;
+
+typedef struct s_exec
+{
+	t_mlx	mlx;
+	t_scub	data;
+}	t_exec;
 
 #endif

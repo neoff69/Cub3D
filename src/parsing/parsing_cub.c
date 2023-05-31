@@ -3,22 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:04:09 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/31 10:08:10 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/31 12:58:20 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	parsing_cub(char **arg)
+int	parsing_cub(char **arg, t_scub *data)
 {
-	t_scub	*data;
-
-	data = malloc(sizeof(t_scub));
-	if (!data)
-		ft_exit("Error\nMalloc.", NULL);
 	data->cub = NULL;
 	data->map = NULL;
 	data->map_fill = NULL;
@@ -37,7 +32,7 @@ int	parsing_cub(char **arg)
 		ft_return("Error\nInvalid parameters in *.cub file.", data);
 		return (1);
 	}
-	ft_return(NULL, data);
+	//ft_return(NULL, data); A MODIFIER SEGFAULT VU QUE JE RETURN LA STRUCT
 	return (0);
 }
 

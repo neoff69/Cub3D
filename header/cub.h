@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/31 11:08:52 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/05/31 12:55:13 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@
 # include <fcntl.h>
 # include <math.h>
 # include "typedef.h"
+# include "keycode.h"
 
 int		check_arg(char *arg, char *filetype);
 int		open_arg(t_scub *data, char *file, int x);
-int		parsing_cub(char **arg);
+int		parsing_cub(char **arg, t_scub *data);
 int		get_parameters(t_scub *data);
 void	get_position(t_scub *data, int x, int y, char c);
 void	analyse_parameters(t_scub *data);
@@ -34,7 +35,7 @@ void	ft_return(char *info, t_scub *data);
 void	*free_2d_array(char **ptr);
 void	free_cub_list(t_pcub *lst);
 
-int     check_char(char c);
+int		check_char(char c);
 void	check_par_map(char *str, t_scub *data, char **map);
 
 t_pcub	*new_node_cmd(char	*key, char *content, t_type id, t_valid check);
@@ -43,10 +44,13 @@ t_pcub	*cmd_lst_last(t_pcub **lst);
 int		duplicate_key(t_pcub **lst, t_pcub *node);
 t_pcub	*get_node(t_pcub *lst, t_type type);
 t_pcub	*new_map_node(char *key);
-size_t  map_lst_size(t_pcub **lst);
+size_t	map_lst_size(t_pcub **lst);
 void	fill_map_lst_next(char *str, t_scub *data);
 
-char    **fill_map_array(t_scub *data);
-void    fill_map(t_scub *data);
+char	**fill_map_array(t_scub *data);
+void	fill_map(t_scub *data);
+
+//EXEC
+int		exec_cub(t_exec *exec);
 
 #endif
