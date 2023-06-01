@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_algorithm.c                                   :+:      :+:    :+:   */
+/*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/01 14:41:31 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/01 16:24:23 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@ typedef struct s_line
 	float	xincr;
 	float	yincr;
 }	t_line;
-
-static void	get_next_wall(t_exec *exec, int *next_x, int *next_y)
-{
-	while (exec->data.map[*next_y][*next_x] != '1' )
-	{
-		*next_y -= 1;
-	}
-}
 
 static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 {
@@ -44,20 +36,43 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 	line->yincr = dy / line->step;
 }
 
+float rotate_line_x(t_exec *exec, t_line origin, float length) 
+{
+	float	x;
+
+	x = origin.final_x + length * cos(exec->angle);
+	return x;
+}
+
+float rotate_line_y(t_exec *exec, t_line origin, float length)
+{
+	float	y;
+
+	y = origin.final_y + length * sin(exec->angle);
+	return y;
+}
+
 void	draw_line(t_exec *exec, int next_x, int next_y)
 {
 	int		i;
 	t_line	line;
+	float		x;
+	float		y;
 
 	i = 0;
 	set_up_variable(exec, next_x, next_y, &line);
-	line.final_x = exec->actual_x * SQUARE_SIZE + SQUARE_SIZE / 2;
-	line.final_y = exec->actual_y * SQUARE_SIZE + SQUARE_SIZE / 2;
+	line.final_x = (exec->actual_x * SQUARE_SIZE + SQUARE_SIZE / 2);
+	line.final_y = (exec->actual_y * SQUARE_SIZE + SQUARE_SIZE / 2);
+	x = rotate_line_x(exec, line, 30);
+	y = rotate_line_y(exec, line, 30);
+	set_up_variable(exec, x, y, &line);
+	printf("%f == y = %f\n", x, y);
+	printf("%f == y = %f\n", line.final_x, line.final_y);
 	while (i < line.step * SQUARE_SIZE - SQUARE_SIZE / 2)
 	{
-		my_mlx_pixel_put(exec, (int)line.final_x, (int)line.final_y, 0xFF0000);
-		line.final_x = line.final_x + line.xincr;
-		line.final_y = line.final_y + line.yincr;
+		my_mlx_pixel_put(exec, (int)x, (int)y, 0xFF0000);
+		line.final_x = x - line.xincr;
+		line.final_y = y - line.yincr;
 		i++;
 	}
 }

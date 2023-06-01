@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/31 18:58:23 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/01 15:22:57 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	keyhook(int keycode, t_exec *exec)
 	else if (keycode == KEY_W || keycode == KEY_S \
 			|| keycode == KEY_A || keycode == KEY_D)
 		minimap_deplacement(exec, keycode);
+	else if (keycode == KEY_Q || keycode == KEY_E)
+		minimap_rotation(exec, keycode);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/01 14:41:47 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/01 15:24:59 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	draw_square(int y, int x, int color, t_exec *exec);
 //HOOK
 void	hook(t_exec *exec);
 void	minimap_deplacement(t_exec *exec, int keycode);
+void    minimap_rotation(t_exec *exec, int keycode);
 
 //UTILS
 void	my_mlx_pixel_put(t_exec *exec, int x, int y, int color);

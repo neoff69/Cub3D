@@ -15,12 +15,13 @@ SRC						=	main.c	exit.c	\
 							exec/exec_cub.c \
 							exec/hook/hook.c \
 							exec/hook/hook_deplacement.c \
+							exec/hook/hook_rotation.c \
 							exec/display/display_game.c \
 							exec/display/display_utils.c \
 							exec/display/minimap/display_minimap.c \
 							exec/display/minimap/display_minimap_character.c \
 							exec/display/minimap/display_raytracing.c \
-							exec/display/minimap/draw_line_algorithme.c \
+							exec/display/minimap/draw_line_algorithm.c \
 							
 OBJECTS					= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
