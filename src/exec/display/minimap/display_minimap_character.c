@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:31:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/31 19:33:39 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/01 10:49:12 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 void	display_minimap_character(t_exec *exec)
 {
-	int	new_x;
-	int	new_y;
-
-	new_x = exec->data.pos_x * SQUARE_SIZE + exec->horizontal_movement;
-	new_y = exec->data.pos_y * SQUARE_SIZE + exec->vertical_movement;
-	draw_square(new_x, new_y, 0x0000FF, exec);
+	exec->actual_x = exec->data.pos_x * SQUARE_SIZE + exec->horizontal_movement;
+	exec->actual_y = exec->data.pos_y * SQUARE_SIZE + exec->vertical_movement;
+	draw_square(exec->actual_x, exec->actual_y, 0x0000FF, exec);
 }

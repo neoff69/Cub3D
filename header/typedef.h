@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/31 18:40:02 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/01 10:47:32 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_exec
 	t_scub	data;
 	int		vertical_movement;
 	int		horizontal_movement;
+	int		actual_x;
+	int		actual_y;
 }	t_exec;
 
 #endif
