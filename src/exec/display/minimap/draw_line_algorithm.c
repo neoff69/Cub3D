@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_algorithm.c                                   :+:      :+:    :+:   */
+/*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/01 14:41:31 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/01 15:11:56 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@ typedef struct s_line
 	float	xincr;
 	float	yincr;
 }	t_line;
-
-static void	get_next_wall(t_exec *exec, int *next_x, int *next_y)
-{
-	while (exec->data.map[*next_y][*next_x] != '1' )
-	{
-		*next_y -= 1;
-	}
-}
 
 static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 {

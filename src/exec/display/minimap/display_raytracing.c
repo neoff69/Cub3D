@@ -6,12 +6,19 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 10:27:15 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/01 14:41:21 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/01 15:12:07 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
+static void	get_next_wall(t_exec *exec, int *next_x, int *next_y)
+{
+	while (exec->data.map[*next_y][*next_x] != '1' )
+	{
+		*next_y -= 1;
+	}
+}
 
 void	display_raytracing(t_exec *exec)
 {
