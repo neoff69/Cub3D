@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:27:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/31 18:50:18 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/01 10:42:04 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,5 @@ void	display_minimap(t_exec *exec)
 {
 	init_display_minimap(exec);
 	display_minimap_character(exec);
+	display_raytracing(exec);
 }

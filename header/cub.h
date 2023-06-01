@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/31 18:54:26 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/01 10:43:03 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		exec_cub(t_exec *exec);
 void	display_game(t_exec *exec);
 void	display_minimap(t_exec *exec);
 void	display_minimap_character(t_exec *exec);
+void	display_raytracing(t_exec *exec);
 void	draw_square(int y, int x, int color, t_exec *exec);
 
 //HOOK

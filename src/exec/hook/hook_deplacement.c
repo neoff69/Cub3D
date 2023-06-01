@@ -6,41 +6,59 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/31 20:05:08 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/01 10:05:01 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+void	vertical_movement(t_exec *exec, int keycode, int *x, int *y)
+{
+	if (keycode == KEY_S)
+	{
+		*x = ((exec->data.pos_x) * SQUARE_SIZE \
+			+ exec->horizontal_movement) / (SQUARE_SIZE);
+		*y = ((1 + exec->data.pos_y) * SQUARE_SIZE \
+			+ exec->vertical_movement) / (SQUARE_SIZE);
+	}
+	else
+	{
+		*x = (exec->data.pos_x * SQUARE_SIZE \
+			+ exec->horizontal_movement) / (SQUARE_SIZE);
+		*y = (exec->data.pos_y * SQUARE_SIZE \
+			+ exec->vertical_movement - 1) / (SQUARE_SIZE);
+	}
+}
+
+void	horizontal_movement(t_exec *exec, int keycode, int *x, int *y)
+{
+	if (keycode == KEY_D)
+	{
+		*x = ((1 + exec->data.pos_x) * SQUARE_SIZE \
+			+ exec->horizontal_movement) / (SQUARE_SIZE);
+		*y = ((exec->data.pos_y) * SQUARE_SIZE \
+			+ exec->vertical_movement) / (SQUARE_SIZE);
+	}
+	else
+	{
+		*x = (exec->data.pos_x * SQUARE_SIZE \
+			+ exec->horizontal_movement - 1) / (SQUARE_SIZE);
+		*y = (exec->data.pos_y * SQUARE_SIZE \
+			+ exec->vertical_movement) / (SQUARE_SIZE);
+	}
+}
 
 int	check_if_wall(t_exec *exec, int keycode)
 {
 	int	x;
 	int	y;
 
-	(void)keycode;
 	x = 0;
 	y = 0;
-	if (keycode == KEY_S)
-	{
-		x = ((exec->data.pos_x) * SQUARE_SIZE + exec->horizontal_movement) / (SQUARE_SIZE);
-		y = ((1 + exec->data.pos_y) * SQUARE_SIZE + exec->vertical_movement) / (SQUARE_SIZE);
-	}
-	else if (keycode == KEY_D)
-	{
-		x = ((1 + exec->data.pos_x) * SQUARE_SIZE + exec->horizontal_movement) / (SQUARE_SIZE);
-		y = ((exec->data.pos_y) * SQUARE_SIZE + exec->vertical_movement) / (SQUARE_SIZE);
-	}
-	else if (keycode == KEY_A)
-	{
-		x = (exec->data.pos_x * SQUARE_SIZE + exec->horizontal_movement - 1) / (SQUARE_SIZE);
-		y = (exec->data.pos_y * SQUARE_SIZE + exec->vertical_movement) / (SQUARE_SIZE);
-	}
-	else if (keycode == KEY_W)
-	{
-		x = (exec->data.pos_x * SQUARE_SIZE + exec->horizontal_movement) / (SQUARE_SIZE);
-		y = (exec->data.pos_y * SQUARE_SIZE + exec->vertical_movement - 1) / (SQUARE_SIZE);
-	}
-	//printf("%c %d %d\n", exec->data.map[y][x], y, x);
+	if (keycode == KEY_S || keycode == KEY_W)
+		vertical_movement(exec, keycode, &x, &y);
+	else
+		horizontal_movement(exec, keycode, &x, &y);
 	if (exec->data.map[y][x] == '1')
 		return (1);
 	return (0);
