@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:51:39 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/31 10:05:51 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/01 12:51:16 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	get_parameters(t_scub *data)
 
 	res = 0;
 	data->first_wall = NULL;
+	data->map = NULL;
 	while (res == 0)
 		res = find_map(data);
 	analyse_parameters(data);
@@ -71,6 +72,7 @@ int	find_map(t_scub *data)
 	if (fill_line_lst(str, temp, data) == 1)
 		return (1);
 	free(data->first_wall);
+	data->first_wall = NULL;
 	return (0);
 }
 

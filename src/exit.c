@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:31:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/30 13:59:07 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/01 12:53:44 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	ft_exit(char *info, t_scub *data)
 			free_2d_array(data->map);
 		if (data->fd != -1)
 			close(data->fd);
-		if (data)
-			free(data);
 	}
 	exit (1);
 }
@@ -64,8 +62,6 @@ void	ft_return(char *info, t_scub *data)
 		printf("%s\n", info);
 	if (data->fd != -1)
 		close(data->fd);
-	if (data)
-		free(data);
 }
 
 void	*free_2d_array(char **ptr)
