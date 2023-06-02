@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 15:14:47 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 15:19:56 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	horizontal_movement(t_exec *exec, int keycode, int *x, int *y)
 		// if (exec->angle > 2 * PI)
 		// 	exec->angle = 0;
 	}
-	return (0);
 }
 
 int    check_in_map(float x, float y, t_exec *exec, int keycode)
