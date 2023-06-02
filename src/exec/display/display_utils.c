@@ -6,18 +6,21 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 12:37:13 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 15:44:15 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	my_mlx_pixel_put(t_exec *exec, int x, int y, int color)
+int	my_mlx_pixel_put(t_exec *exec, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = exec->mlx.addr + (y * exec->mlx.len + x * (exec->mlx.bit / 8));
+	if (*(unsigned int *)dst == 0x808080)
+	 return (1);
 	*(unsigned int *)dst = color;
+	return (0);
 }
 
 void	set_image_win(t_exec *exec)

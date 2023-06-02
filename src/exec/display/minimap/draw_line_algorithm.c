@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 15:20:46 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 15:45:23 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	draw_line(t_exec *exec)
 	set_up_variable(exec, exec->actual_x, exec->actual_y + 10, &line);
 	while (num < 80)
 	{
-		line.final_x = ((exec->actual_x * SQUARE_SIZE + SQUARE_SIZE / 2));
-		line.final_y = ((exec->actual_y * SQUARE_SIZE + SQUARE_SIZE / 2));
+		line.final_x = ((exec->actual_x + SQUARE_SIZE / 2));
+		line.final_y = ((exec->actual_y + SQUARE_SIZE / 2));
 		i = 0;
 		while (i < line.step * SQUARE_SIZE)
 		{
@@ -79,7 +79,8 @@ void	draw_line(t_exec *exec)
 			y = rotate_line_y(&line, i, ang);
 			if (x >= 1920 ||  x <= 0 || y >= 1080 || y <= 0)
 				break ;
-			my_mlx_pixel_put(exec, (int)x, (int)y, 0xFF0000);
+			if (my_mlx_pixel_put(exec, (int)x, (int)y, 0xFF0000))
+				break ;
 			i++;
 		}
 		ang += RAD;
