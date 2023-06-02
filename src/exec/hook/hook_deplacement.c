@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hook_deplacement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 13:47:45 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/02 14:48:45 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	vertical_movement(t_exec *exec, int keycode, float *x, float *y)
+void	vertical_movement(t_exec *exec, int keycode, int *x, int *y)
 {
 	if (keycode == KEY_S)
 	{
@@ -30,7 +30,7 @@ void	vertical_movement(t_exec *exec, int keycode, float *x, float *y)
 	}
 }
 
-void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
+void	horizontal_movement(t_exec *exec, int keycode, int *x, int *y)
 {
 	if (keycode == KEY_D)
 	{
@@ -39,9 +39,9 @@ void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
 		*y = ((exec->data.pos_y) * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
 
-		// exec->angle += 0.1;
-		// if (exec->angle > 2 * PI)
-		// 	exec->angle = 0;
+		// exec->angle -= 0.1;
+		// if (exec->angle < 0)
+		// 	exec->angle = 2 * PI;
 	}
 	else
 	{
@@ -50,31 +50,16 @@ void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
 		*y = (exec->data.pos_y * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
 
-		// exec->angle -= 0.1;
-		// if (exec->angle < 0)
-		// 	exec->angle = 2 * PI;
+		// exec->angle += 0.1;
+		// if (exec->angle > 2 * PI)
+		// 	exec->angle = 0;
 	}
-}
-
-int	check_in_map(float x, float y, t_exec *exec, int keycode)
-{
-	if (exec->data.map[(int)y][(int)x] == '1')
-		return (1);
-	if (keycode == KEY_A && y != (int)y)
-	{
-		if (exec->data.map[(int)y + 1][(int)x] == '1')
-			return (1);
-	}
-	if (keycode == KEY_W && x != (int) x)
-		if (exec->data.map[(int)y][(int)x + 1] == '1')
-			return (1);
-	return (0);
 }
 
 int	check_if_wall(t_exec *exec, int keycode)
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 
 	x = 0;
 	y = 0;
@@ -82,7 +67,7 @@ int	check_if_wall(t_exec *exec, int keycode)
 		vertical_movement(exec, keycode, &x, &y);
 	else
 		horizontal_movement(exec, keycode, &x, &y);
-	if (check_in_map(x, y, exec, keycode))
+	if (exec->data.map[y][x] == '1')
 		return (1);
 	return (0);
 }
