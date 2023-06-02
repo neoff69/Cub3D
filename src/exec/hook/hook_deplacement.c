@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_deplacement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 15:23:58 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 15:41:51 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,58 +56,58 @@ void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
 	}
 }
 
-int    check_in_map(float x, float y, t_exec *exec, int keycode)
+int	check_in_map(float x, float y, t_exec *exec, int keycode)
 {
-    if (exec->data.map[(int)y][(int)x] == '1')
-        return (1);
-    if (keycode == KEY_A && y != (int)y)
-    {
-        if (exec->data.map[(int)y + 1][(int)x] == '1')
-            return (1);
-    }
-    else if (keycode == KEY_D && y != (int) y)
-    {
-        if (exec->data.map[(int)y + 1][(int)x] == '1')
-            return (1);
-    }
-    else if (keycode == KEY_W && x != (int) x)
-    {
-        if (exec->data.map[(int)y][(int)x + 1] == '1')
-            return (1);
-    }
-    else if (keycode == KEY_S && x != (int) x)
-    {
-        if (exec->data.map[(int)y][(int)x + 1] == '1')
-            return (1);
-    }
-    return (0);
+	if (exec->data.map[(int)y][(int)x] == '1')
+		return (1);
+	if (keycode == KEY_A && y != (int)y)
+	{
+		if (exec->data.map[(int)y + 1][(int)x] == '1')
+			return (1);
+	}
+	else if (keycode == KEY_D && y != (int) y)
+	{
+		if (exec->data.map[(int)y + 1][(int)x] == '1')
+			return (1);
+	}
+	else if (keycode == KEY_W && x != (int) x)
+	{
+		if (exec->data.map[(int)y][(int)x + 1] == '1')
+			return (1);
+	}
+	else if (keycode == KEY_S && x != (int) x)
+	{
+		if (exec->data.map[(int)y][(int)x + 1] == '1')
+			return (1);
+	}
+	return (0);
 }
 
-int    check_if_wall(t_exec *exec, int keycode)
+int	check_if_wall(t_exec *exec, int keycode)
 {
-    float    x;
-    float    y;
+	float	x;
+	float	y;
 
-    x = 0;
-    y = 0;
-    if (keycode == KEY_S || keycode == KEY_W)
-        vertical_movement(exec, keycode, &x, &y);
-    else
-        horizontal_movement(exec, keycode, &x, &y);
-    if (check_in_map(x, y, exec, keycode))
-        return (1);
-    return (0);
+	x = 0;
+	y = 0;
+	if (keycode == KEY_S || keycode == KEY_W)
+		vertical_movement(exec, keycode, &x, &y);
+	else
+		horizontal_movement(exec, keycode, &x, &y);
+	if (check_in_map(x, y, exec, keycode))
+		return (1);
+	return (0);
 }
 
-void    minimap_deplacement(t_exec *exec, int keycode)
+void	minimap_deplacement(t_exec *exec, int keycode)
 {
-    if (keycode == KEY_W && check_if_wall(exec, keycode) == 0)
-        exec->vertical_movement -= 10;
-    else if (keycode == KEY_S && check_if_wall(exec, keycode) == 0)
-        exec->vertical_movement += 10;
-    else if (keycode == KEY_D && check_if_wall(exec, keycode) == 0)
-        exec->horizontal_movement += 10;
-    else if (keycode == KEY_A && check_if_wall(exec, keycode) == 0)
-        exec->horizontal_movement -= 10;
-    set_image_win(exec);
+	if (keycode == KEY_W && check_if_wall(exec, keycode) == 0)
+		exec->vertical_movement -= 10;
+	else if (keycode == KEY_S && check_if_wall(exec, keycode) == 0)
+		exec->vertical_movement += 10;
+	else if (keycode == KEY_D && check_if_wall(exec, keycode) == 0)
+		exec->horizontal_movement += 10;
+	else if (keycode == KEY_A && check_if_wall(exec, keycode) == 0)
+		exec->horizontal_movement -= 10;
+	set_image_win(exec);
 }

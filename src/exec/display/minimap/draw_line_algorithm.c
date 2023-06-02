@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 15:20:46 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 15:43:18 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 typedef struct s_line
 {
-float    final_x;
-float    final_y;
-int        step;
-float    xincr;
-float    yincr;
+	float    final_x;
+	float    final_y;
+	int        step;
+	float    xincr;
+	float    yincr;
 }    t_line;
 
 static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 {
-float    dx;
-float    dy;
+	float	dx;
+	float	dy;
 
 	dx = next_x - exec->actual_x;
 	dy = next_y - exec->actual_y;
@@ -70,8 +70,8 @@ void	draw_line(t_exec *exec)
 	set_up_variable(exec, exec->actual_x, exec->actual_y + 10, &line);
 	while (num < 80)
 	{
-		line.final_x = ((exec->actual_x * SQUARE_SIZE + SQUARE_SIZE / 2));
-		line.final_y = ((exec->actual_y * SQUARE_SIZE + SQUARE_SIZE / 2));
+		line.final_x = ((exec->actual_x + SQUARE_SIZE / 2));
+		line.final_y = ((exec->actual_y + SQUARE_SIZE / 2));
 		i = 0;
 		while (i < line.step * SQUARE_SIZE)
 		{
