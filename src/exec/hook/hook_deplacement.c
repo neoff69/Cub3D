@@ -6,13 +6,13 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 15:19:56 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 15:23:58 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	vertical_movement(t_exec *exec, int keycode, int *x, int *y)
+void	vertical_movement(t_exec *exec, int keycode, float *x, float *y)
 {
 	if (keycode == KEY_S)
 	{
@@ -30,7 +30,7 @@ void	vertical_movement(t_exec *exec, int keycode, int *x, int *y)
 	}
 }
 
-void	horizontal_movement(t_exec *exec, int keycode, int *x, int *y)
+void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
 {
 	if (keycode == KEY_D)
 	{
@@ -83,31 +83,31 @@ int    check_in_map(float x, float y, t_exec *exec, int keycode)
     return (0);
 }
 
-int	check_if_wall(t_exec *exec, int keycode)
+int    check_if_wall(t_exec *exec, int keycode)
 {
-	int	x;
-	int	y;
+    float    x;
+    float    y;
 
-	x = 0;
-	y = 0;
-	if (keycode == KEY_S || keycode == KEY_W)
-		vertical_movement(exec, keycode, &x, &y);
-	else
-		horizontal_movement(exec, keycode, &x, &y);
-	if (check_in_map(x, y, exec, keycode))
-		return (1);
-	return (0);
+    x = 0;
+    y = 0;
+    if (keycode == KEY_S || keycode == KEY_W)
+        vertical_movement(exec, keycode, &x, &y);
+    else
+        horizontal_movement(exec, keycode, &x, &y);
+    if (check_in_map(x, y, exec, keycode))
+        return (1);
+    return (0);
 }
 
-void	minimap_deplacement(t_exec *exec, int keycode)
+void    minimap_deplacement(t_exec *exec, int keycode)
 {
-	if (keycode == KEY_W && check_if_wall(exec, keycode) == 0)
-		exec->vertical_movement -= 10;
-	else if (keycode == KEY_S && check_if_wall(exec, keycode) == 0)
-		exec->vertical_movement += 10;
-	else if (keycode == KEY_D && check_if_wall(exec, keycode) == 0)
-		exec->horizontal_movement += 10;
-	else if (keycode == KEY_A && check_if_wall(exec, keycode) == 0)
-		exec->horizontal_movement -= 10;
-	set_image_win(exec);
+    if (keycode == KEY_W && check_if_wall(exec, keycode) == 0)
+        exec->vertical_movement -= 10;
+    else if (keycode == KEY_S && check_if_wall(exec, keycode) == 0)
+        exec->vertical_movement += 10;
+    else if (keycode == KEY_D && check_if_wall(exec, keycode) == 0)
+        exec->horizontal_movement += 10;
+    else if (keycode == KEY_A && check_if_wall(exec, keycode) == 0)
+        exec->horizontal_movement -= 10;
+    set_image_win(exec);
 }

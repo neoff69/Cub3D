@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 15:12:29 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 15:20:46 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ void	draw_line(t_exec *exec)
 			if (x >= 1920 ||  x <= 0 || y >= 1080 || y <= 0)
 				break ;
 			my_mlx_pixel_put(exec, (int)x, (int)y, 0xFF0000);
-			line.final_x += line.xincr;
-			line.final_y +=  line.yincr;
 			i++;
 		}
 		ang += RAD;
