@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 15:45:23 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 16:03:01 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	draw_line(t_exec *exec)
 		line.final_x = ((exec->actual_x + SQUARE_SIZE / 2));
 		line.final_y = ((exec->actual_y + SQUARE_SIZE / 2));
 		i = 0;
-		while (i < line.step * SQUARE_SIZE)
+		while (i < 1920)
 		{
 			x = rotate_line_x(&line, i, ang);
 			y = rotate_line_y(&line, i, ang);
