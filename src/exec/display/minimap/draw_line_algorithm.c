@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/02 15:45:23 by jlaisne          ###   ########.fr       */
@@ -14,17 +14,17 @@
 
 typedef struct s_line
 {
-float    final_x;
-float    final_y;
-int        step;
-float    xincr;
-float    yincr;
+	float    final_x;
+	float    final_y;
+	int        step;
+	float    xincr;
+	float    yincr;
 }    t_line;
 
 static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 {
-float    dx;
-float    dy;
+	float	dx;
+	float	dy;
 
 	dx = next_x - exec->actual_x;
 	dy = next_y - exec->actual_y;
