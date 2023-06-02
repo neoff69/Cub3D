@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 16:03:01 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/02 16:56:11 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,37 @@ float	rotate_line_y(t_line *origin, float length, float ang)
 	return (y);
 }
 
+void set_pixel_color(t_exec *exec, int x, int y, int color)
+{
+    char *pixel = exec->mlx.addr + (y * exec->mlx.len + x * (exec->mlx.bit / 8));
+    *(unsigned int*)pixel = color;
+}
+
+void draw_wall(t_exec *data, int x0, int y0, int x1, int y1, int color)
+{
+    int dx = abs(x1 - x0);
+    int dy = abs(y1 - y0);
+    int sx = (x0 < x1) ? 1 : -1;
+    int sy = (y0 < y1) ? 1 : -1;
+    int err = dx - dy;
+
+    while (x0 != x1 || y0 != y1)
+    {
+        set_pixel_color(data, x0, y0, color);
+        int err2 = err * 2;
+        if (err2 > -dy)
+        {
+            err -= dy;
+            x0 += sx;
+        }
+        if (err2 < dx)
+        {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
+
 void	draw_line(t_exec *exec)
 {
 	int		i;
@@ -59,9 +90,12 @@ void	draw_line(t_exec *exec)
 	float	x;
 	float	y;
 	float	ang;
+	float	distance;
+	float	wall;
+	float	not_wall;
 
 	int num = 0;
-	ang = exec->angle - RAD * 45;
+	ang = exec->angle - RAD * 40;
 	if (ang < 0)
 		ang += 2 * PI;
 	else if (ang > 2 * PI)
@@ -83,6 +117,12 @@ void	draw_line(t_exec *exec)
 				break ;
 			i++;
 		}
+		distance = ((line.final_x - x) * (line.final_x - x)) + ((line.final_y - y) * (line.final_y - y));
+		distance = sqrt(distance);
+		distance = adjusted_dist(exec, ang, distance);
+		wall = get_line_height(distance);
+		not_wall = line_offset(wall);
+		draw_wall(exec, num * 8 + 50, not_wall, num * 8 + 50, wall + not_wall, 0xFF0000);
 		ang += RAD;
 		num++;
 	}
