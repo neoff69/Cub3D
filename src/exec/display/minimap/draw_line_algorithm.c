@@ -6,11 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/01 16:24:23 by jlaisne          ###   ########.fr       */
-=======
-/*   Updated: 2023/06/01 15:11:56 by vgonnot          ###   ########.fr       */
->>>>>>> b66c4caaedc9cb12137b9deb7c6fcf613a8f78d7
+/*   Updated: 2023/06/02 09:46:17 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +66,7 @@ void	draw_line(t_exec *exec, int next_x, int next_y)
 	x = rotate_line_x(exec, line, 30);
 	y = rotate_line_y(exec, line, 30);
 	set_up_variable(exec, x, y, &line);
-	printf("%f == y = %f\n", x, y);
-	printf("%f == y = %f\n", line.final_x, line.final_y);
+	printf("%f\n", exec->angle);
 	while (i < line.step * SQUARE_SIZE - SQUARE_SIZE / 2)
 	{
 		my_mlx_pixel_put(exec, (int)x, (int)y, 0xFF0000);

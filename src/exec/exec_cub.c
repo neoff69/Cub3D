@@ -6,17 +6,29 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/01 15:28:22 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 09:56:39 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
+void	set_angle(t_exec *exec)
+{
+	if (exec->data.player_facing == 7)
+		exec->angle = -1.6;
+	else if (exec->data.player_facing == 8)
+		exec->angle = -3.1;
+	else if (exec->data.player_facing == 9)
+		exec->angle = 1.6;
+	else if (exec->data.player_facing == 10)
+		exec->angle = 0.0;
+}
+
 void	set_up_struct(t_exec *exec)
 {
 	exec->vertical_movement = 0;
 	exec->horizontal_movement = 0;
-	exec->angle = 0.0;
+	set_angle(exec);
 }
 
 void	set_up_mlx(t_exec *exec)
