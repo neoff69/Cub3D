@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/02 16:56:11 by jlaisne          ###   ########.fr       */
@@ -14,12 +14,12 @@
 
 typedef struct s_line
 {
-	float    final_x;
-	float    final_y;
-	int        step;
-	float    xincr;
-	float    yincr;
-}    t_line;
+	float	final_x;
+	float	final_y;
+	int		step;
+	float	xincr;
+	float	yincr;
+}	t_line;
 
 static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 {
@@ -36,7 +36,7 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 	line->yincr = dy / line->step;
 }
 
-float	rotate_line_x(t_line *origin, float length, float ang)
+static float	rotate_line_x(t_line *origin, float length, float ang)
 {
 	int	x;
 
@@ -44,7 +44,7 @@ float	rotate_line_x(t_line *origin, float length, float ang)
 	return (x);
 }
 
-float	rotate_line_y(t_line *origin, float length, float ang)
+static float	rotate_line_y(t_line *origin, float length, float ang)
 {
 	int	y;
 
@@ -83,12 +83,8 @@ void draw_wall(t_exec *data, int x0, int y0, int x1, int y1, int color)
     }
 }
 
-void	draw_line(t_exec *exec)
+float	get_angle(t_exec *exec)
 {
-	int		i;
-	t_line	line;
-	float	x;
-	float	y;
 	float	ang;
 	float	distance;
 	float	wall;
@@ -96,22 +92,33 @@ void	draw_line(t_exec *exec)
 
 	int num = 0;
 	ang = exec->angle - RAD * 40;
+	ang = exec->angle - RAD * 45;
 	if (ang < 0)
 		ang += 2 * PI;
 	else if (ang > 2 * PI)
 		ang -= 2 * PI;
-	i = 0;
-	set_up_variable(exec, exec->actual_x, exec->actual_y + 10, &line);
+	return (ang);
+}
+
+void	draw(t_exec *exec, t_line *line, float ang)
+{
+	int		i;
+	int		num;
+	float	x;
+	float	y;
+  float distance;
+  float wall;
+  float not_wall;
+
+	num = 0;
 	while (num < 80)
 	{
-		line.final_x = ((exec->actual_x + SQUARE_SIZE / 2));
-		line.final_y = ((exec->actual_y + SQUARE_SIZE / 2));
 		i = 0;
 		while (i < WIDTH)
 		{
-			x = rotate_line_x(&line, i, ang);
-			y = rotate_line_y(&line, i, ang);
-			if (x >= 1920 ||  x <= 0 || y >= 1080 || y <= 0)
+			x = rotate_line_x(line, i, ang);
+			y = rotate_line_y(line, i, ang);
+			if (x >= 1920 || x <= 0 || y >= 1080 || y <= 0)
 				break ;
 			if (my_mlx_pixel_put(exec, (int)x, (int)y, 0xFF0000))
 				break ;
@@ -126,4 +133,16 @@ void	draw_line(t_exec *exec)
 		ang += RAD;
 		num++;
 	}
+}
+
+void	draw_line(t_exec *exec)
+{
+	t_line	line;
+	float	ang;
+
+	ang = get_angle(exec);
+	set_up_variable(exec, exec->actual_x, exec->actual_y, &line);
+	line.final_x = (exec->actual_x + SQUARE_SIZE / 2);
+	line.final_y = (exec->actual_y + SQUARE_SIZE / 2);
+	draw(exec, &line, ang);
 }
