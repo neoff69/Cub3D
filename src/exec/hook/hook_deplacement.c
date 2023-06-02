@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 14:48:45 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 15:14:47 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,34 @@ void	horizontal_movement(t_exec *exec, int keycode, int *x, int *y)
 		// if (exec->angle > 2 * PI)
 		// 	exec->angle = 0;
 	}
+	return (0);
+}
+
+int    check_in_map(float x, float y, t_exec *exec, int keycode)
+{
+    if (exec->data.map[(int)y][(int)x] == '1')
+        return (1);
+    if (keycode == KEY_A && y != (int)y)
+    {
+        if (exec->data.map[(int)y + 1][(int)x] == '1')
+            return (1);
+    }
+    else if (keycode == KEY_D && y != (int) y)
+    {
+        if (exec->data.map[(int)y + 1][(int)x] == '1')
+            return (1);
+    }
+    else if (keycode == KEY_W && x != (int) x)
+    {
+        if (exec->data.map[(int)y][(int)x + 1] == '1')
+            return (1);
+    }
+    else if (keycode == KEY_S && x != (int) x)
+    {
+        if (exec->data.map[(int)y][(int)x + 1] == '1')
+            return (1);
+    }
+    return (0);
 }
 
 int	check_if_wall(t_exec *exec, int keycode)
@@ -67,7 +95,7 @@ int	check_if_wall(t_exec *exec, int keycode)
 		vertical_movement(exec, keycode, &x, &y);
 	else
 		horizontal_movement(exec, keycode, &x, &y);
-	if (exec->data.map[y][x] == '1')
+	if (check_in_map(x, y, exec, keycode))
 		return (1);
 	return (0);
 }
