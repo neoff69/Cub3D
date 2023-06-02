@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/02 10:53:04 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/02 13:54:42 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ void	draw_square(int y, int x, int color, t_exec *exec);
 void	hook(t_exec *exec);
 void	minimap_deplacement(t_exec *exec, int keycode);
 void    minimap_rotation(t_exec *exec, int keycode);
+
+//LINE
+float	line_offset(float lineHeight);
+float	get_line_height(float dist);
+float	adjusted_dist(t_exec *exec, float ray_angle, float dist);
 
 //UTILS
 void	my_mlx_pixel_put(t_exec *exec, int x, int y, int color);

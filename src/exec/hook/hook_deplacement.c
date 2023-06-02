@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 13:42:42 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/02 13:47:45 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
 			+ exec->horizontal_movement) / (SQUARE_SIZE);
 		*y = ((exec->data.pos_y) * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
+
+		// exec->angle += 0.1;
+		// if (exec->angle > 2 * PI)
+		// 	exec->angle = 0;
 	}
 	else
 	{
@@ -45,6 +49,10 @@ void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
 			+ exec->horizontal_movement - 1) / (SQUARE_SIZE);
 		*y = (exec->data.pos_y * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
+
+		// exec->angle -= 0.1;
+		// if (exec->angle < 0)
+		// 	exec->angle = 2 * PI;
 	}
 }
 

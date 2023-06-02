@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 12:26:37 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/02 13:54:11 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,67 +14,80 @@
 
 typedef struct s_line
 {
-	float	final_x;
-	float	final_y;
-	int		step;
-	float	xincr;
-	float	yincr;
-}	t_line;
+float    final_x;
+float    final_y;
+int        step;
+float    xincr;
+float    yincr;
+}    t_line;
 
-static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
+static void    set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 {
-	float	dx;
-	float	dy;
+float    dx;
+float    dy;
 
-	dx = next_x - exec->actual_x;
-	dy = next_y - exec->actual_y;
-	if (fabs(dx) > fabs(dy))
-		line->step = fabs(dx);
-	else
-		line->step = fabs(dy);
-	line->xincr = dx / line->step;
-	line->yincr = dy / line->step;
+dx = next_x - exec->actual_x;
+dy = next_y - exec->actual_y;
+if (fabs(dx) > fabs(dy))
+	line->step = fabs(dx);
+else
+	line->step = fabs(dy);
+line->xincr = dx / line->step;
+line->yincr = dy / line->step;
 }
 
-float	rotate_line_x(t_exec *exec, t_line *origin, float length)
+float    rotate_line_x(t_line *origin, float length, float ang)
 {
-	float	x;
+int x;
 
-	x = origin->final_x + length * cos(exec->angle);
-	return (x);
+x = origin->final_x + length * cos(ang);
+return (x);
 }
 
-float	rotate_line_y(t_exec *exec, t_line *origin, float length)
+float    rotate_line_y(t_line *origin, float length, float ang)
 {
-	float	y;
+int y;
 
-	y = origin->final_y + length * sin(exec->angle);
-	return (y);
+y = origin->final_y + length * sin(ang);
+return (y);
 }
 
-void	draw_line(t_exec *exec)
+void    draw_line(t_exec *exec)
 {
-	int		i;
-	t_line	line;
-	float	x;
-	float	y;
+	int        i;
+	t_line    line;
+	float    x;
+	float    y;
+	float    ang;
 
-	(void)exec;
+	ang = exec->angle - RAD * 45;
+	if (ang < 0)
+		ang += 2 * PI;
+	else if (ang > 2 * PI)
+		ang -= 2 * PI;
 	i = 0;
-	set_up_variable(exec, exec->actual_x, exec->actual_y - 10, &line);
-	line.final_x = (exec->actual_x * SQUARE_SIZE + SQUARE_SIZE / 2);
-	line.final_y = (exec->actual_y * SQUARE_SIZE + SQUARE_SIZE / 2);
-	//printf("x = %f y = %f fnal_x = %f final_y = %f steps = %d xincr = %f yincr =%f\n", x, y, line.final_x, line.final_y, line.step, line.xincr, line.yincr);
-	while (i < line.step * SQUARE_SIZE)
+	if (ang > PI)
+		set_up_variable(exec, exec->actual_x, exec->actual_y - 5, &line);
+	else
+		set_up_variable(exec, exec->actual_x, exec->actual_y + 5, &line);
+	int num = 0;
+	while (num < 80)
 	{
-		x = rotate_line_x(exec, &line, i);
-		y = rotate_line_y(exec, &line, i);
-		if (x >= 1920 || x <= 0 || y >= 1080 || y <= 0)
-			break ;
-		my_mlx_pixel_put(exec, (int)x, (int)y, 0xFF0000);
-		//printf("x = %f y= %f i = %d angle = %f\n", x, y, i, sin(exec->angle));
-		line.final_x += line.xincr;
-		line.final_y +=  line.yincr;
-		i++;
+		line.final_x = (exec->actual_x * SQUARE_SIZE + SQUARE_SIZE / 2);
+		line.final_y = (exec->actual_y * SQUARE_SIZE + SQUARE_SIZE / 2);
+		i = 0;
+		while (i < line.step * SQUARE_SIZE)
+		{
+			x = rotate_line_x(&line, i, ang);
+			y = rotate_line_y(&line, i, ang);
+			if (x >= 1920 ||  x <= 0 || y >= 1080 || y <= 0)
+				break ;
+			my_mlx_pixel_put(exec, (int)x, (int)y, 0xFF0000);
+			line.final_x += line.xincr;
+			line.final_y +=  line.yincr;
+			i++;
+		}
+		ang += RAD;
+		num++;
 	}
 }

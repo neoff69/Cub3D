@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/02 10:57:40 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/02 13:55:21 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	set_angle(t_exec *exec)
 {
-if (exec->data.player_facing == 7)
-        exec->angle = 3 * PI / 2;
-    else if (exec->data.player_facing == 8)
-        exec->angle = 2 * PI;
-    else if (exec->data.player_facing == 9)
-        exec->angle = PI / 2;
-    else if (exec->data.player_facing == 10)
-        exec->angle = PI;
+	if (exec->data.player_facing == 7)
+		exec->angle = -1.6;
+	else if (exec->data.player_facing == 8)
+		exec->angle = -3.1;
+	else if (exec->data.player_facing == 9)
+		exec->angle = 1.6;
+	else if (exec->data.player_facing == 10)
+		exec->angle = 0.0;
 }
 
 void	set_up_struct(t_exec *exec)
@@ -37,7 +37,7 @@ void	set_up_mlx(t_exec *exec)
 	if (exec->mlx.mlx == NULL)
 		exit (0); //A GERER
 	exec->mlx.mlx_win = mlx_new_window(exec->mlx.mlx, 1920, 1080, "Cub3D");
-	exec->mlx.img = mlx_new_image(exec->mlx.mlx, 1920, 1080);
+	exec->mlx.img = mlx_new_image(exec->mlx.mlx, WIDTH, HEIGHT);
 	if (exec->mlx.mlx_win == NULL || exec->mlx.img == NULL)
 		exit(0); //A GERER
 	exec->mlx.addr = mlx_get_data_addr \
