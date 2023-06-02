@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/02 09:56:39 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 10:57:40 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	set_angle(t_exec *exec)
 {
-	if (exec->data.player_facing == 7)
-		exec->angle = -1.6;
-	else if (exec->data.player_facing == 8)
-		exec->angle = -3.1;
-	else if (exec->data.player_facing == 9)
-		exec->angle = 1.6;
-	else if (exec->data.player_facing == 10)
-		exec->angle = 0.0;
+if (exec->data.player_facing == 7)
+        exec->angle = 3 * PI / 2;
+    else if (exec->data.player_facing == 8)
+        exec->angle = 2 * PI;
+    else if (exec->data.player_facing == 9)
+        exec->angle = PI / 2;
+    else if (exec->data.player_facing == 10)
+        exec->angle = PI;
 }
 
 void	set_up_struct(t_exec *exec)

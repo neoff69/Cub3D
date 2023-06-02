@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/01 15:16:00 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 13:13:17 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ typedef struct s_exec
 {
 	t_mlx	mlx;
 	t_scub	data;
-	int		vertical_movement;
-	int		horizontal_movement;
+	float	vertical_movement;
+	float	horizontal_movement;
 	int		actual_x;
 	int		actual_y;
 	float	angle;
