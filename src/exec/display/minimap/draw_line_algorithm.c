@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 16:56:11 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 18:11:42 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ typedef struct s_line
 	int		step;
 	float	xincr;
 	float	yincr;
+	float	x;
+	float	y;
 }	t_line;
 
 static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
@@ -52,45 +54,41 @@ static float	rotate_line_y(t_line *origin, float length, float ang)
 	return (y);
 }
 
-void set_pixel_color(t_exec *exec, int x, int y, int color)
+void	set_pixel_color(t_exec *exec, int x, int y, int color)
 {
     char *pixel = exec->mlx.addr + (y * exec->mlx.len + x * (exec->mlx.bit / 8));
     *(unsigned int*)pixel = color;
 }
 
-void draw_wall(t_exec *data, int x0, int y0, int x1, int y1, int color)
+void	draw_wall(t_exec *data, int x0, int y0, int x1, int y1, int color)
 {
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
-    int sx = (x0 < x1) ? 1 : -1;
-    int sy = (y0 < y1) ? 1 : -1;
-    int err = dx - dy;
+	int	dx = abs(x1 - x0);
+	int	dy = abs(y1 - y0);
+	int	sx = (x0 < x1) ? 1 : -1;
+	int	sy = (y0 < y1) ? 1 : -1;
+	int	err = dx - dy;
 
-    while (x0 != x1 || y0 != y1)
-    {
-        set_pixel_color(data, x0, y0, color);
-        int err2 = err * 2;
-        if (err2 > -dy)
-        {
-            err -= dy;
-            x0 += sx;
-        }
-        if (err2 < dx)
-        {
+	while (x0 != x1 || y0 != y1)
+	{
+		set_pixel_color(data, x0, y0, color);
+		int	err2 = err * 2;
+		if (err2 > -dy)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (err2 < dx)
+		{
             err += dx;
             y0 += sy;
-        }
-    }
+		}
+	}
 }
 
 float	get_angle(t_exec *exec)
 {
 	float	ang;
-	float	distance;
-	float	wall;
-	float	not_wall;
 
-	int num = 0;
 	ang = exec->angle - RAD * 40;
 	ang = exec->angle - RAD * 45;
 	if (ang < 0)
@@ -100,15 +98,34 @@ float	get_angle(t_exec *exec)
 	return (ang);
 }
 
+float	get_distance(t_line *line, t_exec *exec, float ang)
+{
+	float	distance;
+
+	distance = ((line->final_x - line->x) * (line->final_x - line->x)) \
+			+ ((line->final_y - line->y) * (line->final_y - line->y));
+	distance = sqrt(distance);
+	distance = adjusted_dist(exec, ang, distance);
+	return (distance);
+}
+
+void	display_wall(t_line *line, t_exec *exec, float ang, int num)
+{
+	float	distance;
+	float	wall;
+	float	not_wall;
+
+	distance = get_distance(line, exec, ang);
+	wall = get_line_height(distance);
+	not_wall = line_offset(wall);
+	draw_wall(exec, num * 24, not_wall, num * 24, wall + not_wall, 0xFF0000);
+}
+
 void	draw(t_exec *exec, t_line *line, float ang)
 {
 	int		i;
 	int		num;
-	float	x;
-	float	y;
-  float distance;
-  float wall;
-  float not_wall;
+
 
 	num = 0;
 	while (num < 80)
@@ -116,20 +133,16 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		i = 0;
 		while (i < WIDTH)
 		{
-			x = rotate_line_x(line, i, ang);
-			y = rotate_line_y(line, i, ang);
-			if (x >= 1920 || x <= 0 || y >= 1080 || y <= 0)
+			line->x = rotate_line_x(line, i, ang);
+			line->y = rotate_line_y(line, i, ang);
+			if (line->x >= 1920 || line->x <= 0 \
+				|| line->y >= 1080 || line->y <= 0)
 				break ;
-			if (my_mlx_pixel_put(exec, (int)x, (int)y, 0xFF0000))
+			if (my_mlx_pixel_put_rt(exec, (int)line->x, (int)line->y, 0xFF0000))
 				break ;
 			i++;
 		}
-		distance = ((line.final_x - x) * (line.final_x - x)) + ((line.final_y - y) * (line.final_y - y));
-		distance = sqrt(distance);
-		distance = adjusted_dist(exec, ang, distance);
-		wall = get_line_height(distance);
-		not_wall = line_offset(wall);
-		draw_wall(exec, num * 8 + 50, not_wall, num * 8 + 50, wall + not_wall, 0xFF0000);
+		display_wall(line, exec, ang, num);
 		ang += RAD;
 		num++;
 	}
