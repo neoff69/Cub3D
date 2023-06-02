@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/02 09:56:39 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/02 13:43:36 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	set_angle(t_exec *exec)
 {
 	if (exec->data.player_facing == 7)
-		exec->angle = -1.6;
+		exec->angle = 3 * PI / 2;
 	else if (exec->data.player_facing == 8)
-		exec->angle = -3.1;
+		exec->angle = 2 * PI;
 	else if (exec->data.player_facing == 9)
-		exec->angle = 1.6;
+		exec->angle = PI / 2;
 	else if (exec->data.player_facing == 10)
-		exec->angle = 0.0;
+		exec->angle = PI;
 }
 
 void	set_up_struct(t_exec *exec)
@@ -37,7 +37,7 @@ void	set_up_mlx(t_exec *exec)
 	if (exec->mlx.mlx == NULL)
 		exit (0); //A GERER
 	exec->mlx.mlx_win = mlx_new_window(exec->mlx.mlx, 1920, 1080, "Cub3D");
-	exec->mlx.img = mlx_new_image(exec->mlx.mlx, 1920, 1080);
+	exec->mlx.img = mlx_new_image(exec->mlx.mlx, WIDTH, HEIGHT);
 	if (exec->mlx.mlx_win == NULL || exec->mlx.img == NULL)
 		exit(0); //A GERER
 	exec->mlx.addr = mlx_get_data_addr \

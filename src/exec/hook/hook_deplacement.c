@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_deplacement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/01 10:05:01 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/02 13:39:13 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ void	horizontal_movement(t_exec *exec, int keycode, int *x, int *y)
 			+ exec->horizontal_movement) / (SQUARE_SIZE);
 		*y = ((exec->data.pos_y) * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
+
+		// exec->angle += 0.1;
+		// if (exec->angle > 2 * PI)
+		// 	exec->angle = 0;
 	}
 	else
 	{
@@ -45,6 +49,10 @@ void	horizontal_movement(t_exec *exec, int keycode, int *x, int *y)
 			+ exec->horizontal_movement - 1) / (SQUARE_SIZE);
 		*y = (exec->data.pos_y * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
+
+		// exec->angle -= 0.1;
+		// if (exec->angle < 0)
+		// 	exec->angle = 2 * PI;
 	}
 }
 
@@ -67,12 +75,12 @@ int	check_if_wall(t_exec *exec, int keycode)
 void	minimap_deplacement(t_exec *exec, int keycode)
 {
 	if (keycode == KEY_W && check_if_wall(exec, keycode) == 0)
-		exec->vertical_movement -= 1;
+		exec->vertical_movement -= 10;
 	else if (keycode == KEY_S && check_if_wall(exec, keycode) == 0)
-		exec->vertical_movement += 1;
+		exec->vertical_movement += 10;
 	else if (keycode == KEY_D && check_if_wall(exec, keycode) == 0)
-		exec->horizontal_movement += 1;
+		exec->horizontal_movement += 10;
 	else if (keycode == KEY_A && check_if_wall(exec, keycode) == 0)
-		exec->horizontal_movement -= 1;
+		exec->horizontal_movement -= 10;
 	set_image_win(exec);
 }
