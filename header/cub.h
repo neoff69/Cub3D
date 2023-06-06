@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/06 10:35:45 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/06 14:27:58 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ void	display_minimap(t_exec *exec);
 void	display_minimap_character(t_exec *exec);
 void	display_raytracing(t_exec *exec);
 void	draw_square(int y, int x, int color, t_exec *exec);
+void	draw_sky(t_exec *exec);
 
 //HOOK
 void	hook(t_exec *exec);
 void	minimap_deplacement(t_exec *exec, int keycode);
-void    minimap_rotation(t_exec *exec, int keycode);
+void	minimap_rotation(t_exec *exec, int keycode);
 
 //LINE
 float	line_offset(float lineHeight);
@@ -71,8 +72,9 @@ float	get_line_height(float dist);
 float	adjusted_dist(t_exec *exec, float ray_angle, float dist);
 
 //UTILS
-int 	my_mlx_pixel_put(t_exec *exec, int x, int y, int color);
-int 	check_if_corner(t_exec *exec, int bit, int x, int y);
+int		my_mlx_pixel_put(t_exec *exec, int x, int y, int color);
+int		my_mlx_pixel_put_wall(t_exec *exec, int x, int y, int color);
+int		check_if_corner(t_exec *exec, int bit, int x, int y);
 int		my_mlx_pixel_put_rt(t_exec *exec, int x, int y, int color);
 void	set_image_win(t_exec *exec);
 void	draw_line(t_exec *exec);

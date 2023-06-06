@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_game.c                                     :+:      :+:    :+:   */
+/*   draw_sky.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 16:31:55 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/06 14:28:15 by vgonnot          ###   ########.fr       */
+/*   Created: 2023/06/06 14:11:46 by vgonnot           #+#    #+#             */
+/*   Updated: 2023/06/06 14:38:39 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	display_game(t_exec *exec)
+void	draw_sky(t_exec *exec)
 {
-	display_minimap(exec);
-	draw_sky(exec);
+	t_pcub	*temp;
+	char	*sky;
+
+	temp = get_node(exec->data.cub, C);
+	sky = temp->content;
 }

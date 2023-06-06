@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_rotation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:23:28 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/06 13:44:37 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/06 14:09:53 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ void	minimap_rotation(t_exec *exec, int keycode)
 	}
 	exec->delta_x = cos(exec->angle) * 5;
 	exec->delta_y = sin(exec->angle) * 5;
-	printf("dx %f  dy %f\n", exec->delta_x, exec->delta_y);
 	set_image_win(exec);
 }
