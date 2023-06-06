@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/06 11:28:16 by jlaisne          ###   ########.fr       */
@@ -54,35 +54,28 @@ static float	rotate_line_y(t_line *origin, float length, float ang)
 	return (y);
 }
 
-void	set_pixel_color(t_exec *exec, int x, int y, int color)
+void	draw_wall(t_exec *exec, t_line *wall, int color)
 {
-    char *pixel = exec->mlx.addr + (y * exec->mlx.len + x * (exec->mlx.bit / 8));
-    *(unsigned int*)pixel = color;
-}
+	int	dx;
+	int	dy;
+	int	i;
 
-void draw_wall(t_exec *data, int x0, int y0, int x1, int y1, int color)
-{
-	int dx = abs(x1 - x0);
-	int dy = abs(y1 - y0);
-	int sx = (x0 < x1) ? 1 : -1;
-	int sy = (y0 < y1) ? 1 : -1;
-	int err = dx - dy;
-
-	while (x0 != x1 || y0 != y1)
+	dx = wall->final_x - wall->x;
+	dy = wall->final_y - wall->y;
+	i = 0;
+	if (abs(dx) > abs(dy))
+		wall->step = abs(dx);
+	else
+		wall->step = abs(dy);
+	wall->xincr = dx / wall->step;
+	wall->yincr = dy / wall->step;
+	while (i < wall->step)
 	{
-		set_pixel_color(data, x0, y0, color);
-		// draw_square(x1, y1, color, data);
-		int err2 = err * 2;
-		if (err2 > -dy)
-		{
-			err -= dy;
-			x0 += sx;
-		}
-		if (err2 < dx)
-		{
-			err += dx;
-			y0 += sy;
-		}
+		i++;
+		if (my_mlx_pixel_put(exec, wall->final_x, wall->final_y, color))
+			return ;
+		wall->final_x -= wall->xincr;
+		wall->final_y -= wall->yincr;
 	}
 }
 
@@ -114,18 +107,23 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	float	distance;
 	float	wall;
 	float	not_wall;
+	t_line	wall_struct;
 
 	distance = get_distance(line, exec, ang);
 	wall = get_line_height(distance);
 	not_wall = line_offset(wall);
-	draw_wall(exec, num * (WIDTH / 1920), not_wall, num * (WIDTH / 1920), wall + not_wall, 0x808080);
+	wall_struct.x = num * (WIDTH / 1920);
+	wall_struct.final_x = wall_struct.x;
+	wall_struct.y = not_wall;
+	wall_struct.final_y = wall + not_wall;
+	draw_wall(exec, &wall_struct, 0x00FFFF);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
 {
 	int		i;
 	int		num;
-  
+
 	num = 0;
 	while (num < WIDTH)
 	{
