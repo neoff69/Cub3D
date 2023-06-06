@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/06 10:25:13 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/06 10:41:29 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,13 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	distance = get_distance(line, exec, ang);
 	wall = get_line_height(distance);
 	not_wall = line_offset(wall);
-	draw_wall(exec, num * 24, not_wall, num * 24, wall + not_wall, 0xFF0000);
+	draw_wall(exec, num * (WIDTH / 1920), not_wall, num * (WIDTH / 1920), wall + not_wall, 0x808080);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
 {
 	int		i;
 	int		num;
-	float	x;
-	float	y;
   
 	num = 0;
 	while (num < WIDTH)
@@ -140,23 +138,12 @@ void	draw(t_exec *exec, t_line *line, float ang)
 			if (line->x >= 1920 || line->x <= 0 \
 				|| line->y >= 1080 || line->y <= 0)
 				break ;
-			if (my_mlx_pixel_put_cmpr(exec, (int)x, (int)y, 0xFF0000))
-				break ;
-			i++;
-		}
-		distance = ((line->final_x - x) * (line->final_x - x)) + ((line->final_y - y) * (line->final_y - y));
-		distance = sqrt(distance);
-		distance = adjusted_dist(exec, ang, distance);
-		wall = get_line_height(distance);
-		not_wall = line_offset(wall);
-		draw_wall(exec, num * (WIDTH / 1920), not_wall, num * (WIDTH / 1920), wall + not_wall, 0xFFFFFFF);
-		ang += RAD * (40.0 / WIDTH);
 			if (my_mlx_pixel_put_rt(exec, (int)line->x, (int)line->y, 0xFF0000))
 				break ;
 			i++;
 		}
 		display_wall(line, exec, ang, num);
-		ang += RAD;
+		ang += RAD * (40.0 / WIDTH);
 		num++;
 	}
 }
