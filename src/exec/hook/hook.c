@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 10:52:11 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:13:07 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	keyhook(int keycode, t_exec *exec)
 {
 	if (keycode == KEY_ESCAPE)
 		exit(0); //LEAKS A GERER
-	else if (keycode == KEY_W || keycode == KEY_S \
+	if (keycode == KEY_W || keycode == KEY_S \
 			|| keycode == KEY_A || keycode == KEY_D)
 		minimap_deplacement(exec, keycode);
-	else if (keycode == KEY_Q || keycode == KEY_E)
+	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 		minimap_rotation(exec, keycode);
 	return (0);
 }

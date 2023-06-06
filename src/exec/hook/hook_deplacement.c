@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_deplacement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 15:41:51 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:50:20 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
 		*y = ((exec->data.pos_y) * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
 
-		// exec->angle -= 0.1;
-		// if (exec->angle < 0)
-		// 	exec->angle = 2 * PI;
 	}
 	else
 	{
@@ -49,10 +46,6 @@ void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
 			+ exec->horizontal_movement - 1) / (SQUARE_SIZE);
 		*y = (exec->data.pos_y * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
-
-		// exec->angle += 0.1;
-		// if (exec->angle > 2 * PI)
-		// 	exec->angle = 0;
 	}
 }
 
