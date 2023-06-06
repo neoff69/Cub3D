@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 18:11:42 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/06 10:25:13 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,19 @@ void	set_pixel_color(t_exec *exec, int x, int y, int color)
     *(unsigned int*)pixel = color;
 }
 
-void	draw_wall(t_exec *data, int x0, int y0, int x1, int y1, int color)
+void draw_wall(t_exec *data, int x0, int y0, int x1, int y1, int color)
 {
-	int	dx = abs(x1 - x0);
-	int	dy = abs(y1 - y0);
-	int	sx = (x0 < x1) ? 1 : -1;
-	int	sy = (y0 < y1) ? 1 : -1;
-	int	err = dx - dy;
+	int dx = abs(x1 - x0);
+	int dy = abs(y1 - y0);
+	int sx = (x0 < x1) ? 1 : -1;
+	int sy = (y0 < y1) ? 1 : -1;
+	int err = dx - dy;
 
 	while (x0 != x1 || y0 != y1)
 	{
 		set_pixel_color(data, x0, y0, color);
-		int	err2 = err * 2;
+		// draw_square(x1, y1, color, data);
+		int err2 = err * 2;
 		if (err2 > -dy)
 		{
 			err -= dy;
@@ -79,18 +80,18 @@ void	draw_wall(t_exec *data, int x0, int y0, int x1, int y1, int color)
 		}
 		if (err2 < dx)
 		{
-            err += dx;
-            y0 += sy;
+			err += dx;
+			y0 += sy;
 		}
 	}
 }
+
 
 float	get_angle(t_exec *exec)
 {
 	float	ang;
 
-	ang = exec->angle - RAD * 40;
-	ang = exec->angle - RAD * 45;
+	ang = exec->angle - RAD * (40);
 	if (ang < 0)
 		ang += 2 * PI;
 	else if (ang > 2 * PI)
@@ -125,10 +126,11 @@ void	draw(t_exec *exec, t_line *line, float ang)
 {
 	int		i;
 	int		num;
-
-
+	float	x;
+	float	y;
+  
 	num = 0;
-	while (num < 80)
+	while (num < WIDTH)
 	{
 		i = 0;
 		while (i < WIDTH)
@@ -138,6 +140,17 @@ void	draw(t_exec *exec, t_line *line, float ang)
 			if (line->x >= 1920 || line->x <= 0 \
 				|| line->y >= 1080 || line->y <= 0)
 				break ;
+			if (my_mlx_pixel_put_cmpr(exec, (int)x, (int)y, 0xFF0000))
+				break ;
+			i++;
+		}
+		distance = ((line->final_x - x) * (line->final_x - x)) + ((line->final_y - y) * (line->final_y - y));
+		distance = sqrt(distance);
+		distance = adjusted_dist(exec, ang, distance);
+		wall = get_line_height(distance);
+		not_wall = line_offset(wall);
+		draw_wall(exec, num * (WIDTH / 1920), not_wall, num * (WIDTH / 1920), wall + not_wall, 0xFFFFFFF);
+		ang += RAD * (40.0 / WIDTH);
 			if (my_mlx_pixel_put_rt(exec, (int)line->x, (int)line->y, 0xFF0000))
 				break ;
 			i++;

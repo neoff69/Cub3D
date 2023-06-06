@@ -3,21 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 18:23:14 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/06 10:20:33 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	my_mlx_pixel_put(t_exec *exec, int x, int y, int color)
+int	my_mlx_pixel_put_cmpr(t_exec *exec, int x, int y, int color)
 {
 	char	*dst;
 
+	(void)color;
+	temp = NULL;
 	dst = exec->mlx.addr + (y * exec->mlx.len + x * (exec->mlx.bit / 8));
-	*(unsigned int *)dst = color;
+	temp_r = exec->mlx.addr + (y * exec->mlx.len + (x - 1) * (exec->mlx.bit / 8));
+	temp_x = exec->mlx.addr + (y * exec->mlx.len + (x + 1) * (exec->mlx.bit / 8));
+	if (*(unsigned int *)temp_r == 0x808080 || *(unsigned int *)temp_x == 0x808080)
+		temp = exec->mlx.addr + ((y + 1) * exec->mlx.len + x * (exec->mlx.bit / 8));
+	if (*(unsigned int *)dst == 0x808080 || (temp && *(unsigned int *)temp == 0x808080))
+		return (1);
+	dst = exec->mlx.addr + (y * exec->mlx.len + x * (exec->mlx.bit / 8));
 	return (0);
 }
 

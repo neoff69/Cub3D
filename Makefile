@@ -34,7 +34,7 @@ MINILIB_DIR				= minilibx-linux/
 
 LINUX 					= -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm -lz
 GCC						= cc
-CFLAGS					= -Wall -Werror -Wextra -g3
+CFLAGS					= -Wall -Werror -Wextra -g3 -O2
 SANITIZE				= $(CFLAGS) -g3 -fsanitize=address
 
 RM 						= rm -rf
