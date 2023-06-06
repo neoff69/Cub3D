@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_minimap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:27:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/06 10:20:08 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/06 14:08:01 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	init_display_minimap(t_exec *exec)
 		while (exec->data.map[y][x])
 		{
 			if (exec->data.map[y][x] == '1')
-				draw_square(x * SQUARE_SIZE, y * SQUARE_SIZE, 0x808080, exec);
+				draw_square(x * SQUARE_SIZE, y * SQUARE_SIZE, WALL_MINIMAP, exec);
 			else if (exec->data.map[y][x] != ' ' \
 					&& exec->data.map[y][x] != '\n')
-				draw_square(x * SQUARE_SIZE, y * SQUARE_SIZE, 0xFFFFFF, exec);
+				draw_square(x * SQUARE_SIZE, y * SQUARE_SIZE, FLOOR_MINIMAP, exec);
 			x++;
 		}
 		y++;

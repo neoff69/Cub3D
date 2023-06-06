@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keycode.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/06 10:22:53 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/06 14:21:18 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,7 @@
 # define HEIGHT 1080
 # define CUB 20
 # define RAD 0.0174533
+# define WALL_MINIMAP 0x808080
+# define FLOOR_MINIMAP 0xFFFFFF
+# define PLAYER_MINIMAP 0x0000FF
 #endif

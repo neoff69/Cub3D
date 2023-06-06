@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook_rotation.c                                    :+:      :+:    :+:   */
+/*   draw_sky.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 15:23:28 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/06 14:31:37 by jlaisne          ###   ########.fr       */
+/*   Created: 2023/06/06 14:11:46 by vgonnot           #+#    #+#             */
+/*   Updated: 2023/06/06 14:38:39 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	minimap_rotation(t_exec *exec, int keycode)
+void	draw_sky(t_exec *exec)
 {
-	if (keycode == KEY_LEFT)
-	{
-		exec->angle -= 0.1;
-		if (exec->angle < 0)
-		 	exec->angle += 2 * PI;
-	}
-	if (keycode == KEY_RIGHT)
-	{
-		exec->angle += 0.1;
-		if (exec->angle > 2 * PI)
-		 	exec->angle -= 2 * PI;
-	}
-	exec->delta_x = cos(exec->angle) * 10;
-	exec->delta_y = sin(exec->angle) * 10;
-	set_image_win(exec);
+	t_pcub	*temp;
+	char	*sky;
+
+	temp = get_node(exec->data.cub, C);
+	sky = temp->content;
 }

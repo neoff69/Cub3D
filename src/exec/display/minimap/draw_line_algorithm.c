@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/06 13:58:22 by jlaisne          ###   ########.fr       */
@@ -72,7 +72,7 @@ void	draw_wall(t_exec *exec, t_line *wall, int color)
 	while (i < wall->step)
 	{
 		i++;
-		if (my_mlx_pixel_put(exec, wall->final_x, wall->final_y, color))
+		if (my_mlx_pixel_put_wall(exec, wall->final_x, wall->final_y, color))
 			return ;
 		wall->final_x -= wall->xincr;
 		wall->final_y -= wall->yincr;
