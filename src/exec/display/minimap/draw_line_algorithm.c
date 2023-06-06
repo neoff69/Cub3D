@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/06 14:15:50 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:58:22 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ float	get_angle(t_exec *exec)
 {
 	float	ang;
 
-	ang = exec->angle - RAD * 40;
+	ang = exec->angle - RAD * 20;
 	if (ang < 0)
 		ang += 2 * PI;
 	else if (ang > 2 * PI)
@@ -130,8 +130,8 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		i = 0;
 		while (i < WIDTH)
 		{
-			line->x = rotate_line_x(line, i, ang + RAD * 20);
-			line->y = rotate_line_y(line, i, ang + RAD * 20);
+			line->x = rotate_line_x(line, i, ang);
+			line->y = rotate_line_y(line, i, ang);
 			if (line->x >= 1920 || line->x <= 0 \
 				|| line->y >= 1080 || line->y <= 0)
 				break ;
