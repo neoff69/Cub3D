@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/02 13:13:17 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/06 11:34:48 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ typedef enum s_valid
 	VALID,
 	FALSE
 }	t_valid;
+
+typedef enum s_pressed
+{
+	PRE,
+	REL
+}	t_pressed;
 
 typedef struct s_pcub
 {
@@ -70,10 +76,19 @@ typedef struct s_mlx
 	int		endian;
 }	t_mlx;
 
+typedef struct s_key
+{
+	t_pressed key_w;
+	t_pressed key_a;
+	t_pressed key_s;
+	t_pressed key_d;
+}	t_key;
+
 typedef struct s_exec
 {
 	t_mlx	mlx;
 	t_scub	data;
+	t_key	key;
 	float	vertical_movement;
 	float	horizontal_movement;
 	int		actual_x;

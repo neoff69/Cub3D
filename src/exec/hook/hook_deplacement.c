@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_deplacement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 15:41:51 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/06 11:36:37 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ void	vertical_movement(t_exec *exec, int keycode, float *x, float *y)
 			+ exec->horizontal_movement) / (SQUARE_SIZE);
 		*y = ((1 + exec->data.pos_y) * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
+		if (exec->key.key_a == PRE)
+		{
+			exec->angle -= 0.1;
+			if (exec->angle < 0)
+				exec->angle = 2 * PI;
+		}
+		if (exec->key.key_d == PRE)
+		{
+			exec->angle += 0.1;
+			if (exec->angle > 2 * PI)
+				exec->angle = 0;
+		}
 	}
 	else
 	{
@@ -27,6 +39,18 @@ void	vertical_movement(t_exec *exec, int keycode, float *x, float *y)
 			+ exec->horizontal_movement) / (SQUARE_SIZE);
 		*y = (exec->data.pos_y * SQUARE_SIZE \
 			+ exec->vertical_movement - 1) / (SQUARE_SIZE);
+		if (exec->key.key_a == PRE)
+		{
+			exec->angle -= 0.1;
+			if (exec->angle < 0)
+				exec->angle = 2 * PI;
+		}
+		if (exec->key.key_d == PRE)
+		{
+			exec->angle += 0.1;
+			if (exec->angle > 2 * PI)
+				exec->angle = 0;
+		}
 	}
 }
 
@@ -39,9 +63,6 @@ void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
 		*y = ((exec->data.pos_y) * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
 
-		// exec->angle -= 0.1;
-		// if (exec->angle < 0)
-		// 	exec->angle = 2 * PI;
 	}
 	else
 	{
@@ -50,9 +71,6 @@ void	horizontal_movement(t_exec *exec, int keycode, float *x, float *y)
 		*y = (exec->data.pos_y * SQUARE_SIZE \
 			+ exec->vertical_movement) / (SQUARE_SIZE);
 
-		// exec->angle += 0.1;
-		// if (exec->angle > 2 * PI)
-		// 	exec->angle = 0;
 	}
 }
 
