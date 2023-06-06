@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/06 11:36:23 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:29:57 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	my_mlx_pixel_put(t_exec *exec, int x, int y, int color)
 
 	bit = exec->mlx.bit / 8;
 	dst = exec->mlx.addr + (y * exec->mlx.len + x * (bit));
-	if (*(unsigned int *)dst != 0x000000)
-		return (1);
+	if (color == 0x00FFFF && *(unsigned int *)dst != 0x000000)
+		return (0);
 	*(unsigned int *)dst = color;
 	return (0);
 }
