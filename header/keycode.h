@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 16:52:21 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/06 10:22:53 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@
 # define KEY_SPACE 32
 # define SQUARE_SIZE 10
 # define PI 3.14159265359
-# define WIDTH 1920
+# define WIDTH 1920.0
 # define HEIGHT 1080
-# define CUB 10
+# define CUB 20
 # define RAD 0.0174533
 #endif

@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/02 16:51:41 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/06 08:57:57 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ float	adjusted_dist(t_exec *exec, float ray_angle, float dist);
 
 //UTILS
 int 	my_mlx_pixel_put(t_exec *exec, int x, int y, int color);
+int 	my_mlx_pixel_put_cmpr(t_exec *exec, int x, int y, int color);
 void	set_image_win(t_exec *exec);
 void	draw_line(t_exec *exec);
 
