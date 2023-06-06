@@ -43,7 +43,8 @@ void	init_display_minimap(t_exec *exec)
 		{
 			if (exec->data.map[y][x] == '1')
 				draw_square(x * SQUARE_SIZE, y * SQUARE_SIZE, 0x808080, exec);
-			else if (exec->data.map[y][x] != ' ' && exec->data.map[y][x] != '\n')
+			else if (exec->data.map[y][x] != ' ' \
+					&& exec->data.map[y][x] != '\n')
 				draw_square(x * SQUARE_SIZE, y * SQUARE_SIZE, 0xFFFFFF, exec);
 			x++;
 		}

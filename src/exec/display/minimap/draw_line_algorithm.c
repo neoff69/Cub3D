@@ -19,6 +19,8 @@ typedef struct s_line
 	int		step;
 	float	xincr;
 	float	yincr;
+	float	x;
+	float	y;
 }	t_line;
 
 static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
@@ -52,7 +54,7 @@ static float	rotate_line_y(t_line *origin, float length, float ang)
 	return (y);
 }
 
-void set_pixel_color(t_exec *exec, int x, int y, int color)
+void	set_pixel_color(t_exec *exec, int x, int y, int color)
 {
     char *pixel = exec->mlx.addr + (y * exec->mlx.len + x * (exec->mlx.bit / 8));
     *(unsigned int*)pixel = color;
@@ -60,29 +62,30 @@ void set_pixel_color(t_exec *exec, int x, int y, int color)
 
 void draw_wall(t_exec *data, int x0, int y0, int x1, int y1, int color)
 {
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
-    int sx = (x0 < x1) ? 1 : -1;
-    int sy = (y0 < y1) ? 1 : -1;
-    int err = dx - dy;
+	int dx = abs(x1 - x0);
+	int dy = abs(y1 - y0);
+	int sx = (x0 < x1) ? 1 : -1;
+	int sy = (y0 < y1) ? 1 : -1;
+	int err = dx - dy;
 
-    while (x0 != x1 || y0 != y1)
-    {
-        set_pixel_color(data, x0, y0, color);
-        // draw_square(x1, y1, color, data);
+	while (x0 != x1 || y0 != y1)
+	{
+		set_pixel_color(data, x0, y0, color);
+		// draw_square(x1, y1, color, data);
 		int err2 = err * 2;
-        if (err2 > -dy)
-        {
-            err -= dy;
-            x0 += sx;
-        }
-        if (err2 < dx)
-        {
-            err += dx;
-            y0 += sy;
-        }
-    }
+		if (err2 > -dy)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (err2 < dx)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
 }
+
 
 float	get_angle(t_exec *exec)
 {
@@ -96,25 +99,46 @@ float	get_angle(t_exec *exec)
 	return (ang);
 }
 
+float	get_distance(t_line *line, t_exec *exec, float ang)
+{
+	float	distance;
+
+	distance = ((line->final_x - line->x) * (line->final_x - line->x)) \
+			+ ((line->final_y - line->y) * (line->final_y - line->y));
+	distance = sqrt(distance);
+	distance = adjusted_dist(exec, ang, distance);
+	return (distance);
+}
+
+void	display_wall(t_line *line, t_exec *exec, float ang, int num)
+{
+	float	distance;
+	float	wall;
+	float	not_wall;
+
+	distance = get_distance(line, exec, ang);
+	wall = get_line_height(distance);
+	not_wall = line_offset(wall);
+	draw_wall(exec, num * 24, not_wall, num * 24, wall + not_wall, 0xFF0000);
+}
+
 void	draw(t_exec *exec, t_line *line, float ang)
 {
 	int		i;
 	int		num;
 	float	x;
 	float	y;
-	float	distance;
-	float	wall;
-	float	not_wall;
-
+  
 	num = 0;
 	while (num < WIDTH)
 	{
 		i = 0;
 		while (i < WIDTH)
 		{
-			x = rotate_line_x(line, i, ang);
-			y = rotate_line_y(line, i, ang);
-			if (x >= 1920 || x <= 0 || y >= 1080 || y <= 0)
+			line->x = rotate_line_x(line, i, ang);
+			line->y = rotate_line_y(line, i, ang);
+			if (line->x >= 1920 || line->x <= 0 \
+				|| line->y >= 1080 || line->y <= 0)
 				break ;
 			if (my_mlx_pixel_put_cmpr(exec, (int)x, (int)y, 0xFF0000))
 				break ;
@@ -127,6 +151,12 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		not_wall = line_offset(wall);
 		draw_wall(exec, num * (WIDTH / 1920), not_wall, num * (WIDTH / 1920), wall + not_wall, 0xFFFFFFF);
 		ang += RAD * (40.0 / WIDTH);
+			if (my_mlx_pixel_put_rt(exec, (int)line->x, (int)line->y, 0xFF0000))
+				break ;
+			i++;
+		}
+		display_wall(line, exec, ang, num);
+		ang += RAD;
 		num++;
 	}
 }
