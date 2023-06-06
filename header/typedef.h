@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/06 13:21:24 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/06 14:55:32 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_scub
 	char	*first_wall;
 	t_type	player_facing;
 	t_valid	player;
+	int		c_tab[3];
+	int		f_tab[3];
 	int		size;
 	int		pos_x;
 	int		pos_y;
