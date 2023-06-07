@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/06 14:27:58 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 11:13:55 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	display_minimap(t_exec *exec);
 void	display_minimap_character(t_exec *exec);
 void	display_raytracing(t_exec *exec);
 void	draw_square(int y, int x, int color, t_exec *exec);
+int		draw_player(int y, int x, int color, t_exec *exec);
 void	draw_sky(t_exec *exec);
 
 //HOOK
@@ -76,6 +77,7 @@ int		my_mlx_pixel_put(t_exec *exec, int x, int y, int color);
 int		my_mlx_pixel_put_wall(t_exec *exec, int x, int y, int color);
 int		check_if_corner(t_exec *exec, int bit, int x, int y);
 int		my_mlx_pixel_put_rt(t_exec *exec, int x, int y, int color);
+int		pixel_check(t_exec *exec, int x, int y);
 void	set_image_win(t_exec *exec);
 void	draw_line(t_exec *exec);
 

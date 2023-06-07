@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/06 14:17:55 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 13:34:02 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	my_mlx_pixel_put_rt(t_exec *exec, int x, int y, int color)
 
 	bit = exec->mlx.bit / 8;
 	dst = exec->mlx.addr + (y * exec->mlx.len + x * (bit));
-	if (*(unsigned int *)dst == WALL_MINIMAP || check_if_corner(exec, bit, x, y))
+	if (*(unsigned int *)dst == WALL_MINIMAP \
+		|| check_if_corner(exec, bit, x, y))
 		return (1);
 	*(unsigned int *)dst = color;
 	return (0);
@@ -49,6 +50,33 @@ int	my_mlx_pixel_put(t_exec *exec, int x, int y, int color)
 
 	bit = exec->mlx.bit / 8;
 	dst = exec->mlx.addr + (y * exec->mlx.len + x * (bit));
+	*(unsigned int *)dst = color;
+	return (0);
+}
+
+int	pixel_check(t_exec *exec, int x, int y)
+{
+	char	*dst;
+	int		bit;
+
+	bit = exec->mlx.bit / 8;
+	dst = exec->mlx.addr + (y * exec->mlx.len + x * (bit));
+	if (*(unsigned int *)dst == WALL_MINIMAP)
+	{
+		return (1);
+	}
+	return (0);
+}
+
+int	my_mlx_put_cf(t_exec *exec, int x, int y, int color)
+{
+	char	*dst;
+	int		bit;
+
+	bit = exec->mlx.bit / 8;
+	dst = exec->mlx.addr + (y * exec->mlx.len + x * (bit));
+	if (*(unsigned int *)dst != 0x000000 || *(unsigned int *)dst != WALL_MINIMAP)
+		return (1);
 	*(unsigned int *)dst = color;
 	return (0);
 }

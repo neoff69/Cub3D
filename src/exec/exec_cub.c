@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/06 14:58:06 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/07 11:53:19 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	set_up_struct(t_exec *exec)
 	exec->vertical_movement = 0;
 	exec->horizontal_movement = 0;
 	set_angle(exec);
-	exec->delta_x = cos(exec->angle) * 5;
-	exec->delta_y = sin(exec->angle) * 5;
+	exec->delta_x = cos(exec->angle) * 2;
+	exec->delta_y = sin(exec->angle) * 2;
 }
 
 void	set_up_mlx(t_exec *exec)
