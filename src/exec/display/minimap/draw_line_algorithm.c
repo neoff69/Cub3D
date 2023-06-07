@@ -118,10 +118,10 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.final_x = wall_struct.x;
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	draw_wall(exec, &wall_struct, 0x00FFFF, &my_mlx_pixel_put_wall);
-	wall_struct.y = not_wall + wall;
-	wall_struct.final_y = HEIGHT;
-	draw_wall(exec, &wall_struct, exec->data.f_color, &my_mlx_put_offset);
+	draw_wall(exec, &wall_struct, 0xA0522D);
+	wall_struct.y = HEIGHT;
+	wall_struct.final_y = not_wall + wall;
+	draw_wall(exec, &wall_struct,  exec->data.f_color);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = 0.0;
 	draw_wall(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);

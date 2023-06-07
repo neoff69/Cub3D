@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/07 12:41:37 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/07 14:05:32 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*mlx_win;
 	void	*img;
+	void	*north_img;
+	void	*south_img;
+	void	*west_img;
+	void	*east_img;
 	char	*addr;
 	int		bit;
 	int		len;
