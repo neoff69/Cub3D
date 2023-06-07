@@ -19,7 +19,6 @@ SRC						=	main.c	exit.c	\
 							exec/hook/hook_rotation.c \
 							exec/display/display_game.c \
 							exec/display/utils/display_utils.c \
-							exec/display/draw_sky_floor/draw_sky.c \
 							exec/display/minimap/display_minimap.c \
 							exec/display/minimap/display_minimap_character.c \
 							exec/display/minimap/display_raytracing.c \

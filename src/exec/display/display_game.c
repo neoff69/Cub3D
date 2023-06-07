@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:31:55 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/06 14:28:15 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 14:19:44 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,4 @@
 void	display_game(t_exec *exec)
 {
 	display_minimap(exec);
-	draw_sky(exec);
 }
