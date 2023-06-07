@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:27:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/06 14:08:01 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 11:49:50 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,25 @@ void	draw_square(int x, int y, int color, t_exec *exec)
 		}
 		i++;
 	}
+}
+
+int	draw_player(int x, int y, int color, t_exec *exec)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < SQUARE_SIZE_PLAYER)
+	{
+		j = 0;
+		while (j < SQUARE_SIZE_PLAYER)
+		{
+			my_mlx_pixel_put(exec, x + j, y + i, color);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 void	init_display_minimap(t_exec *exec)

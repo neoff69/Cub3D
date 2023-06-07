@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/07 13:36:48 by jlaisne          ###   ########.fr       */
@@ -140,9 +140,6 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		{
 			line->x = rotate_line_x(line, i, ang);
 			line->y = rotate_line_y(line, i, ang);
-			if (line->x >= 1920 || line->x <= 0 \
-				|| line->y >= 1080 || line->y <= 0)
-				break ;
 			if (my_mlx_pixel_put_rt(exec, (int)line->x, (int)line->y, 0xFF0000))
 				break ;
 			i++;
@@ -160,7 +157,7 @@ void	draw_line(t_exec *exec)
 
 	ang = get_angle(exec);
 	set_up_variable(exec, exec->actual_x, exec->actual_y, &line);
-	line.final_x = (exec->actual_x + SQUARE_SIZE / 2);
-	line.final_y = (exec->actual_y + SQUARE_SIZE / 2);
+	line.final_x = (exec->actual_x + SQUARE_SIZE_PLAYER / 2);
+	line.final_y = (exec->actual_y + SQUARE_SIZE_PLAYER / 2);
 	draw(exec, &line, ang);
 }

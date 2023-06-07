@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:11:46 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/06 14:38:39 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 13:38:04 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	draw_sky(t_exec *exec)
 {
-	t_pcub	*temp;
-	char	*sky;
+	int	*rgb;
+	int	hexa;
 
-	temp = get_node(exec->data.cub, C);
-	sky = temp->content;
+	rgb = exec->data.c_tab;
+	hexa = (rgb[0] << 16) + (rgb[1] << 8) + rgb[2];
 }
