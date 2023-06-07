@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/07 13:48:36 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/07 13:56:38 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.final_x = wall_struct.x;
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	draw_wall(exec, &wall_struct, 0x00FFFF);
+	draw_wall(exec, &wall_struct, 0xA0522D);
 	wall_struct.y = HEIGHT;
 	wall_struct.final_y = not_wall + wall;
 	draw_wall(exec, &wall_struct,  exec->data.f_color);

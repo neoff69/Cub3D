@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/07 11:53:19 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 14:25:59 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,22 @@ void	set_up_struct(t_exec *exec)
 	exec->delta_y = sin(exec->angle) * 2;
 }
 
+void	set_up_img(t_exec *exec)
+{
+	int	img_width;
+	int	img_height;
+	t_pcub	*temp;
+
+	temp = exec->data.cub;
+	exec->mlx.north_img = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	temp = temp->next;
+	exec->mlx.east_img = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	temp = temp->next;
+	exec->mlx.south_img = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content,&img_width, &img_height);
+	temp = temp->next;
+	exec->mlx.west_img = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+}
+
 void	set_up_mlx(t_exec *exec)
 {
 	exec->mlx.mlx = mlx_init();
@@ -44,6 +60,7 @@ void	set_up_mlx(t_exec *exec)
 		exit(0); //A GERER
 	exec->mlx.addr = mlx_get_data_addr \
 			(exec->mlx.img, &exec->mlx.bit, &exec->mlx.len, &exec->mlx.endian);
+	set_up_img(exec);
 }
 
 int	exec_cub(t_exec *exec)
