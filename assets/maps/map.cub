@@ -9,8 +9,8 @@ WE ./assets/sprites/west.xpm
 EA ./assets/sprites/east.xpm
 
 
-F 230,100,0
-C 220,30,0
+F 34,139,34
+C 135,206,235
 
 
             1111111111111111111111111
