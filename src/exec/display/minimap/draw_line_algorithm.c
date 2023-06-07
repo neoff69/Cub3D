@@ -76,12 +76,12 @@ void	draw_wall(t_exec *exec, t_line *wall, int color, int(*pixel_put)(t_exec *, 
 	while (i <= wall->step)
 	{
 		dst = pixel_return(exec, x++, 10);
-		if (x > 100)
+		if (x >= 100)
 			x = 0;
 		i++;
 		if (color != 0 && pixel_put(exec, wall->final_x, wall->final_y, color))
 			return ;
-		if (color == 0 && pixel_put(exec, wall->final_x, wall->final_y, *(unsigned int*)dst))
+		if (color == 0 && pixel_put(exec, wall->final_x, wall->final_y, *(unsigned int *)dst))
 			return ;
 		wall->final_x -= wall->xincr;
 		wall->final_y -= wall->yincr;
@@ -140,6 +140,7 @@ void	draw(t_exec *exec, t_line *line, float ang)
 	int		num;
 
 	num = 0;
+	exec->y = 0;
 	while (num < WIDTH)
 	{
 		i = 0;
@@ -152,6 +153,9 @@ void	draw(t_exec *exec, t_line *line, float ang)
 			i++;
 		}
 		display_wall(line, exec, ang, num);
+		exec->y++;
+		if (exec->y >= 100)
+			exec->y = 0;
 		ang += RAD * (40.0 / WIDTH);
 		num++;
 	}
