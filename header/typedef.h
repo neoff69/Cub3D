@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/07 14:05:32 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/07 16:07:34 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,20 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*mlx_win;
 	void	*img;
-	void	*north_img;
-	void	*south_img;
-	void	*west_img;
-	void	*east_img;
 	char	*addr;
 	int		bit;
 	int		len;
 	int		endian;
 }	t_mlx;
+
+typedef struct s_img
+{
+	void	*texture;
+	char	*addr;
+	int		bit;
+	int		len;
+	int		endian;
+}	t_img;
 
 typedef struct s_key
 {
@@ -95,12 +100,17 @@ typedef struct s_key
 typedef struct s_exec
 {
 	t_mlx	mlx;
+	t_img	north;
+	t_img	south;
+	t_img	west;
+	t_img	east;
 	t_scub	data;
 	t_key	key;
 	float	vertical_movement;
 	float	horizontal_movement;
 	int		actual_x;
 	int		actual_y;
+	int		y;
 	float	angle;
 	float	delta_x;
 	float	delta_y;

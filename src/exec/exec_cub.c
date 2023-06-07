@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/07 14:25:59 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/07 17:02:05 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,22 @@ void	set_up_struct(t_exec *exec)
 
 void	set_up_img(t_exec *exec)
 {
-	int	img_width;
-	int	img_height;
+	int		img_width;
+	int		img_height;
 	t_pcub	*temp;
 
 	temp = exec->data.cub;
-	exec->mlx.north_img = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	exec->north.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	exec->north.addr = mlx_get_data_addr(exec->north.texture, &exec->north.bit, &exec->north.len, &exec->north.endian);
 	temp = temp->next;
-	exec->mlx.east_img = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	exec->south.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	exec->south.addr = mlx_get_data_addr(exec->south.texture, &exec->south.bit, &exec->south.len, &exec->south.endian);
 	temp = temp->next;
-	exec->mlx.south_img = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content,&img_width, &img_height);
+	exec->east.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content,&img_width, &img_height);
+	exec->east.addr = mlx_get_data_addr(exec->east.texture, &exec->east.bit, &exec->east.len, &exec->east.endian);
 	temp = temp->next;
-	exec->mlx.west_img = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	exec->west.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	exec->west.addr = mlx_get_data_addr(exec->west.texture, &exec->west.bit, &exec->west.len, &exec->west.endian);
 }
 
 void	set_up_mlx(t_exec *exec)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/07 14:10:20 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:27:46 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,8 @@ int		my_mlx_put_offset(t_exec *exec, int x, int y, int color);
 int		pixel_check(t_exec *exec, int x, int y);
 void	set_image_win(t_exec *exec);
 void	draw_line(t_exec *exec);
+
+
+char	*pixel_return(t_exec *exec, int x, int y);
 
 #endif
