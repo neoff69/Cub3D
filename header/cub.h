@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/07 11:13:55 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 14:10:20 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int		my_mlx_pixel_put(t_exec *exec, int x, int y, int color);
 int		my_mlx_pixel_put_wall(t_exec *exec, int x, int y, int color);
 int		check_if_corner(t_exec *exec, int bit, int x, int y);
 int		my_mlx_pixel_put_rt(t_exec *exec, int x, int y, int color);
+int		my_mlx_put_offset(t_exec *exec, int x, int y, int color);
 int		pixel_check(t_exec *exec, int x, int y);
 void	set_image_win(t_exec *exec);
 void	draw_line(t_exec *exec);

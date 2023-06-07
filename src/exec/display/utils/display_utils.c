@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/07 13:34:02 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 14:22:48 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,23 @@ int	pixel_check(t_exec *exec, int x, int y)
 	bit = exec->mlx.bit / 8;
 	dst = exec->mlx.addr + (y * exec->mlx.len + x * (bit));
 	if (*(unsigned int *)dst == WALL_MINIMAP)
-	{
 		return (1);
-	}
 	return (0);
 }
 
-int	my_mlx_put_cf(t_exec *exec, int x, int y, int color)
+int	my_mlx_put_offset(t_exec *exec, int x, int y, int color)
 {
 	char	*dst;
 	int		bit;
 
 	bit = exec->mlx.bit / 8;
 	dst = exec->mlx.addr + (y * exec->mlx.len + x * (bit));
-	if (*(unsigned int *)dst != 0x000000 || *(unsigned int *)dst != WALL_MINIMAP)
+	if (*(unsigned int *)dst == WALL_MINIMAP \
+		|| *(unsigned int *)dst == FLOOR_MINIMAP \
+		|| *(unsigned int *)dst == PLAYER_MINIMAP \
+		|| *(unsigned int *)dst == RAY_MINIMAP)
+		return (0);
+	else if (*(unsigned int *)dst != 0x000000)
 		return (1);
 	*(unsigned int *)dst = color;
 	return (0);

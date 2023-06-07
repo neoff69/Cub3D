@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/07 13:48:36 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/07 14:25:03 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static float	rotate_line_y(t_line *origin, float length, float ang)
 	return (y);
 }
 
-void	draw_wall(t_exec *exec, t_line *wall, int color)
+void	draw_wall(t_exec *exec, t_line *wall, int color, int(*pixel_put)(t_exec *, int, int, int))
 {
 	int	dx;
 	int	dy;
@@ -74,7 +74,7 @@ void	draw_wall(t_exec *exec, t_line *wall, int color)
 	while (i <= wall->step)
 	{
 		i++;
-		if (my_mlx_pixel_put_wall(exec, wall->final_x, wall->final_y, color))
+		if (pixel_put(exec, wall->final_x, wall->final_y, color))
 			return ;
 		wall->final_x -= wall->xincr;
 		wall->final_y -= wall->yincr;
@@ -118,13 +118,13 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.final_x = wall_struct.x;
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	draw_wall(exec, &wall_struct, 0x00FFFF);
-	wall_struct.y = HEIGHT;
-	wall_struct.final_y = not_wall + wall;
-	draw_wall(exec, &wall_struct,  exec->data.f_color);
+	draw_wall(exec, &wall_struct, 0x00FFFF, &my_mlx_pixel_put_wall);
+	wall_struct.y = not_wall + wall;
+	wall_struct.final_y = HEIGHT;
+	draw_wall(exec, &wall_struct, exec->data.f_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = 0.0;
-	draw_wall(exec, &wall_struct, exec->data.c_color);
+	draw_wall(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
@@ -140,7 +140,7 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		{
 			line->x = rotate_line_x(line, i, ang);
 			line->y = rotate_line_y(line, i, ang);
-			if (my_mlx_pixel_put_rt(exec, (int)line->x, (int)line->y, 0xFF0000))
+			if (my_mlx_pixel_put_rt(exec, (int)line->x, (int)line->y, RAY_MINIMAP))
 				break ;
 			i++;
 		}
