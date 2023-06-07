@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/07 17:12:08 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/07 17:20:28 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	draw_wall(t_exec *exec, t_line *wall, int color, int(*pixel_put)(t_exec *, 
 	int x = -1;
 	while (i <= wall->step)
 	{
-		dst = pixel_return(exec, x++, 50);
+		dst = pixel_return(exec, x++, 10);
 		if (x > 100)
 			x = 0;
 		i++;
@@ -125,7 +125,7 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.final_x = wall_struct.x;
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	draw_wall(exec, &wall_struct, 0, &my_mlx_pixel_put_wall);
+	draw_wall(exec, &wall_struct, 1, &my_mlx_pixel_put_wall);
 	wall_struct.y = not_wall + wall;
 	wall_struct.final_y = HEIGHT;
 	draw_wall(exec, &wall_struct,  exec->data.f_color, &my_mlx_put_offset);
