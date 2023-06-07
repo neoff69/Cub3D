@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/07 14:25:03 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 17:12:08 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ static float	rotate_line_y(t_line *origin, float length, float ang)
 
 void	draw_wall(t_exec *exec, t_line *wall, int color, int(*pixel_put)(t_exec *, int, int, int))
 {
-	int	dx;
-	int	dy;
-	int	i;
+	char	*dst;
+	int		dx;
+	int		dy;
+	int		i;
 
 	dx = wall->final_x - wall->x;
 	dy = wall->final_y - wall->y;
@@ -71,10 +72,16 @@ void	draw_wall(t_exec *exec, t_line *wall, int color, int(*pixel_put)(t_exec *, 
 		return ;
 	wall->xincr = dx / wall->step;
 	wall->yincr = dy / wall->step;
+	int x = -1;
 	while (i <= wall->step)
 	{
+		dst = pixel_return(exec, x++, 50);
+		if (x > 100)
+			x = 0;
 		i++;
-		if (pixel_put(exec, wall->final_x, wall->final_y, color))
+		if (color != 0 && pixel_put(exec, wall->final_x, wall->final_y, color))
+			return ;
+		if (color == 0 && pixel_put(exec, wall->final_x, wall->final_y, *(unsigned int*)dst))
 			return ;
 		wall->final_x -= wall->xincr;
 		wall->final_y -= wall->yincr;
@@ -85,7 +92,7 @@ float	get_angle(t_exec *exec)
 {
 	float	ang;
 
-	ang = exec->angle - RAD * 25;
+	ang = exec->angle - RAD * 20;
 	if (ang < 0)
 		ang += 2 * PI;
 	else if (ang > 2 * PI)
@@ -99,7 +106,7 @@ float	get_distance(t_line *line, t_exec *exec, float ang)
 
 	distance = ((line->final_x - line->x) * (line->final_x - line->x)) \
 			+ ((line->final_y - line->y) * (line->final_y - line->y));
-	distance = sqrt(distance);
+	distance = sqrt(distance) - 0.1;
 	distance = adjusted_dist(exec, ang, distance);
 	return (distance);
 }
@@ -118,10 +125,10 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.final_x = wall_struct.x;
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	draw_wall(exec, &wall_struct, 0xA0522D);
-	wall_struct.y = HEIGHT;
-	wall_struct.final_y = not_wall + wall;
-	draw_wall(exec, &wall_struct,  exec->data.f_color);
+	draw_wall(exec, &wall_struct, 0, &my_mlx_pixel_put_wall);
+	wall_struct.y = not_wall + wall;
+	wall_struct.final_y = HEIGHT;
+	draw_wall(exec, &wall_struct,  exec->data.f_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = 0.0;
 	draw_wall(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
@@ -145,7 +152,7 @@ void	draw(t_exec *exec, t_line *line, float ang)
 			i++;
 		}
 		display_wall(line, exec, ang, num);
-		ang += RAD * (50.0 / WIDTH);
+		ang += RAD * (40.0 / WIDTH);
 		num++;
 	}
 }

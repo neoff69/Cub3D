@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/07 14:22:48 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 17:07:05 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	check_if_corner(t_exec *exec, int bit, int x, int y)
 	right_x = exec->mlx.addr + (y * exec->mlx.len + (x + 1) * (bit));
 	if (*(unsigned int *)left_x == WALL_MINIMAP \
 		|| *(unsigned int *)right_x == WALL_MINIMAP)
-		corner = exec->mlx.addr + ((y + 1) * exec->mlx.len + x * (bit));
-	if (corner && *(unsigned int *)corner == WALL_MINIMAP)
+		corner = exec->mlx.addr + ((y - 1) * exec->mlx.len + x * (bit));
+	if ((corner && *(unsigned int *)corner == WALL_MINIMAP))
 		return (1);
 	return (0);
 }
@@ -64,6 +64,16 @@ int	pixel_check(t_exec *exec, int x, int y)
 	if (*(unsigned int *)dst == WALL_MINIMAP)
 		return (1);
 	return (0);
+}
+
+char	*pixel_return(t_exec *exec, int x, int y)
+{
+	char	*dst;
+	int		bit;
+
+	bit = exec->east.bit / 8;
+	dst = exec->east.addr + (y * exec->mlx.len + x * (bit));
+	return (dst);
 }
 
 int	my_mlx_put_offset(t_exec *exec, int x, int y, int color)
