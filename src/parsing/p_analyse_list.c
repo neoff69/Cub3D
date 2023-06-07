@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:15:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/06 14:56:10 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/07 12:44:22 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,10 @@ int	split_and_check(t_scub *data, char *content, int index)
 			data->c_tab[i] = ft_atoll(colors[i]);
 		i++;
 	}
+	if (index == 0)
+		data->f_color = (data->f_tab[0] << 16) + (data->f_tab[1] << 8) + data->f_tab[2];
+	if (index == 1)
+		data->c_color = (data->c_tab[0] << 16) + (data->c_tab[1] << 8) + data->c_tab[2];
 	free_2d_array(colors);
 	return (0);
 }

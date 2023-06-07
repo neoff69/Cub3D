@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/07 13:17:35 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/07 13:36:48 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,11 @@ void	draw_wall(t_exec *exec, t_line *wall, int color)
 		wall->step = abs(dx);
 	else
 		wall->step = abs(dy);
+	if (dy == 0)
+		return ;
 	wall->xincr = dx / wall->step;
 	wall->yincr = dy / wall->step;
-	while (i < wall->step)
+	while (i <= wall->step)
 	{
 		i++;
 		if (my_mlx_pixel_put_wall(exec, wall->final_x, wall->final_y, color))
@@ -117,6 +119,12 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
 	draw_wall(exec, &wall_struct, 0x00FFFF);
+	wall_struct.y = HEIGHT;
+	wall_struct.final_y = not_wall;
+	draw_wall(exec, &wall_struct,  exec->data.f_color);
+	wall_struct.y = not_wall;
+	wall_struct.final_y = 0.0;
+	draw_wall(exec, &wall_struct, exec->data.c_color);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
