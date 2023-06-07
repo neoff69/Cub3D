@@ -56,7 +56,7 @@ $(NAME): 				$(OBJECTS) $(LIB_DIR)$(LIBFT)
 						$(GCC) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(MINILIB_DIR)$(MINILIB) $(LINUX)
 
 sanit :					$(OBJECTS) $(LIB_DIR)$(LIBFT)
-						$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(MINILIB_DIR)$(MINILIB)
+						$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(MINILIB_DIR)$(MINILIB) $(LINUX)
 
 lib:
 						@make -C $(LIB_DIR)
