@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/07 17:31:00 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/08 11:39:12 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ char	*pixel_return(t_exec *exec, int x, int y)
 	char	*dst;
 	int		bit;
 
-	bit = exec->east.bit / 8;
-	dst = exec->east.addr + (y * exec->mlx.len + x * (bit));
+	bit = exec->north.bit / 8;
+	dst = exec->north.addr + (y * exec->north.len + x * (bit));
 	return (dst);
 }
+
 
 int	my_mlx_put_offset(t_exec *exec, int x, int y, int color)
 {
@@ -106,8 +107,8 @@ int	my_mlx_pixel_put_wall(t_exec *exec, int x, int y, int color)
 
 	bit = exec->mlx.bit / 8;
 	dst = exec->mlx.addr + (y * exec->mlx.len + x * (bit));
-	if (*(unsigned int *)dst != 0x000000)
-		return (0);
+	// if (*(unsigned int *)dst != 0x000000)
+	// 	return (0);
 	*(unsigned int *)dst = color;
 	return (0);
 }

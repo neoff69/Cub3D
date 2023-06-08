@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:18:13 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/06 13:57:22 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/08 10:18:40 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,15 @@ float	line_offset(float lineHeight)
 
 	lineOffset = HEIGHT / 2 - lineHeight / 2;
 	return (lineOffset);
+}
+
+float	get_distance(t_line *line, t_exec *exec, float ang)
+{
+	float	distance;
+
+	distance = ((line->final_x - line->x) * (line->final_x - line->x)) \
+			+ ((line->final_y - line->y) * (line->final_y - line->y));
+	distance = sqrt(distance);
+	distance = adjusted_dist(exec, ang, distance);
+	return (distance);
 }
