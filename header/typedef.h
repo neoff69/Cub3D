@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/07 16:07:34 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/08 11:13:32 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,17 @@ typedef struct s_scub
 	int		fd;
 }	t_scub;
 
+typedef struct s_line
+{
+	float	final_x;
+	float	final_y;
+	int		step;
+	float	xincr;
+	float	yincr;
+	float	x;
+	float	y;
+}	t_line;
+
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -80,6 +91,14 @@ typedef struct s_mlx
 	int		endian;
 }	t_mlx;
 
+typedef struct s_key
+{
+	t_pressed key_w;
+	t_pressed key_a;
+	t_pressed key_s;
+	t_pressed key_d;
+}	t_key;
+
 typedef struct s_img
 {
 	void	*texture;
@@ -89,13 +108,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_key
-{
-	t_pressed key_w;
-	t_pressed key_a;
-	t_pressed key_s;
-	t_pressed key_d;
-}	t_key;
 
 typedef struct s_exec
 {
