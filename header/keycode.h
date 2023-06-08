@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   keycode.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/08 13:31:38 by vgonnot          ###   ########.fr       */

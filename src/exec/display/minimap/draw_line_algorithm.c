@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/08 13:45:02 by vgonnot          ###   ########.fr       */
@@ -29,17 +29,17 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 
 static float	rotate_line_x(t_line *origin, float length, float ang)
 {
-	int	x;
+	float	x;
 
-	x = origin->final_x + length * cos(ang);
+	x = origin->final_x + (length / 10.0) * cos(ang);
 	return (x);
 }
 
 static float	rotate_line_y(t_line *origin, float length, float ang)
 {
-	int	y;
+	float	y;
 
-	y = origin->final_y + length * sin(ang);
+	y = origin->final_y + (length / 10.0) * sin(ang);
 	return (y);
 }
 
@@ -177,7 +177,7 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		}
 		display_wall(line, exec, ang, num);
 		ang += RAD * (40.0 / WIDTH);
-		num++;
+		num ++;
 	}
 }
 
