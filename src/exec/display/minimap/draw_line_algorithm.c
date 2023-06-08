@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/08 12:38:50 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/08 13:45:02 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 		line->step = fabs(dx);
 	else
 		line->step = fabs(dy);
-	line->xincr = dx / line->step;
-	line->yincr = dy / line->step;
+	line->xincr = dx / (line->step);
+	line->yincr = dy / (line->step);
 }
 
 static float	rotate_line_x(t_line *origin, float length, float ang)
@@ -104,13 +104,13 @@ float	get_angle(t_exec *exec)
 //     }
 // }
 
-void	draw_sprite(t_exec *exec, t_line *wall, int x)
+void	draw_sprite(t_exec *exec, t_line *wall, int x, float mur)
 {
 	char	*dst;
 	int		dx;
 	int		dy;
 	int		i;
-	int 	y = 50;
+	float 	y = 0;
 
 	dx = wall->final_x - wall->x;
 	dy = wall->final_y - wall->y;
@@ -126,10 +126,9 @@ void	draw_sprite(t_exec *exec, t_line *wall, int x)
 	while (i <= wall->step)
 	{
 		i++;
-		dst = pixel_return(exec, x % SPRITE_SIZE, y);
-		y--;
-		if (y < 0)
-			y = SPRITE_SIZE;
+		dst = pixel_return(exec, x, y * (SPRITE_SIZE / mur));
+		y += 1;
+		//printf("y = %f sps %d H %f\n",(float)(SPRITE_SIZE / HEIGHT), SPRITE_SIZE, HEIGHT);
 		my_mlx_pixel_put_wall(exec, wall->final_x, wall->final_y, *(unsigned int*)dst);
 		wall->final_x -= wall->xincr;
 		wall->final_y -= wall->yincr;
@@ -156,7 +155,7 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	draw_offset(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	draw_sprite(exec, &wall_struct, num);
+	draw_sprite(exec, &wall_struct, (float)num * (SPRITE_SIZE / wall), wall);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
