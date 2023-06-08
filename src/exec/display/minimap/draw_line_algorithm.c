@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/08 12:38:50 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/08 13:52:22 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 
 static float	rotate_line_x(t_line *origin, float length, float ang)
 {
-	int	x;
+	float	x;
 
-	x = origin->final_x + length * cos(ang);
+	x = origin->final_x + (length / 10.0) * cos(ang);
 	return (x);
 }
 
 static float	rotate_line_y(t_line *origin, float length, float ang)
 {
-	int	y;
+	float	y;
 
-	y = origin->final_y + length * sin(ang);
+	y = origin->final_y + (length / 10.0) * sin(ang);
 	return (y);
 }
 
@@ -104,7 +104,7 @@ float	get_angle(t_exec *exec)
 //     }
 // }
 
-void	draw_sprite(t_exec *exec, t_line *wall, int x)
+void	draw_sprite(t_exec *exec, t_line *wall, t_line *line, int x)
 {
 	char	*dst;
 	int		dx;
@@ -126,7 +126,7 @@ void	draw_sprite(t_exec *exec, t_line *wall, int x)
 	while (i <= wall->step)
 	{
 		i++;
-		dst = pixel_return(exec, x % SPRITE_SIZE, y);
+		dst = pixel_return(exec, (float)(x % SPRITE_SIZE), y);
 		y--;
 		if (y < 0)
 			y = SPRITE_SIZE;
@@ -156,7 +156,8 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	draw_offset(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	draw_sprite(exec, &wall_struct, num);
+	// printf("x = %f y = %f\n", line->x, line->y);
+	draw_sprite(exec, &wall_struct, line, num);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
@@ -178,7 +179,7 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		}
 		display_wall(line, exec, ang, num);
 		ang += RAD * (40.0 / WIDTH);
-		num++;
+		num ++;
 	}
 }
 
