@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keycode.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/08 09:58:26 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/08 12:38:53 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@
 # define FLOOR_MINIMAP 0xFFFFFF
 # define PLAYER_MINIMAP 0x0000FF
 # define RAY_MINIMAP 0xFF0000
+# define SPRITE_SIZE 50
 #endif

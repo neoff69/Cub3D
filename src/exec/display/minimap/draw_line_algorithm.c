@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/08 11:37:11 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/08 12:38:50 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,13 @@ float	get_angle(t_exec *exec)
 //     }
 // }
 
-void	dda(t_exec *exec, t_line *wall, int x)
+void	draw_sprite(t_exec *exec, t_line *wall, int x)
 {
 	char	*dst;
 	int		dx;
 	int		dy;
 	int		i;
-	int 	y = 0;
+	int 	y = 50;
 
 	dx = wall->final_x - wall->x;
 	dy = wall->final_y - wall->y;
@@ -126,20 +126,14 @@ void	dda(t_exec *exec, t_line *wall, int x)
 	while (i <= wall->step)
 	{
 		i++;
-		dst = pixel_return(exec, x % 51, y);
-		y++;
-		if (y > 50)
-			y = 0;
-		if (my_mlx_pixel_put_wall(exec, wall->final_x, wall->final_y, *(unsigned int*)dst))
-			return ;
+		dst = pixel_return(exec, x % SPRITE_SIZE, y);
+		y--;
+		if (y < 0)
+			y = SPRITE_SIZE;
+		my_mlx_pixel_put_wall(exec, wall->final_x, wall->final_y, *(unsigned int*)dst);
 		wall->final_x -= wall->xincr;
 		wall->final_y -= wall->yincr;
 	}
-}
-
-void	draw_sprites(t_exec *exec, t_line *wall, int num)
-{
-	dda(exec, wall, num);
 }
 
 void	display_wall(t_line *line, t_exec *exec, float ang, int num)
@@ -162,7 +156,7 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	draw_offset(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	draw_sprites(exec, &wall_struct, num);
+	draw_sprite(exec, &wall_struct, num);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
