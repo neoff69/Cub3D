@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/09 12:59:40 by jlaisne          ###   ########.fr       */
@@ -140,7 +140,7 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.final_y = wall + not_wall;
 	sprite_x = fmodf(line->x, 10.0) * 10.0 / 2;
 	sprite_y = 50 - fmodf(line->y, 10.0) * 10.0 / 2;
-	if (sprite_x > 49.0 && sprite_y > 1.0)
+	if (sprite_x > 49.0)
 		draw_sprite(exec, &exec->west, &wall_struct, sprite_y, wall);
 	else if (sprite_y < 1.0)
 		draw_sprite(exec, &exec->north, &wall_struct, sprite_x, wall);
@@ -167,12 +167,6 @@ void	draw(t_exec *exec, t_line *line, float ang)
 				break ;
 			i++;
 		}
-		// if (num < 10)
-		// {
-		// 	printf("x = %f - y = %f\n", line->x, line->y);
-		// 	printf("mod = %f\n\n\n", fmodf(line->x, 10.0) * 10 / 2);
-		// 	printf("ANG = %f\n", ang);
-		// }
 		display_wall(line, exec, ang, num);
 		ang += RAD * (40.0 / WIDTH);
 		num ++;
