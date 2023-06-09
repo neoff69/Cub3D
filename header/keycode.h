@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/08 13:31:38 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/08 14:14:29 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@
 # define PI 3.14159265359
 # define WIDTH 1920.0
 # define HEIGHT 1080.0
-# define CUB 25
+# define CUB 15
 # define RAD 0.0174533
 # define WALL_MINIMAP 0x808080
 # define FLOOR_MINIMAP 0xFFFFFF

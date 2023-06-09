@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/08 13:45:02 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/09 11:01:27 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,28 +82,6 @@ float	get_angle(t_exec *exec)
 	return (ang);
 }
 
-// static void	single_ray(t_program *prog, t_img *img, int x, double rot)
-// {
-// 	int			i;
-// 	t_side		wall;
-// 	int			ln_ht;
-// 	t_img		spr;
-// 	int			start;
-
-// 	wall = get_wall(prog, rot);
-// 	spr = prog->sprites[get_texture(&wall, rot)];
-// 	ln_ht = 2 * (img->height / (wall.dist * \
-// 		cos((rot - prog->player.rot) / 180 * M_PI)));
-// 	start = (img->height - ln_ht) / 2;
-// 	i = -1;
-// 	while (++i < img->height)
-// 	{
-// 		if (i < start + ln_ht)
-// 			pixel_put(img, x, i, pixel_get(&spr, wich_x(&wall, spr.width), \
-// 			trunc((i + 0.5 - start) / ln_ht * spr.height)));
-//     }
-// }
-
 void	draw_sprite(t_exec *exec, t_line *wall, int x, float mur)
 {
 	char	*dst;
@@ -123,12 +101,12 @@ void	draw_sprite(t_exec *exec, t_line *wall, int x, float mur)
 		return ;
 	wall->xincr = dx / wall->step;
 	wall->yincr = dy / wall->step;
+	dst = NULL;
 	while (i <= wall->step)
 	{
 		i++;
-		dst = pixel_return(exec, x, y * (SPRITE_SIZE / mur));
+		dst = pixel_return(&exec->north, x, y * (SPRITE_SIZE / mur));
 		y += 1;
-		//printf("y = %f sps %d H %f\n",(float)(SPRITE_SIZE / HEIGHT), SPRITE_SIZE, HEIGHT);
 		my_mlx_pixel_put_wall(exec, wall->final_x, wall->final_y, *(unsigned int*)dst);
 		wall->final_x -= wall->xincr;
 		wall->final_y -= wall->yincr;
@@ -141,6 +119,8 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	float	wall;
 	float	not_wall;
 	t_line	wall_struct;
+	float	test;
+	// float	test2;
 
 	distance = get_distance(line, exec, ang);
 	wall = get_line_height(distance);
@@ -155,7 +135,16 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	draw_offset(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	draw_sprite(exec, &wall_struct, (float)num * (SPRITE_SIZE / wall), wall);
+	test = fmodf(line->x, 10.0) * 10.0 / 2;
+	// test2 = 50 - fmodf(line->y, 10.0) * 10.0 / 2;
+	// printf("%f\n", test);
+	// printf("%f\n", test2);
+	if (test > 49.0)
+		draw_sprite(exec, &wall_struct, 50.0 - (fmodf(line->y, 10.0) * 10.0 / 2), wall);
+	if (test > 1.0)
+		draw_sprite(exec, &wall_struct, fmodf(line->x, 10.0) * 10.0 / 2, wall);
+	else
+		draw_sprite(exec, &wall_struct, (fmodf(line->y, 10.0) * 10.0 / 2), wall);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
@@ -175,6 +164,12 @@ void	draw(t_exec *exec, t_line *line, float ang)
 				break ;
 			i++;
 		}
+		// if (num < 10)
+		// {
+		// 	printf("x = %f - y = %f\n", line->x, line->y);
+		// 	printf("mod = %f\n\n\n", fmodf(line->x, 10.0) * 10 / 2);
+		// 	printf("ANG = %f\n", ang);
+		// }
 		display_wall(line, exec, ang, num);
 		ang += RAD * (40.0 / WIDTH);
 		num ++;

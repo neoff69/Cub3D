@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/08 12:36:03 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/08 14:36:38 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ int	pixel_check(t_exec *exec, int x, int y)
 	return (0);
 }
 
-char	*pixel_return(t_exec *exec, int x, int y)
+char	*pixel_return(t_img *data, int x, int y)
 {
 	char	*dst;
 	int		bit;
 
-	bit = exec->north.bit / 8;
-	dst = exec->north.addr + (y * exec->north.len + x * (bit));
+	bit = data->bit / 8;
+	dst = data->addr + (y * data->len + x * (bit));
 	return (dst);
 }
 
