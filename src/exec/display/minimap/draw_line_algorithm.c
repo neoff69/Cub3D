@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/09 11:20:59 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/09 13:00:00 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ float	get_angle(t_exec *exec)
 	return (ang);
 }
 
-void	draw_sprite(t_exec *exec, t_line *wall, int x, float mur)
+void	draw_sprite(t_exec *exec, t_line *wall, int x, float wall_height)
 {
 	char	*dst;
 	int		dx;
@@ -105,7 +105,7 @@ void	draw_sprite(t_exec *exec, t_line *wall, int x, float mur)
 	while (i <= wall->step)
 	{
 		i++;
-		dst = pixel_return(&exec->north, x, y * (SPRITE_SIZE / mur));
+		dst = pixel_return(&exec->north, x,(SPRITE_SIZE * (wall_height - y)) / wall_height);
 		y += 1;
 		my_mlx_pixel_put_wall(exec, wall->final_x, wall->final_y, *(unsigned int*)dst);
 		wall->final_x -= wall->xincr;
