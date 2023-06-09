@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/09 12:59:40 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/09 13:13:11 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ float	get_angle(t_exec *exec)
 	return (ang);
 }
 
-void	draw_sprite(t_exec *exec, t_img *texture, t_line *wall, int x, float mur)
+void	draw_sprite(t_exec *exec, t_img *texture, t_line *wall, int x, float wall_height)
 {
 	char	*dst;
 	int		dx;
@@ -101,14 +101,14 @@ void	draw_sprite(t_exec *exec, t_img *texture, t_line *wall, int x, float mur)
 		return ;
 	wall->xincr = dx / wall->step;
 	wall->yincr = dy / wall->step;
-	dst = NULL;
+
 	while (i <= wall->step)
 	{
 		i++;
-		if (mur == 1080)
-			dst = pixel_return(texture, x, y * ((SPRITE_SIZE) / (exec->actL)) / 2);
+		if (wall_height == 1080)
+			dst = pixel_return(texture, x, (SPRITE_SIZE * (exec->actL - y)) / exec->actL);
 		else
-			dst = pixel_return(texture, x, y * (SPRITE_SIZE / mur));
+			dst = pixel_return(texture, x, (SPRITE_SIZE * (wall_height - y)) / wall_height);
 		y += 1;
 		my_mlx_pixel_put_wall(exec, wall->final_x, wall->final_y, *(unsigned int*)dst);
 		wall->final_x -= wall->xincr;
