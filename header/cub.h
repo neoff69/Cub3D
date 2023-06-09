@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/08 14:33:43 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/09 12:45:40 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	minimap_rotation(t_exec *exec, int keycode);
 
 //LINE
 float	line_offset(float lineHeight);
-float	get_line_height(float dist);
+float	get_line_height(t_exec *exec, float dist);
 float	adjusted_dist(t_exec *exec, float ray_angle, float dist);
 float	get_distance(t_line *line, t_exec *exec, float ang);
 

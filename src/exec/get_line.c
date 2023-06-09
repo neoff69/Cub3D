@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:18:13 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/08 13:03:31 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/09 12:45:31 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ float	adjusted_dist(t_exec *exec, float ray_angle, float dist)
 	return (dist);
 }
 
-float	get_line_height(float dist)
+float	get_line_height(t_exec *exec, float dist)
 {
 	float	lineHeight;
 
 	lineHeight = CUB * 1080 / dist;
 	if (lineHeight > 1080)
+	{
+		exec->actL = lineHeight;
 		lineHeight = 1080;
+	}
 	return (lineHeight);
 }
 
