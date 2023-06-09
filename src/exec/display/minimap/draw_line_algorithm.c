@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/09 11:01:27 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/09 11:20:59 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	float	not_wall;
 	t_line	wall_struct;
 	float	test;
-	// float	test2;
+	float	test2;
 
 	distance = get_distance(line, exec, ang);
 	wall = get_line_height(distance);
@@ -136,14 +136,14 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
 	test = fmodf(line->x, 10.0) * 10.0 / 2;
-	// test2 = 50 - fmodf(line->y, 10.0) * 10.0 / 2;
-	// printf("%f\n", test);
-	// printf("%f\n", test2);
-	if (test > 49.0)
+	test2 = 50 - fmodf(line->y, 10.0) * 10.0 / 2;
+	if (test > 49.0) // WEST
 		draw_sprite(exec, &wall_struct, 50.0 - (fmodf(line->y, 10.0) * 10.0 / 2), wall);
-	if (test > 1.0)
+	else if (test2 < 1.0) // NORTH
 		draw_sprite(exec, &wall_struct, fmodf(line->x, 10.0) * 10.0 / 2, wall);
-	else
+	else if (test2 > 49.0) // SOUTH
+		draw_sprite(exec, &wall_struct, 50.0 - fmodf(line->x, 10.0) * 10.0 / 2, wall);
+	else // EAST
 		draw_sprite(exec, &wall_struct, (fmodf(line->y, 10.0) * 10.0 / 2), wall);
 }
 
