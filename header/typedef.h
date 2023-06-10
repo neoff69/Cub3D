@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/09 12:45:53 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/10 14:07:03 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_exec
 	int		actual_y;
 	float	angle;
 	float	actL;
+	t_img	*prev_wall;
 	float	delta_x;
 	float	delta_y;
 }	t_exec;
