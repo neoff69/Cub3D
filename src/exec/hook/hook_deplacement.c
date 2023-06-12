@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/07 13:10:57 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/12 18:16:42 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,53 +77,140 @@ int	draw_player_check(int x, int y, t_exec *exec)
 // 	return (0);
 // }
 
-int	check_if_wall(t_exec *exec, int keycode)
+// int	check_if_wall(t_exec *exec, int keycode)
+// {
+// 	float	x;
+// 	float	y;
+
+// 	x = 0;
+// 	y = 0;
+// 	if (keycode == KEY_S || keycode == KEY_W)
+// 		vertical_movement(exec, keycode, &x, &y);
+// 	else
+// 		horizontal_movement(exec, keycode, &x, &y);
+// 	if (draw_player_check((int)x, (int)y, exec))
+// 		return (1);
+// 	return (0);
+// }
+
+void	check_if_upper_wall(t_exec *exec)
 {
 	float	x;
 	float	y;
 
 	x = 0;
 	y = 0;
-	if (keycode == KEY_S || keycode == KEY_W)
-		vertical_movement(exec, keycode, &x, &y);
-	else
-		horizontal_movement(exec, keycode, &x, &y);
-	if (draw_player_check((int)x, (int)y, exec))
-		return (1);
-	return (0);
+
+	x = (exec->data.pos_x * SQUARE_SIZE \
+			+ exec->horizontal_movement);
+	y = (exec->data.pos_y * SQUARE_SIZE \
+			+ exec->vertical_movement);
+	while (draw_player_check((int)x, (int)y, exec))
+	{
+		exec->horizontal_movement -= exec->delta_x / 10;
+		exec->vertical_movement -= exec->delta_y / 10;
+		x = (exec->data.pos_x * SQUARE_SIZE \
+			+ exec->horizontal_movement);
+		y = (exec->data.pos_y * SQUARE_SIZE \
+			+ exec->vertical_movement);
+		printf("%f %f\n", x, y);
+	}
+}
+
+void	check_if_lower_wall(t_exec *exec)
+{
+	float	x;
+	float	y;
+
+	x = 0;
+	y = 0;
+
+	x = (exec->data.pos_x * SQUARE_SIZE \
+			+ exec->horizontal_movement);
+	y = (exec->data.pos_y * SQUARE_SIZE \
+			+ exec->vertical_movement);
+	while (draw_player_check((int)x, (int)y, exec))
+	{
+		exec->horizontal_movement += exec->delta_x / 10;
+		exec->vertical_movement += exec->delta_y / 10;
+		x = (exec->data.pos_x * SQUARE_SIZE \
+			+ exec->horizontal_movement);
+		y = (exec->data.pos_y * SQUARE_SIZE \
+			+ exec->vertical_movement);
+	}
+}
+
+void	check_if_left_wall(t_exec *exec)
+{
+	float	x;
+	float	y;
+
+	x = 0;
+	y = 0;
+
+	x = (exec->data.pos_x * SQUARE_SIZE \
+			+ exec->horizontal_movement);
+	y = (exec->data.pos_y * SQUARE_SIZE \
+			+ exec->vertical_movement);
+	while (draw_player_check((int)x, (int)y, exec))
+	{
+		exec->horizontal_movement += cos(exec->angle + PI / 2) / 10;
+		exec->vertical_movement += sin(exec->angle + PI / 2) / 10;
+		x = (exec->data.pos_x * SQUARE_SIZE \
+			+ exec->horizontal_movement);
+		y = (exec->data.pos_y * SQUARE_SIZE \
+			+ exec->vertical_movement);
+	}
+}
+
+void	check_if_right_wall(t_exec *exec)
+{
+	float	x;
+	float	y;
+
+	x = 0;
+	y = 0;
+
+	x = (exec->data.pos_x * SQUARE_SIZE \
+			+ exec->horizontal_movement);
+	y = (exec->data.pos_y * SQUARE_SIZE \
+			+ exec->vertical_movement);
+	while (draw_player_check((int)x, (int)y, exec))
+	{
+		exec->horizontal_movement -= cos(exec->angle + PI / 2) / 10;
+		exec->vertical_movement -= sin(exec->angle + PI / 2) / 10;
+		x = (exec->data.pos_x * SQUARE_SIZE \
+			+ exec->horizontal_movement);
+		y = (exec->data.pos_y * SQUARE_SIZE \
+			+ exec->vertical_movement);
+	}
 }
 
 void	minimap_deplacement(t_exec *exec, int keycode)
 {	
-	float	temp_hor;
-	float	temp_ver;
-
-	temp_hor = exec->horizontal_movement;
-	temp_ver = exec->vertical_movement;
 	if (keycode == KEY_W)
 	{
 		exec->horizontal_movement += exec->delta_x;
 		exec->vertical_movement += exec->delta_y;
+		check_if_upper_wall(exec);
 	}
 	else if (keycode == KEY_S)
 	{
 		exec->horizontal_movement -= exec->delta_x;
 		exec->vertical_movement -= exec->delta_y;
+		check_if_lower_wall(exec);
 	}
 	else if (keycode == KEY_D)
 	{
 		exec->horizontal_movement += cos(exec->angle + PI / 2);
 		exec->vertical_movement += sin(exec->angle + PI / 2);
+		check_if_right_wall(exec);
 	}
 	else if (keycode == KEY_A)
 	{
 		exec->horizontal_movement -= cos(exec->angle + PI / 2);
 		exec->vertical_movement -= sin(exec->angle + PI / 2);
-	}
-	if (check_if_wall(exec, keycode))
-	{
-		exec->horizontal_movement = temp_hor;
-		exec->vertical_movement = temp_ver;
+		check_if_left_wall(exec);
 	}
 	set_image_win(exec);
 }
