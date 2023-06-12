@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/12 10:03:44 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/12 10:17:19 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,6 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.final_y = wall + not_wall;
 	sprite_x = fmodf(line->x, 10.0) * 10.0 / 2;
 	sprite_y = 50 - fmodf(line->y, 10.0) * 10.0 / 2;
-	printf("s_x %f\n", sprite_x);
-	printf("s_y %f\n", sprite_y);
-	// printf("l_x %f\n", line->x);
-	// printf("l_y %f\n", line->y);
 	if (sprite_x > 49.7)
 		draw_sprite(exec, &exec->west, &wall_struct, sprite_y, wall);
 	else if (sprite_y < 1.0)

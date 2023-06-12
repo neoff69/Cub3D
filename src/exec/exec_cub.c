@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/09 12:34:43 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/12 10:29:26 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ void	set_up_struct(t_exec *exec)
 	set_angle(exec);
 	exec->delta_x = cos(exec->angle) * 2;
 	exec->delta_y = sin(exec->angle) * 2;
+	exec->act = 0;
+	exec->off = 0;
+	exec->key.key_w = 0;
+	exec->key.key_a = 0;
+	exec->key.key_s = 0;
+	exec->key.key_d = 0;
 }
 
 void	set_up_img(t_exec *exec)
