@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/09 12:45:53 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/12 10:27:54 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct s_key
 	t_pressed key_a;
 	t_pressed key_s;
 	t_pressed key_d;
+	t_pressed key_r;
+	t_pressed key_l;
 }	t_key;
 
 typedef struct s_img
@@ -123,7 +125,8 @@ typedef struct s_exec
 	int		actual_x;
 	int		actual_y;
 	float	angle;
-	float	actL;
+	float	act;
+	float	off;
 	float	delta_x;
 	float	delta_y;
 }	t_exec;
