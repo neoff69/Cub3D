@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/10 16:23:28 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/12 10:03:44 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static float	rotate_line_x(t_line *origin, float length, float ang)
 {
 	float	x;
 
-	x = origin->final_x + (length / 5.0) * cos(ang);
+	x = origin->final_x + (length / CUB) * cos(ang);
 	return (x);
 }
 
@@ -39,7 +39,7 @@ static float	rotate_line_y(t_line *origin, float length, float ang)
 {
 	float	y;
 
-	y = origin->final_y + (length / 5.0) * sin(ang);
+	y = origin->final_y + (length / CUB) * sin(ang);
 	return (y);
 }
 
@@ -106,7 +106,7 @@ void	draw_sprite(t_exec *exec, t_img *texture, t_line *wall, int x, float wall_h
 	{
 		i++;
 		if (wall_height == 1080)
-			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->actL - y) / exec->actL) - 0.5));
+			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - exec->off - y) / exec->act)));
 		else
 			dst = pixel_return(texture, x, (SPRITE_SIZE * (wall_height - y)) / wall_height - 0.5);
 		y += 1;
@@ -140,7 +140,11 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.final_y = wall + not_wall;
 	sprite_x = fmodf(line->x, 10.0) * 10.0 / 2;
 	sprite_y = 50 - fmodf(line->y, 10.0) * 10.0 / 2;
-	if (sprite_x > 49.0)
+	printf("s_x %f\n", sprite_x);
+	printf("s_y %f\n", sprite_y);
+	// printf("l_x %f\n", line->x);
+	// printf("l_y %f\n", line->y);
+	if (sprite_x > 49.7)
 		draw_sprite(exec, &exec->west, &wall_struct, sprite_y, wall);
 	else if (sprite_y < 1.0)
 		draw_sprite(exec, &exec->north, &wall_struct, sprite_x, wall);
