@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/12 09:54:23 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/13 10:17:05 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@
 # define KEY_9 231
 # define KEY_ESCAPE 65307
 # define KEY_SPACE 32
-# define SQUARE_SIZE 10
-# define SQUARE_SIZE_PLAYER 4
+# define SQUARE_SIZE 6
+# define SQUARE_SIZE_PLAYER 2
 # define PI 3.14159265359
 # define WIDTH 1920.0
 # define HEIGHT 1080.0
