@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 10:17:05 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:02:44 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@
 # define KEY_ESCAPE 65307
 # define KEY_SPACE 32
 # define SQUARE_SIZE 6
-# define SQUARE_SIZE_PLAYER 2
+# define SQUARE_SIZE_PLAYER 3
 # define PI 3.14159265359
 # define WIDTH 1920.0
 # define HEIGHT 1080.0
