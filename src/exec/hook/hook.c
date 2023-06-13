@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 10:03:36 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:24:41 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	keyhook_rel(int keycode, t_exec *exec)
 
 void	hook(t_exec *exec)
 {
-	mlx_hook(exec->mlx.mlx_win, 2, 1L << 0, keyhook, exec);
-	mlx_hook(exec->mlx.mlx_win, 3, 1L << 1, keyhook_rel, exec);
+	mlx_hook(exec->mlx.mlx_win, 2, 1L << 1, keyhook, exec);
+	// mlx_hook(exec->mlx.mlx_win, 3, 1L << 1, keyhook_rel, exec);
 	mlx_hook(exec->mlx.mlx_win, 17, 1L << 0, click_to_quit, exec);
 }

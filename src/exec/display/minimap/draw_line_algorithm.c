@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 11:24:52 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:32:33 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ void	draw_sprite(t_exec *exec, t_img *texture, t_line *wall, int x, float wall_h
 	while (i <= wall->step)
 	{
 		i++;
-		if (wall_height == 1080)
-			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - exec->off - y) / exec->act)));
+		if (wall_height == HEIGHT)
+			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - exec->off - 10 - y) / exec->act)));
 		else
 			dst = pixel_return(texture, x, (SPRITE_SIZE * (wall_height - y)) / wall_height - 0.5);
 		y += 1;
@@ -143,16 +143,10 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	not_wall = line_offset(wall);
 	wall_struct.x = num;
 	wall_struct.final_x = wall_struct.x;
-	wall_struct.y = not_wall + wall;
-	wall_struct.final_y = HEIGHT;
-	draw_offset(exec, &wall_struct, exec->data.f_color, &my_mlx_put_offset);
-	wall_struct.y = not_wall;
-	wall_struct.final_y = 0.0;
-	draw_offset(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	sprite_x = fmodf(line->x, SQUARE_SIZE) * 17.0 / 2;
-	sprite_y = SPRITE_SIZE - fmodf(line->y, SQUARE_SIZE) * 17.0 / 2;
+	sprite_x = fmodf(line->x, SQUARE_SIZE) * 8.5;
+	sprite_y = SPRITE_SIZE - fmodf(line->y, SQUARE_SIZE) * 8.5;
 	if (check_texture(line, exec) == 2)
 		draw_sprite(exec, &exec->west, &wall_struct, sprite_y, wall);
 	else if (check_texture(line, exec) == 3)
@@ -160,7 +154,13 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	else if (check_texture(line, exec) == 4)
 		draw_sprite(exec, &exec->south, &wall_struct, SPRITE_SIZE - fmodf(line->x, SQUARE_SIZE) * 8.5, wall);
 	else
-		draw_sprite(exec, &exec->east, &wall_struct, (fmodf(line->y, SQUARE_SIZE) * 8.5), wall);
+		draw_sprite(exec, &exec->east, &wall_struct, (fmodf(line->y, 6.0) * 8.5), wall);
+	wall_struct.y = not_wall + wall;
+	wall_struct.final_y = HEIGHT;
+	draw_offset(exec, &wall_struct,  exec->data.f_color, &my_mlx_put_offset);
+	wall_struct.y = not_wall;
+	wall_struct.final_y = 0.0;
+	draw_offset(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
