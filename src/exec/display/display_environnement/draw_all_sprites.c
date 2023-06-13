@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all_sprites.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 13:07:37 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 13:33:45 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/13 15:37:24 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 static void	get_incrementation_and_step(t_line *wall)
 {
-	wall->dx = wall->final_x - wall->x;
-	wall->dy = wall->final_y - wall->y;
+	int	dx;
+	int	dy;
+
+	dx = wall->final_x - wall->x;
+	dy = wall->final_y - wall->y;
 	if (wall->dy == 0)
 		return ;
-	if (abs((int)wall->dx) > abs((int)wall->dy))
-		wall->step = abs((int)wall->dx);
+	if (abs(dx) > abs(dy))
+		wall->step = abs(dx);
 	else
-		wall->step = abs((int)wall->dy);
-	wall->xincr = wall->dx / wall->step;
-	wall->yincr = wall->dy / wall->step;
+		wall->step = abs(dy);
+	wall->xincr = dx / wall->step;
+	wall->yincr = dy / wall->step;
 }
 
 static void	draw_sprite(\
@@ -42,7 +45,7 @@ static void	draw_sprite(\
 		i++;
 		if (wall->wall_height == 1080)
 			dst = pixel_return(texture, x, \
-				(SPRITE_SIZE * ((exec->act - exec->off - y) / exec->act)));
+				(SPRITE_SIZE * ((exec->act - 10 - exec->off - y) / exec->act)));
 		else
 			dst = pixel_return(texture, x, \
 			(SPRITE_SIZE * (wall->wall_height - y)) / wall->wall_height - 0.5);
