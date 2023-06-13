@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 11:32:33 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/13 13:56:13 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,20 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 static float	rotate_line_x(t_line *origin, float length, float ang)
 {
 	float	x;
+	float	dx;
 
-	x = origin->final_x + (length / CUB) * cos(ang);
+	dx = cos(ang);
+	x = origin->final_x + (length / CUB) * dx;
 	return (x);
 }
 
 static float	rotate_line_y(t_line *origin, float length, float ang)
 {
 	float	y;
+	float	dy;
 
-	y = origin->final_y + (length / CUB) * sin(ang);
+	dy = sin(ang);
+	y = origin->final_y + (length / CUB) * dy;
 	return (y);
 }
 
