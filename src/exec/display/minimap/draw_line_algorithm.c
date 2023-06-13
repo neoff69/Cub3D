@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/12 18:19:23 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/13 10:33:15 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,19 @@ void	draw_sprite(t_exec *exec, t_img *texture, t_line *wall, int x, float wall_h
 	}
 }
 
+int check_texture(t_line *line, t_exec *exec)
+{
+	if ((int)(line->x + 0.1) / SQUARE_SIZE != (int)line->x / SQUARE_SIZE && exec->data.map[(int)line->y / SQUARE_SIZE][(int)(line->x + 0.1) / SQUARE_SIZE] != '1')
+		return (2);
+	if ((int)(line->x - 0.1) / SQUARE_SIZE != (int)line->x / SQUARE_SIZE && exec->data.map[(int)line->y / SQUARE_SIZE][(int)(line->x - 0.1) / SQUARE_SIZE] != '1')
+		return (1);
+	if ((int)(line->y + 0.1) / SQUARE_SIZE != (int)line->y / SQUARE_SIZE)
+		return (3);
+	if ((int)(line->y - 0.1) / SQUARE_SIZE != (int)line->y / SQUARE_SIZE)
+		return (4);
+	return (0);
+}
+
 void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 {
 	float	distance;
@@ -125,10 +138,10 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	float	sprite_x;
 	float	sprite_y;
 
-	distance = get_distance(line, exec, ang);
+	distance = get_distance(line, exec, ang) * 2.0;
 	wall = get_line_height(exec, distance);
 	not_wall = line_offset(wall);
-	wall_struct.x = num * (WIDTH / 1920);
+	wall_struct.x = num;
 	wall_struct.final_x = wall_struct.x;
 	wall_struct.y = not_wall + wall;
 	wall_struct.final_y = HEIGHT;
@@ -138,19 +151,16 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	draw_offset(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	sprite_x = fmodf(line->x, 10) * 10.0 / 2;
-	sprite_y = 50 - fmodf(line->y, 10) * 10.0 / 2;
-	if (sprite_x > 49.7)
-	{
-		//printf("SPRITE X %f, Y %f struct x %f final x %f line x %f struct y %f final y %f line y %f\n", sprite_x, sprite_y, wall_struct.x, wall_struct.final_x, line->x, wall_struct.y, wall_struct.final_y, line->y);
+	sprite_x = fmodf(line->x, 6.0) * 17.0 / 2;
+	sprite_y = SPRITE_SIZE - fmodf(line->y, 6.0) * 17.0 / 2;
+	if (check_texture(line, exec) == 2)
 		draw_sprite(exec, &exec->west, &wall_struct, sprite_y, wall);
-	}
-	else if (sprite_y < 1.0)
+	else if (check_texture(line, exec) == 3)
 		draw_sprite(exec, &exec->north, &wall_struct, sprite_x, wall);
-	else if (sprite_y > 49.0)
-		draw_sprite(exec, &exec->south, &wall_struct, 50.0 - fmodf(line->x, 10.0) * 10.0 / 2, wall);
+	else if (check_texture(line, exec) == 4)
+		draw_sprite(exec, &exec->south, &wall_struct, SPRITE_SIZE - fmodf(line->x, 6.0) * 17.0 / 2, wall);
 	else
-		draw_sprite(exec, &exec->east, &wall_struct, (fmodf(line->y, 10.0) * 10.0 / 2), wall);
+		draw_sprite(exec, &exec->east, &wall_struct, (fmodf(line->y, 6.0) * 17.0 / 2), wall);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
