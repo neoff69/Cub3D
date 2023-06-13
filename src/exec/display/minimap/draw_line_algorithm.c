@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/13 10:33:15 by jlaisne          ###   ########.fr       */
@@ -193,7 +193,7 @@ void	draw_line(t_exec *exec)
 
 	ang = get_angle(exec);
 	set_up_variable(exec, exec->actual_x, exec->actual_y, &line);
-	line.final_x = (exec->actual_x + SQUARE_SIZE_PLAYER / 2);
-	line.final_y = (exec->actual_y + SQUARE_SIZE_PLAYER / 2);
+	line.final_x = (exec->actual_x + SQUARE_SIZE_PLAYER / 2); //+ SQUARE_SIZE / 3);
+	line.final_y = (exec->actual_y + SQUARE_SIZE_PLAYER / 2); //+ SQUARE_SIZE / 3);
 	draw(exec, &line, ang);
 }
