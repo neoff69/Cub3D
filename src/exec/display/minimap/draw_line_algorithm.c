@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 11:25:19 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:32:33 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,6 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	not_wall = line_offset(wall);
 	wall_struct.x = num;
 	wall_struct.final_x = wall_struct.x;
-	wall_struct.y = not_wall + wall;
-	wall_struct.final_y = HEIGHT;
-	draw_offset(exec, &wall_struct,  exec->data.f_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
 	sprite_x = fmodf(line->x, 6.0) * 17.0 / 2;
@@ -158,6 +155,9 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 		draw_sprite(exec, &exec->south, &wall_struct, SPRITE_SIZE - fmodf(line->x, 6.0) * 17.0 / 2, wall);
 	else
 		draw_sprite(exec, &exec->east, &wall_struct, (fmodf(line->y, 6.0) * 17.0 / 2), wall);
+	wall_struct.y = not_wall + wall;
+	wall_struct.final_y = HEIGHT;
+	draw_offset(exec, &wall_struct,  exec->data.f_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = 0.0;
 	draw_offset(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
