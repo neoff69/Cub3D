@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/13 11:32:33 by jlaisne          ###   ########.fr       */
@@ -145,16 +145,16 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.final_x = wall_struct.x;
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	sprite_x = fmodf(line->x, 6.0) * 17.0 / 2;
-	sprite_y = SPRITE_SIZE - fmodf(line->y, 6.0) * 17.0 / 2;
+	sprite_x = fmodf(line->x, SQUARE_SIZE) * 8.5;
+	sprite_y = SPRITE_SIZE - fmodf(line->y, SQUARE_SIZE) * 8.5;
 	if (check_texture(line, exec) == 2)
 		draw_sprite(exec, &exec->west, &wall_struct, sprite_y, wall);
 	else if (check_texture(line, exec) == 3)
 		draw_sprite(exec, &exec->north, &wall_struct, sprite_x, wall);
 	else if (check_texture(line, exec) == 4)
-		draw_sprite(exec, &exec->south, &wall_struct, SPRITE_SIZE - fmodf(line->x, 6.0) * 17.0 / 2, wall);
+		draw_sprite(exec, &exec->south, &wall_struct, SPRITE_SIZE - fmodf(line->x, SQUARE_SIZE) * 8.5, wall);
 	else
-		draw_sprite(exec, &exec->east, &wall_struct, (fmodf(line->y, 6.0) * 17.0 / 2), wall);
+		draw_sprite(exec, &exec->east, &wall_struct, (fmodf(line->y, 6.0) * 8.5), wall);
 	wall_struct.y = not_wall + wall;
 	wall_struct.final_y = HEIGHT;
 	draw_offset(exec, &wall_struct,  exec->data.f_color, &my_mlx_put_offset);
@@ -193,7 +193,7 @@ void	draw_line(t_exec *exec)
 
 	ang = get_angle(exec);
 	set_up_variable(exec, exec->actual_x, exec->actual_y, &line);
-	line.final_x = (exec->actual_x + SQUARE_SIZE_PLAYER / 2);
-	line.final_y = (exec->actual_y + SQUARE_SIZE_PLAYER / 2);
+	line.final_x = (exec->actual_x + SQUARE_SIZE / 2);
+	line.final_y = (exec->actual_y + SQUARE_SIZE / 2);
 	draw(exec, &line, ang);
 }

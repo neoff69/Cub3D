@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_minimap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:27:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/08 13:39:40 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:21:35 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	draw_player(int x, int y, int color, t_exec *exec)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < SQUARE_SIZE_PLAYER)
+	i = 1;
+	while (i < 5)
 	{
-		j = 0;
-		while (j < SQUARE_SIZE_PLAYER)
+		j = 1;
+		while (j < 5)
 		{
 			my_mlx_pixel_put(exec, x + j, y + i, color);
 			j++;

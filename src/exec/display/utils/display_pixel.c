@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_pixel.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:50:31 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/13 10:37:50 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/13 10:52:30 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	my_mlx_pixel_put_rt(t_exec *exec, int x, int y, int color)
 	if (*(unsigned int *)dst == WALL_MINIMAP \
 		|| check_if_corner(exec, bit, x, y))
 		return (1);
-	return (0);
 	*(unsigned int *)dst = color;
+	return (0);
 }
 
 int	my_mlx_pixel_put(t_exec *exec, int x, int y, int color)
