@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/09 12:45:40 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/13 13:36:52 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ int		exec_cub(t_exec *exec);
 void	display_game(t_exec *exec);
 void	display_minimap(t_exec *exec);
 void	display_minimap_character(t_exec *exec);
-void	display_raytracing(t_exec *exec);
+void	display_game(t_exec *exec);
 void	draw_square(int y, int x, int color, t_exec *exec);
 int		draw_player(int y, int x, int color, t_exec *exec);
-void	draw_sky(t_exec *exec);
+void	display_environment(t_line *line, t_exec *exec, float ang, int num);
+void	draw_all_sprites( \
+	t_exec *exec, float wall_height, t_line *line, t_line *wall_struct);
 
 //HOOK
 void	hook(t_exec *exec);
@@ -81,7 +83,7 @@ int		my_mlx_pixel_put_rt(t_exec *exec, int x, int y, int color);
 int		my_mlx_put_offset(t_exec *exec, int x, int y, int color);
 int		pixel_check(t_exec *exec, int x, int y);
 void	set_image_win(t_exec *exec);
-void	draw_line(t_exec *exec);
+
 
 
 char	*pixel_return(t_img *data, int x, int y);
