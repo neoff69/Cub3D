@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 11:22:03 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:25:19 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	draw_sprite(t_exec *exec, t_img *texture, t_line *wall, int x, float wall_h
 	{
 		i++;
 		if (wall_height == HEIGHT)
-			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - exec->off - y) / exec->act)));
+			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - exec->off - 10 - y) / exec->act)));
 		else
 			dst = pixel_return(texture, x, (SPRITE_SIZE * (wall_height - y)) / wall_height - 0.5);
 		y += 1;
