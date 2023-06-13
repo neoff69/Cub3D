@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:50:31 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/13 10:52:30 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/13 13:46:35 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	my_mlx_pixel_put_rt(t_exec *exec, int x, int y, int color)
 	bit = exec->mlx.bit / 8;
 	dst = exec->mlx.addr + (y * exec->mlx.len + x * (bit));
 	if (*(unsigned int *)dst == WALL_MINIMAP \
-		|| check_if_corner(exec, bit, x, y))
+	|| check_if_corner(exec, bit, x, y))
 		return (1);
 	*(unsigned int *)dst = color;
 	return (0);

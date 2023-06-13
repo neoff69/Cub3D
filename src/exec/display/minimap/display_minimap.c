@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:27:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 11:21:35 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/13 13:39:33 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@ void	init_display_minimap(t_exec *exec)
 		while (exec->data.map[y][x])
 		{
 			if (exec->data.map[y][x] == '1')
-				draw_square(x * SQUARE_SIZE, y * SQUARE_SIZE, WALL_MINIMAP, exec);
+				draw_square(x * SQUARE_SIZE, \
+				y * SQUARE_SIZE, WALL_MINIMAP, exec);
 			else if (exec->data.map[y][x] != ' ' \
 					&& exec->data.map[y][x] != '\n')
-				draw_square(x * SQUARE_SIZE, y * SQUARE_SIZE, FLOOR_MINIMAP, exec);
+				draw_square(x * SQUARE_SIZE,\
+				y * SQUARE_SIZE, FLOOR_MINIMAP, exec);
 			x++;
 		}
 		y++;
@@ -75,5 +77,5 @@ void	display_minimap(t_exec *exec)
 {
 	init_display_minimap(exec);
 	display_minimap_character(exec);
-	display_raytracing(exec);
+	display_game(exec);
 }
