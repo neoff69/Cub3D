@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 10:37:01 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:22:03 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	draw_sprite(t_exec *exec, t_img *texture, t_line *wall, int x, float wall_h
 	while (i <= wall->step)
 	{
 		i++;
-		if (wall_height == 1080)
+		if (wall_height == HEIGHT)
 			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - exec->off - y) / exec->act)));
 		else
 			dst = pixel_return(texture, x, (SPRITE_SIZE * (wall_height - y)) / wall_height - 0.5);
@@ -147,9 +147,6 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 	wall_struct.final_y = HEIGHT;
 	draw_offset(exec, &wall_struct,  exec->data.f_color, &my_mlx_put_offset);
 	wall_struct.y = not_wall;
-	wall_struct.final_y = 0.0;
-	draw_offset(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
-	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
 	sprite_x = fmodf(line->x, 6.0) * 17.0 / 2;
 	sprite_y = SPRITE_SIZE - fmodf(line->y, 6.0) * 17.0 / 2;
@@ -161,6 +158,9 @@ void	display_wall(t_line *line, t_exec *exec, float ang, int num)
 		draw_sprite(exec, &exec->south, &wall_struct, SPRITE_SIZE - fmodf(line->x, 6.0) * 17.0 / 2, wall);
 	else
 		draw_sprite(exec, &exec->east, &wall_struct, (fmodf(line->y, 6.0) * 17.0 / 2), wall);
+	wall_struct.y = not_wall;
+	wall_struct.final_y = 0.0;
+	draw_offset(exec, &wall_struct, exec->data.c_color, &my_mlx_put_offset);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
