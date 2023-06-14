@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/14 13:32:29 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/14 14:44:27 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static float	rotate_line_x(t_line *line, float length, float ang)
 {
 	float	x;
 
-	x = line->final_x + (length / CUB) * ang;
+	x = line->final_x + (length / CUB / 100) * ang;
 	return (x);
 }
 
@@ -36,30 +36,30 @@ static float	rotate_line_y(t_line *line, float length, float ang)
 {
 	float	y;
 
-	y = line->final_y + (length / CUB) * ang;
+	y = line->final_y + (length / CUB / 100) * ang;
 	return (y);
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
 {
-	int		i;
+	int		pixel;
 	float	dx;
 	float	dy;
 
 	exec->num = 0;
 	while (exec->num <= WIDTH)
 	{
-		i = 0;
+		pixel = 0;
 		dx = cos(ang);
 		dy = sin(ang);
 		while (1)
 		{
-			line->x = rotate_line_x(line, i, dx);
-			line->y = rotate_line_y(line, i, dy);
+			line->x = rotate_line_x(line, pixel, dx);
+			line->y = rotate_line_y(line, pixel, dy);
 			if (my_mlx_pixel_put_rt(exec, \
 				(int)line->x, (int)line->y, RAY_MINIMAP))
 				break ;
-			i++;
+			pixel += 100;
 		}
 		display_environment(line, exec, ang);
 		ang += RAD * (40.0 / WIDTH);

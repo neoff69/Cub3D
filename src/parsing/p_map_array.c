@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:01:44 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/31 10:10:30 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/14 14:50:15 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,16 @@ static void	is_open(t_scub *data, int y, int x)
 		return ;
 	if (x == 0 || y == 0 || y == data->size - 1 || x == len - 2)
 		ft_exit("Error\nMap open.", data);
+	if (!data->map[y - 1][x] || !data->map[y + 1][x]
+		|| !data->map[y][x - 1] || !data->map[y][x + 1])
+		ft_exit("Error\nMap open.", data);
 	if ((data->map[y - 1][x] && data->map[y - 1][x] == ' ')
 		|| (data->map[y + 1][x] && data->map[y + 1][x] == ' ')
 		|| (data->map[y][x - 1] && data->map[y][x - 1] == ' ')
 		|| (data->map[y][x + 1] && data->map[y][x + 1] == ' '))
+		ft_exit("Error\nMap open.", data);
+	if (data->map[y - 1][x] == '\n' || data->map[y + 1][x] == '\n'
+		|| data->map[y][x - 1] == '\n'|| data->map[y][x + 1] == '\n')
 		ft_exit("Error\nMap open.", data);
 	return ;
 }
