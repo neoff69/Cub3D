@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:31:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/01 12:53:44 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:00:28 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	free_cub_list(t_pcub *lst)
 
 void	ft_exit(char *info, t_scub *data)
 {
-	printf("%s\n", info);
+	if (info)
+		printf("%s\n", info);
 	if (data)
 	{
 		if (data->first_wall)

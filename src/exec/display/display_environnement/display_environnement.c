@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   display_environnement.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:54:04 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 13:10:53 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:15:18 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
 
 void	draw_offset(t_exec *exec, t_line *wall, int color, int(*pixel_put)(t_exec *, int, int, int))
 {
@@ -22,12 +21,9 @@ void	draw_offset(t_exec *exec, t_line *wall, int color, int(*pixel_put)(t_exec *
 	dx = wall->final_x - wall->x;
 	dy = wall->final_y - wall->y;
 	i = 0;
-	if (abs(dx) > abs(dy))
-		wall->step = abs(dx);
-	else
-		wall->step = abs(dy);
 	if (dy == 0)
 		return ;
+	wall->step = dy;
 	wall->xincr = dx / wall->step;
 	wall->yincr = dy / wall->step;
 	while (i <= wall->step)
@@ -43,6 +39,7 @@ void	draw_offset(t_exec *exec, t_line *wall, int color, int(*pixel_put)(t_exec *
 void	draw_floor_and_sky( \
 	t_exec *exec, float wall, float not_wall, t_line *wall_struct)
 {
+	wall_struct->x = exec->num;
 	wall_struct->final_x = wall_struct->x;
 	wall_struct->y = not_wall + wall;
 	wall_struct->final_y = HEIGHT;
@@ -52,18 +49,16 @@ void	draw_floor_and_sky( \
 	draw_offset(exec, wall_struct, exec->data.c_color, &my_mlx_put_offset);
 }
 
-void	display_environment(t_line *line, t_exec *exec, float ang, int num)
+void	display_environment(t_line *line, t_exec *exec, float ang)
 {
 	float	distance;
 	float	wall;
 	float	not_wall;
 	t_line	wall_struct;
 
-
 	distance = get_distance(line, exec, ang) * 2.0;
 	wall = get_line_height(exec, distance);
 	not_wall = line_offset(wall);
-	wall_struct.x = num;
 	draw_floor_and_sky(exec, wall, not_wall, &wall_struct);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
