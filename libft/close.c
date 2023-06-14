@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook_rotation.c                                    :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 15:23:28 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/14 13:33:07 by jlaisne          ###   ########.fr       */
+/*   Created: 2023/06/14 13:27:14 by jlaisne           #+#    #+#             */
+/*   Updated: 2023/06/14 13:28:07 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "libft.h"
 
-void	minimap_rotation(t_exec *exec, int keycode)
+void	close_all(void)
 {
-	if (keycode == KEY_LEFT)
-	{
-		exec->angle -= 0.1;
-		if (exec->angle < 0)
-			exec->angle += 2 * PI;
-	}
-	if (keycode == KEY_RIGHT)
-	{
-		exec->angle += 0.1;
-		if (exec->angle > 2 * PI)
-			exec->angle -= 2 * PI;
-	}
-	exec->delta_x = cos(exec->angle) * 5;
-	exec->delta_y = sin(exec->angle) * 5;
-	set_image_win(exec);
+    int i;
+
+    i = 3;
+    while (i < 1024)
+    {
+        close(i);
+        i++;
+    }
 }

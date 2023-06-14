@@ -6,13 +6,14 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:54:04 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/14 11:15:18 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/14 13:31:25 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	draw_offset(t_exec *exec, t_line *wall, int color, int(*pixel_put)(t_exec *, int, int, int))
+void	draw_offset(t_exec *exec, t_line *wall, int color, \
+	int(*pixel_put)(t_exec *, int, int, int))
 {
 	int		dx;
 	int		dy;

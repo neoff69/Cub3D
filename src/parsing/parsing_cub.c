@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:04:09 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/31 12:58:20 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/14 13:36:26 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	parsing_cub(char **arg, t_scub *data)
 		ft_return("Error\nInvalid parameters in *.cub file.", data);
 		return (1);
 	}
-	//ft_return(NULL, data); A MODIFIER SEGFAULT VU QUE JE RETURN LA STRUCT
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/14 11:14:41 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/14 13:12:27 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	get_position(t_scub *data, int x, int y, char c);
 void	analyse_parameters(t_scub *data);
 
 void	ft_exit(char *info, t_scub *data);
+void	ft_exit_mlx(char *info, t_scub *data, t_exec *exec);
 void	ft_return(char *info, t_scub *data);
 void	*free_2d_array(char **ptr);
 void	free_cub_list(t_pcub *lst);

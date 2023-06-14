@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_deplacement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 11:26:26 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/14 13:35:20 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	check_if_upper_wall(t_exec *exec)
 
 	x = 0;
 	y = 0;
-
 	x = (exec->data.pos_x * SQUARE_SIZE \
 			+ exec->horizontal_movement);
 	y = (exec->data.pos_y * SQUARE_SIZE \
@@ -62,7 +61,6 @@ void	check_if_lower_wall(t_exec *exec)
 
 	x = 0;
 	y = 0;
-
 	x = (exec->data.pos_x * SQUARE_SIZE \
 			+ exec->horizontal_movement);
 	y = (exec->data.pos_y * SQUARE_SIZE \
@@ -85,7 +83,6 @@ void	check_if_left_wall(t_exec *exec)
 
 	x = 0;
 	y = 0;
-
 	x = (exec->data.pos_x * SQUARE_SIZE \
 			+ exec->horizontal_movement);
 	y = (exec->data.pos_y * SQUARE_SIZE \
@@ -108,7 +105,6 @@ void	check_if_right_wall(t_exec *exec)
 
 	x = 0;
 	y = 0;
-
 	x = (exec->data.pos_x * SQUARE_SIZE \
 			+ exec->horizontal_movement);
 	y = (exec->data.pos_y * SQUARE_SIZE \

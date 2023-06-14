@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:15:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/14 10:54:38 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/14 13:36:32 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	analyse_parameters(t_scub *data)
 	t_pcub	*temp;
 	int		keys;
 	char	*str;
-	
+
 	keys = 0;
 	temp = data->cub;
 	while (temp)

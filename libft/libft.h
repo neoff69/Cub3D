@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:24:40 by gclement          #+#    #+#             */
-/*   Updated: 2023/05/25 14:07:48 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/14 13:28:19 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ int				ft_putnbr_and_count(int n, int fd);
 int				str_isdigit(char *arg);
 int				str_isascii(char *arg);
 size_t			check_isspace(const char *str);
+void			close_all(void);
 
 #endif
