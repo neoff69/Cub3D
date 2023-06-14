@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 14:04:43 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:14:27 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 {
-	//printf("%d %d",  exec->actual_x,  exec->actual_y);
 	line->dx = next_x - exec->actual_x;
 	line->dy = next_y - exec->actual_y;
 	if (fabs(line->dx) > fabs(line->dy))
@@ -29,7 +28,7 @@ static float	rotate_line_x(t_line *line, float length, float ang)
 {
 	float	x;
 
-	x = line->final_x + (length / CUB) * cos(ang);
+	x = line->final_x + (length / CUB) * ang;
 	return (x);
 }
 
@@ -37,7 +36,7 @@ static float	rotate_line_y(t_line *line, float length, float ang)
 {
 	float	y;
 
-	y = line->final_y + (length / CUB) * sin(ang);
+	y = line->final_y + (length / CUB) * ang;
 	return (y);
 }
 
@@ -45,24 +44,27 @@ static float	rotate_line_y(t_line *line, float length, float ang)
 void	draw(t_exec *exec, t_line *line, float ang)
 {
 	int		i;
-	int		num;
+	float	dx;
+	float	dy;
 
-	num = 0;
-	while (num <= WIDTH)
+	exec->num = 0;
+	while (exec->num <= WIDTH)
 	{
 		i = 0;
+		dx = cos(ang);
+		dy = sin(ang);
 		while (1)
 		{
-			line->x = rotate_line_x(line, i, ang);
-			line->y = rotate_line_y(line, i, ang);
+			line->x = rotate_line_x(line, i, dx);
+			line->y = rotate_line_y(line, i, dy);
 			if (my_mlx_pixel_put_rt(exec, 
 				(int)line->x, (int)line->y, RAY_MINIMAP))
 				break ;
 			i++;
 		}
-		display_environment(line, exec, ang, num);
+		display_environment(line, exec, ang);
 		ang += RAD * (40.0 / WIDTH);
-		num ++;
+		exec->num++;
 	}
 }
 

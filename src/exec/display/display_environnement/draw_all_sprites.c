@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all_sprites.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 13:07:37 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 13:33:45 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:27:43 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static void	get_incrementation_and_step(t_line *wall)
 {
-	wall->dx = wall->final_x - wall->x;
-	wall->dy = wall->final_y - wall->y;
-	if (wall->dy == 0)
+	int	dx;
+	int	dy;
+
+	dx = wall->final_x - wall->x;
+	dy = wall->final_y - wall->y;
+	if (dy == 0)
 		return ;
-	if (abs((int)wall->dx) > abs((int)wall->dy))
-		wall->step = abs((int)wall->dx);
-	else
-		wall->step = abs((int)wall->dy);
-	wall->xincr = wall->dx / wall->step;
-	wall->yincr = wall->dy / wall->step;
+	wall->step = dy;
+	wall->xincr = dx / wall->step;
+	wall->yincr = dy / wall->step;
 }
 
 static void	draw_sprite(\
@@ -40,9 +40,9 @@ static void	draw_sprite(\
 	while (i <= wall->step)
 	{
 		i++;
-		if (wall->wall_height == 1080)
+		if (wall->wall_height == HEIGHT)
 			dst = pixel_return(texture, x, \
-				(SPRITE_SIZE * ((exec->act - exec->off - y) / exec->act)));
+				(SPRITE_SIZE * ((exec->act - 10 - exec->off - y) / exec->act)));
 		else
 			dst = pixel_return(texture, x, \
 			(SPRITE_SIZE * (wall->wall_height - y)) / wall->wall_height - 0.5);
@@ -56,18 +56,18 @@ static void	draw_sprite(\
 
 int	check_texture(t_line *line, t_exec *exec)
 {
-	if ((int)(line->x + 0.1) / SQUARE_SIZE != (int)line->x / \
+	if ((int)(line->x + 0.07) / SQUARE_SIZE != (int)line->x / \
 			SQUARE_SIZE && exec->data.map[(int)line->y / \
-			SQUARE_SIZE][(int)(line->x + 0.1) / SQUARE_SIZE] != '1')
+			SQUARE_SIZE][(int)(line->x + 0.07) / SQUARE_SIZE] != '1')
 		return (2);
-	if ((int)(line->x - 0.1) / SQUARE_SIZE != (int)line->x / \
+	if ((int)(line->x - 0.07) / SQUARE_SIZE != (int)line->x / \
 			SQUARE_SIZE && exec->data.map[(int)line->y / \
-			SQUARE_SIZE][(int)(line->x - 0.1) / SQUARE_SIZE] != '1')
+			SQUARE_SIZE][(int)(line->x - 0.07) / SQUARE_SIZE] != '1')
 		return (1);
-	if ((int)(line->y + 0.1) / \
+	if ((int)(line->y + 0.07) / \
 			SQUARE_SIZE != (int)line->y / SQUARE_SIZE)
 		return (3);
-	if ((int)(line->y - 0.1) / \
+	if ((int)(line->y - 0.07) / \
 			SQUARE_SIZE != (int)line->y / SQUARE_SIZE)
 		return (4);
 	return (0);

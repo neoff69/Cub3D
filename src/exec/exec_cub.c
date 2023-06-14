@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/13 14:05:05 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:09:44 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,35 @@ void	set_up_img(t_exec *exec)
 
 	temp = exec->data.cub;
 	exec->north.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	if (!exec->north.texture)
+		ft_exit("Error\nNull texture.", &exec->data);
 	exec->north.addr = mlx_get_data_addr(exec->north.texture, &exec->north.bit, &exec->north.len, &exec->north.endian);
 	temp = temp->next;
 	exec->south.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	if (!exec->south.texture)
+		ft_exit("Error\nNull texture.", &exec->data);
 	exec->south.addr = mlx_get_data_addr(exec->south.texture, &exec->south.bit, &exec->south.len, &exec->south.endian);
 	temp = temp->next;
 	exec->west.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
+	if (!exec->west.texture)
+		ft_exit("Error\nNull texture.", &exec->data);
 	exec->west.addr = mlx_get_data_addr(exec->west.texture, &exec->west.bit, &exec->west.len, &exec->west.endian);
 	temp = temp->next;
 	exec->east.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content,&img_width, &img_height);
 	exec->east.addr = mlx_get_data_addr(exec->east.texture, &exec->east.bit, &exec->east.len, &exec->east.endian);
+	if (!exec->east.texture)
+		ft_exit("Error\nNull texture.", &exec->data);
 }
 
 void	set_up_mlx(t_exec *exec)
 {
 	exec->mlx.mlx = mlx_init();
-	if (exec->mlx.mlx == NULL)
-		exit (0); //A GERER
+	if (!exec->mlx.mlx)
+		ft_exit("Error\nNull mlx_init()", &exec->data);
 	exec->mlx.mlx_win = mlx_new_window(exec->mlx.mlx, 1920, 1080, "Cub3D");
 	exec->mlx.img = mlx_new_image(exec->mlx.mlx, WIDTH, HEIGHT);
 	if (exec->mlx.mlx_win == NULL || exec->mlx.img == NULL)
-		exit(0); //A GERER
+		ft_exit("Error\nNull mlx window/ image init", &exec->data);
 	exec->mlx.addr = mlx_get_data_addr \
 			(exec->mlx.img, &exec->mlx.bit, &exec->mlx.len, &exec->mlx.endian);
 	set_up_img(exec);

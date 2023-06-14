@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/13 13:36:52 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:14:41 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	display_minimap_character(t_exec *exec);
 void	display_game(t_exec *exec);
 void	draw_square(int y, int x, int color, t_exec *exec);
 int		draw_player(int y, int x, int color, t_exec *exec);
-void	display_environment(t_line *line, t_exec *exec, float ang, int num);
+void	display_environment(t_line *line, t_exec *exec, float ang);
 void	draw_all_sprites( \
 	t_exec *exec, float wall_height, t_line *line, t_line *wall_struct);
 
