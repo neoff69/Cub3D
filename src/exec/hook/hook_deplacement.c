@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/13 11:26:26 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/14 17:37:29 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@ int	draw_player_check(int x, int y, t_exec *exec)
 	int	i;
 	int	j;
 
-	i = 1;
-	while (i < 5)
+	i = 0;
+	while (i <= 5)
 	{
-		j = 1;
-		while (j < 5)
+		j = 0;
+		while (j <= 5)
 		{
 			if (pixel_check(exec, x + j, y + i))
+			{
 				return (1);
+			}
 			j++;
 		}
 		i++;
@@ -39,7 +41,6 @@ void	check_if_upper_wall(t_exec *exec)
 
 	x = 0;
 	y = 0;
-
 	x = (exec->data.pos_x * SQUARE_SIZE \
 			+ exec->horizontal_movement);
 	y = (exec->data.pos_y * SQUARE_SIZE \

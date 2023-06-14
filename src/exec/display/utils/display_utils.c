@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/14 10:53:11 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/14 18:06:15 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_if_corner(t_exec *exec, int bit, int x, int y)
 	{
 		if (exec->actual_y >= y)
 			corner = exec->mlx.addr + ((y + 1) * exec->mlx.len + x * (bit));
-		else if (exec->actual_y < y - 10)
+		else if (exec->actual_y < y - 4)
 			corner = exec->mlx.addr + ((y - 1) * exec->mlx.len + x * (bit));
 	}
 	if ((corner && *(unsigned int *)corner == WALL_MINIMAP))
