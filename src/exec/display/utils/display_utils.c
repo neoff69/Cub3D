@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/14 18:06:15 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/15 13:58:33 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,13 @@
 int	check_if_corner(t_exec *exec, int bit, int x, int y)
 {
 	char	*corner;
-	char	*left_x;
-	char	*right_x;
+
 
 	corner = NULL;
-	left_x = exec->mlx.addr + (y * exec->mlx.len + (x - 1) * (bit));
-	right_x = exec->mlx.addr + (y * exec->mlx.len + (x + 1) * (bit));
-	if (*(unsigned int *)left_x == WALL_MINIMAP \
-		|| *(unsigned int *)right_x == WALL_MINIMAP)
-	{
-		if (exec->actual_y >= y)
-			corner = exec->mlx.addr + ((y + 1) * exec->mlx.len + x * (bit));
-		else if (exec->actual_y < y - 4)
-			corner = exec->mlx.addr + ((y - 1) * exec->mlx.len + x * (bit));
-	}
+	if (exec->actual_y > y)
+		corner = exec->mlx.addr + ((y + 1) * exec->mlx.len + x * (bit));
+	else if (exec->actual_y < y - 5)
+		corner = exec->mlx.addr + ((y - 1) * exec->mlx.len + x * (bit));
 	if ((corner && *(unsigned int *)corner == WALL_MINIMAP))
 		return (1);
 	return (0);
