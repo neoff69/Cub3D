@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:04:09 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/14 15:56:45 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/15 09:54:00 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	parsing_cub(char **arg, t_scub *data)
 	data->cub = NULL;
 	data->map = NULL;
 	data->map_fill = NULL;
+	data->first_wall = NULL;
 	if (check_arg(arg[1], ".cub") == 1)
 	{
 		printf("Error\nInvalid map format [%s]: *.cub is required.\n", arg[1]);
@@ -32,6 +33,7 @@ int	parsing_cub(char **arg, t_scub *data)
 		ft_return("Error\nInvalid parameters in *.cub file.", data);
 		return (1);
 	}
+	
 	return (0);
 }
 

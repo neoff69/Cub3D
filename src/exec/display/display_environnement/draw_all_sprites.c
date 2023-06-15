@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 13:07:37 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/14 14:16:49 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/15 10:40:50 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ static void	draw_sprite(\
 	}
 }
 
-int	check_texture(t_line *line, t_exec *exec)
+int	check_texture(t_line *line, t_exec *exec, float s_x, float s_y)
 {
+	(void)s_x;
+	(void)s_y;
 	if ((int)(line->x + 0.07) / SQUARE_SIZE != (int)line->x / \
 			SQUARE_SIZE && exec->data.map[(int)line->y / \
 			SQUARE_SIZE][(int)(line->x + 0.07) / SQUARE_SIZE] != '1')
@@ -82,11 +84,11 @@ void	draw_all_sprites( \
 	wall_struct->wall_height = wall_height;
 	sprite_x = fmodf(line->x, SQUARE_SIZE) * 8.5;
 	sprite_y = SPRITE_SIZE - fmodf(line->y, SQUARE_SIZE) * 8.5;
-	if (check_texture(line, exec) == 2)
+	if (check_texture(line, exec, sprite_x,sprite_y) == 2)
 		draw_sprite(exec, &exec->west, wall_struct, sprite_y);
-	else if (check_texture(line, exec) == 3)
+	else if (check_texture(line, exec, sprite_x, sprite_y) == 3)
 		draw_sprite(exec, &exec->north, wall_struct, sprite_x);
-	else if (check_texture(line, exec) == 4)
+	else if (check_texture(line, exec, sprite_x, sprite_y) == 4)
 		draw_sprite(exec, &exec->south, wall_struct, SPRITE_SIZE \
 			- fmodf(line->x, SQUARE_SIZE) * 8.5);
 	else
