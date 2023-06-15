@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/14 18:35:03 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/15 10:41:00 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,41 +41,54 @@ void	set_up_struct(t_exec *exec)
 
 void	set_up_img(t_exec *exec)
 {
+	t_pcub	*tp;
 	int		img_width;
 	int		img_height;
-	t_pcub	*temp;
 
-	temp = exec->data.cub;
-	exec->north.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
-	if (!exec->north.texture)
-		ft_exit("Error\nNull texture.", &exec->data);
-	exec->north.addr = mlx_get_data_addr(exec->north.texture, &exec->north.bit, &exec->north.len, &exec->north.endian);
-	temp = temp->next;
-	exec->south.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
-	if (!exec->south.texture)
-		ft_exit("Error\nNull texture.", &exec->data);
-	exec->south.addr = mlx_get_data_addr(exec->south.texture, &exec->south.bit, &exec->south.len, &exec->south.endian);
-	temp = temp->next;
-	exec->west.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content, &img_width, &img_height);
-	if (!exec->west.texture)
-		ft_exit("Error\nNull texture.", &exec->data);
-	exec->west.addr = mlx_get_data_addr(exec->west.texture, &exec->west.bit, &exec->west.len, &exec->west.endian);
-	temp = temp->next;
-	exec->east.texture = mlx_xpm_file_to_image(exec->mlx.mlx, temp->content,&img_width, &img_height);
-	exec->east.addr = mlx_get_data_addr(exec->east.texture, &exec->east.bit, &exec->east.len, &exec->east.endian);
-	if (!exec->east.texture)
-		ft_exit("Error\nNull texture.", &exec->data);
+	tp = exec->data.cub;
+	while (tp)
+	{
+		if (tp->type == 1)
+		{
+			exec->north.texture = mlx_xpm_file_to_image(exec->mlx.mlx, tp->content, &img_width, &img_height);
+			if (!exec->north.texture)
+				ft_exit_mlx("Error\nNull texture.", &exec->data, exec);
+			exec->north.addr = mlx_get_data_addr(exec->north.texture, &exec->north.bit, &exec->north.len, &exec->north.endian);
+		}
+		if (tp->type == 2)
+		{
+			exec->south.texture = mlx_xpm_file_to_image(exec->mlx.mlx, tp->content, &img_width, &img_height);
+			if (!exec->south.texture)
+				ft_exit_mlx("Error\nNull texture.", &exec->data, exec);
+			exec->south.addr = mlx_get_data_addr(exec->south.texture, &exec->south.bit, &exec->south.len, &exec->south.endian);
+		}
+		if (tp->type == 3)
+		{
+			exec->west.texture = mlx_xpm_file_to_image(exec->mlx.mlx, tp->content, &img_width, &img_height);
+			if (!exec->west.texture)
+				ft_exit_mlx("Error\nNull texture.", &exec->data, exec);
+			exec->west.addr = mlx_get_data_addr(exec->west.texture, &exec->west.bit, &exec->west.len, &exec->west.endian);
+		}
+		if (tp->type == 4)
+		{
+			exec->east.texture = mlx_xpm_file_to_image(exec->mlx.mlx, tp->content, &img_width, &img_height);
+			if (!exec->east.texture)
+				ft_exit_mlx("Error\nNull texture.", &exec->data, exec);
+			exec->east.addr = mlx_get_data_addr(exec->east.texture, &exec->east.bit, &exec->east.len, &exec->east.endian);
+		}
+		tp = tp->next;
+	}
 }
 
 void	set_up_mlx(t_exec *exec)
 {
 	exec->mlx.mlx = mlx_init();
 	if (!exec->mlx.mlx)
-		ft_exit("Error\nNull mlx_init()", &exec->data);
+		ft_exit_mlx("Error\nNull mlx_init()", &exec->data, exec);
 	exec->mlx.mlx_win = mlx_new_window(exec->mlx.mlx, 1920, 1080, "Cub3D");
 	exec->mlx.img = mlx_new_image(exec->mlx.mlx, WIDTH, HEIGHT);
 	if (exec->mlx.mlx_win == NULL || exec->mlx.img == NULL)
-		ft_exit("Error\nNull mlx window/ image init", &exec->data);
+		ft_exit_mlx("Error\nNull mlx window/ image init", &exec->data, exec);
 	exec->mlx.addr = mlx_get_data_addr \
 			(exec->mlx.img, &exec->mlx.bit, &exec->mlx.len, &exec->mlx.endian);
 	set_up_img(exec);

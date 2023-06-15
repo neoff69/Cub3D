@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/15 14:00:29 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/14 13:12:27 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	get_position(t_scub *data, int x, int y, char c);
 void	analyse_parameters(t_scub *data);
 
 void	ft_exit(char *info, t_scub *data);
+void	ft_exit_mlx(char *info, t_scub *data, t_exec *exec);
 void	ft_return(char *info, t_scub *data);
 void	*free_2d_array(char **ptr);
 void	free_cub_list(t_pcub *lst);
@@ -38,7 +39,7 @@ void	free_cub_list(t_pcub *lst);
 int		check_char(char c);
 void	check_par_map(char *str, t_scub *data, char **map);
 
-t_pcub	*new_node_cmd(char	*key, char *content, t_type id, t_valid check);
+t_pcub	*new_node_cmd(char	*key, char *content, t_type id, t_valid check);x
 void	lst_cmd_add_back(t_pcub **lst, t_pcub *new);
 t_pcub	*cmd_lst_last(t_pcub **lst);
 int		duplicate_key(t_pcub **lst, t_pcub *node);
