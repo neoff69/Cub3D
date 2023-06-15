@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/14 13:12:27 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/15 14:38:09 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	free_cub_list(t_pcub *lst);
 int		check_char(char c);
 void	check_par_map(char *str, t_scub *data, char **map);
 
-t_pcub	*new_node_cmd(char	*key, char *content, t_type id, t_valid check);x
+t_pcub	*new_node_cmd(char	*key, char *content, t_type id, t_valid check);
 void	lst_cmd_add_back(t_pcub **lst, t_pcub *new);
 t_pcub	*cmd_lst_last(t_pcub **lst);
 int		duplicate_key(t_pcub **lst, t_pcub *node);
