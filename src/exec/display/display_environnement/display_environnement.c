@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   display_environnement.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:54:04 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/15 13:04:01 by jlaisne          ###   ########.fr       */

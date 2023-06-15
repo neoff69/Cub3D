@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all_sprites.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 13:07:37 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/15 14:35:28 by jlaisne          ###   ########.fr       */
@@ -84,15 +84,17 @@ void	draw_all_sprites( \
 {
 	float	sprite_x;
 	float	sprite_y;
+	int		texture;
 
 	wall_struct->wall_height = wall_height;
 	sprite_x = fmodf(line->x, SQUARE_SIZE) * 8;
 	sprite_y = SPRITE_SIZE - fmodf(line->y, SQUARE_SIZE) * 8.5;
-	if (check_texture(line, exec) == 2)
+	texture = check_texture(line, exec);
+	if (texture == 2)
 		draw_sprite(exec, &exec->west, wall_struct, sprite_y);
-	else if (check_texture(line, exec) == 3)
+	else if (texture == 3)
 		draw_sprite(exec, &exec->north, wall_struct, sprite_x);
-	else if (check_texture(line, exec) == 4)
+	else if (texture == 4)
 		draw_sprite(exec, &exec->south, wall_struct, SPRITE_SIZE \
 			- fmodf(line->x, SQUARE_SIZE) * 8);
 	else

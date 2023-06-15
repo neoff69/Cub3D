@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   hook_rotation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:23:28 by jlaisne           #+#    #+#             */
 /*   Updated: 2023/06/14 13:33:07 by jlaisne          ###   ########.fr       */
@@ -26,7 +26,7 @@ void	minimap_rotation(t_exec *exec, int keycode)
 		if (exec->angle > 2 * PI)
 			exec->angle -= 2 * PI;
 	}
-	exec->delta_x = cos(exec->angle) * 5;
-	exec->delta_y = sin(exec->angle) * 5;
+	exec->delta_x = cos(exec->angle) * 4;
+	exec->delta_y = sin(exec->angle) * 4;
 	set_image_win(exec);
 }

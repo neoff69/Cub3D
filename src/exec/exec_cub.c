@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
 /*   Updated: 2023/06/15 10:41:00 by jlaisne          ###   ########.fr       */

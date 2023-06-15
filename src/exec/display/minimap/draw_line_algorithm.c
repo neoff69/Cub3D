@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/14 14:56:22 by jlaisne          ###   ########.fr       */
@@ -24,20 +24,11 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 	line->yincr = line->dy / (line->step);
 }
 
-static float	rotate_line_x(t_line *line, float length, float ang)
+
+static void	rotate_line(t_line *line, float length, float dx, float dy)
 {
-	float	x;
-
-	x = line->final_x + (length / CUB) * ang;
-	return (x);
-}
-
-static float	rotate_line_y(t_line *line, float length, float ang)
-{
-	float	y;
-
-	y = line->final_y + (length / CUB) * ang;
-	return (y);
+	line->x = line->final_x + (length / CUB) * dx;
+	line->y = line->final_y + (length / CUB) * dy;
 }
 
 void	draw(t_exec *exec, t_line *line, float ang)
@@ -54,8 +45,7 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		dy = sin(ang);
 		while (1)
 		{
-			line->x = rotate_line_x(line, pixel, dx);
-			line->y = rotate_line_y(line, pixel, dy);
+			rotate_line(line, i, dx, dy);
 			if (my_mlx_pixel_put_rt(exec, \
 				(int)line->x, (int)line->y, RAY_MINIMAP))
 				break ;

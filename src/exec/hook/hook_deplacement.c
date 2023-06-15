@@ -17,14 +17,16 @@ int	draw_player_check(int x, int y, t_exec *exec)
 	int	i;
 	int	j;
 
-	i = 1;
-	while (i < 5)
+	i = 0;
+	while (i <= 5)
 	{
-		j = 1;
-		while (j < 5)
+		j = 0;
+		while (j <= 5)
 		{
 			if (pixel_check(exec, x + j, y + i))
+			{
 				return (1);
+			}
 			j++;
 		}
 		i++;
@@ -37,8 +39,6 @@ void	check_if_upper_wall(t_exec *exec)
 	float	x;
 	float	y;
 
-	x = 0;
-	y = 0;
 	x = (exec->data.pos_x * SQUARE_SIZE \
 			+ exec->horizontal_movement);
 	y = (exec->data.pos_y * SQUARE_SIZE \
@@ -59,8 +59,6 @@ void	check_if_lower_wall(t_exec *exec)
 	float	x;
 	float	y;
 
-	x = 0;
-	y = 0;
 	x = (exec->data.pos_x * SQUARE_SIZE \
 			+ exec->horizontal_movement);
 	y = (exec->data.pos_y * SQUARE_SIZE \
@@ -81,8 +79,6 @@ void	check_if_left_wall(t_exec *exec)
 	float	x;
 	float	y;
 
-	x = 0;
-	y = 0;
 	x = (exec->data.pos_x * SQUARE_SIZE \
 			+ exec->horizontal_movement);
 	y = (exec->data.pos_y * SQUARE_SIZE \
@@ -103,8 +99,6 @@ void	check_if_right_wall(t_exec *exec)
 	float	x;
 	float	y;
 
-	x = 0;
-	y = 0;
 	x = (exec->data.pos_x * SQUARE_SIZE \
 			+ exec->horizontal_movement);
 	y = (exec->data.pos_y * SQUARE_SIZE \
