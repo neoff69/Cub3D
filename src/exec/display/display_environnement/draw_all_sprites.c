@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 13:07:37 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/15 10:40:50 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/15 14:35:28 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,27 @@ static void	draw_sprite(\
 	}
 }
 
-int	check_texture(t_line *line, t_exec *exec, float s_x, float s_y)
+int	check_texture(t_line *line, t_exec *exec)
 {
-	(void)s_x;
-	(void)s_y;
-	if ((int)(line->x + 0.07) / SQUARE_SIZE != (int)line->x / \
-			SQUARE_SIZE && exec->data.map[(int)line->y / \
-			SQUARE_SIZE][(int)(line->x + 0.07) / SQUARE_SIZE] != '1')
-		return (2);
-	if ((int)(line->x - 0.07) / SQUARE_SIZE != (int)line->x / \
-			SQUARE_SIZE && exec->data.map[(int)line->y / \
-			SQUARE_SIZE][(int)(line->x - 0.07) / SQUARE_SIZE] != '1')
-		return (1);
-	if ((int)(line->y + 0.07) / \
-			SQUARE_SIZE != (int)line->y / SQUARE_SIZE)
+	(void)exec;
+
+	// printf("line x %f x %f\n", line->final_x, line->x);
+	// printf("line x %d line x %d\n",  (int)line->x + 1, (int)line->x);
+	// printf("line x %d line x %d\n",  (int)line->x + 1, (int)line->x);
+
+	if (exec->actual_x > line->x && exec->actual_y < line->y)
+	{
+		if (line->final_x > line->x)
+			return (2);
+	}
+	if (exec->actual_x < line->x)
+	{
+		if (line->final_x < line->x)
+			return (1);
+	}
+	if (line->final_y > line->y)
 		return (3);
-	if ((int)(line->y - 0.07) / \
-			SQUARE_SIZE != (int)line->y / SQUARE_SIZE)
+	else
 		return (4);
 	return (0);
 }
@@ -82,15 +86,15 @@ void	draw_all_sprites( \
 	float	sprite_y;
 
 	wall_struct->wall_height = wall_height;
-	sprite_x = fmodf(line->x, SQUARE_SIZE) * 8.5;
+	sprite_x = fmodf(line->x, SQUARE_SIZE) * 8;
 	sprite_y = SPRITE_SIZE - fmodf(line->y, SQUARE_SIZE) * 8.5;
-	if (check_texture(line, exec, sprite_x,sprite_y) == 2)
+	if (check_texture(line, exec) == 2)
 		draw_sprite(exec, &exec->west, wall_struct, sprite_y);
-	else if (check_texture(line, exec, sprite_x, sprite_y) == 3)
+	else if (check_texture(line, exec) == 3)
 		draw_sprite(exec, &exec->north, wall_struct, sprite_x);
-	else if (check_texture(line, exec, sprite_x, sprite_y) == 4)
+	else if (check_texture(line, exec) == 4)
 		draw_sprite(exec, &exec->south, wall_struct, SPRITE_SIZE \
-			- fmodf(line->x, SQUARE_SIZE) * 8.5);
+			- fmodf(line->x, SQUARE_SIZE) * 8);
 	else
 		draw_sprite(exec, &exec->east, wall_struct, \
 		(fmodf(line->y, SQUARE_SIZE) * 8.5));
