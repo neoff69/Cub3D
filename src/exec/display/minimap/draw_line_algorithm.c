@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/14 14:56:22 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/15 14:38:18 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		dy = sin(ang);
 		while (1)
 		{
-			rotate_line(line, i, dx, dy);
+			rotate_line(line, pixel, dx, dy);
 			if (my_mlx_pixel_put_rt(exec, \
 				(int)line->x, (int)line->y, RAY_MINIMAP))
 				break ;
