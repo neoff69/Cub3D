@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/15 15:20:41 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:10:26 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_line
 	float	dx;
 	float	dy;
 	float	wall_height;
+	int		old_texture;
 }	t_line;
 
 typedef struct s_mlx
