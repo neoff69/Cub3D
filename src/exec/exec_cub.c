@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/15 10:41:00 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:09:40 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	set_up_mlx(t_exec *exec)
 	exec->mlx.mlx = mlx_init();
 	if (!exec->mlx.mlx)
 		ft_exit_mlx("Error\nNull mlx_init()", &exec->data, exec);
-	exec->mlx.mlx_win = mlx_new_window(exec->mlx.mlx, 1920, 1080, "Cub3D");
+	exec->mlx.mlx_win = mlx_new_window(exec->mlx.mlx, WIDTH, HEIGHT, "Cub3D");
 	exec->mlx.img = mlx_new_image(exec->mlx.mlx, WIDTH, HEIGHT);
 	if (exec->mlx.mlx_win == NULL || exec->mlx.img == NULL)
 		ft_exit_mlx("Error\nNull mlx window/ image init", &exec->data, exec);

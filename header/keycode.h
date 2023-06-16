@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/14 14:16:44 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:10:34 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@
 # define SQUARE_SIZE 6
 # define SQUARE_SIZE_PLAYER 3
 # define PI 3.14159265359
-# define WIDTH 1920.0
-# define HEIGHT 1080.0
+# define WIDTH 1920
+# define HEIGHT 1080
 # define CUB 20
 # define RAD 0.0174533
 # define WALL_MINIMAP 0x808080
