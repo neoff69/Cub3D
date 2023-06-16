@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
 /*   Updated: 2023/06/16 10:27:03 by jlaisne          ###   ########.fr       */
@@ -44,16 +44,14 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		while (1)
 		{
 			rotate_line(line, pixel, exec->dx, exec->dy);
-			if (exec->data.map[(int)line->y / SQUARE_SIZE][(int)line->x / SQUARE_SIZE] == '1')
-				break ;
-			// if (my_mlx_pixel_put_rt(exec, \
-			// 	(int)line->x, (int)line->y, RAY_MINIMAP))
-			// 	break ;
+			if (my_mlx_pixel_put_rt(exec, \
+			 	(int)line->x, (int)line->y, RAY_MINIMAP))
+			 	break ;
 			pixel++;
 		}
 		display_environment(line, exec, ang);
 		ang += RAD * (40.0 / WIDTH);
-		exec->num++;
+		exec->num ++;
 	}
 }
 
