@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/15 10:41:05 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:20:41 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_line
 	int		step;
 	float	xincr;
 	float	yincr;
+	double	v_x;
+	double	v_y;
 	float	x;
 	float	y;
 	float	dx;
@@ -133,6 +135,8 @@ typedef struct s_exec
 	float	off;
 	float	delta_x;
 	float	delta_y;
+	float	dx;
+	float	dy;
 }	t_exec;
 
 #endif

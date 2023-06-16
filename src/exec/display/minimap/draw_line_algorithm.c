@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/15 14:38:18 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:23:44 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,16 @@ static void	rotate_line(t_line *line, float length, float dx, float dy)
 void	draw(t_exec *exec, t_line *line, float ang)
 {
 	int		pixel;
-	float	dx;
-	float	dy;
 
 	exec->num = 0;
 	while (exec->num <= WIDTH)
 	{
 		pixel = 0;
-		dx = cos(ang);
-		dy = sin(ang);
+		exec->dx = cos(ang);
+		exec->dy = sin(ang);
 		while (1)
 		{
-			rotate_line(line, pixel, dx, dy);
+			rotate_line(line, pixel, exec->dx, exec->dy);
 			if (my_mlx_pixel_put_rt(exec, \
 				(int)line->x, (int)line->y, RAY_MINIMAP))
 				break ;

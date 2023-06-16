@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all_sprites.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 13:07:37 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/15 14:35:28 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 10:08:22 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,34 @@ static void	draw_sprite(\
 
 int	check_texture(t_line *line, t_exec *exec)
 {
-	(void)exec;
-
-	// printf("line x %f x %f\n", line->final_x, line->x);
-	// printf("line x %d line x %d\n",  (int)line->x + 1, (int)line->x);
-	// printf("line x %d line x %d\n",  (int)line->x + 1, (int)line->x);
-
-	if (exec->actual_x > line->x && exec->actual_y < line->y)
-	{
-		if (line->final_x > line->x)
-			return (2);
-	}
-	if (exec->actual_x < line->x)
-	{
-		if (line->final_x < line->x)
-			return (1);
-	}
-	if (line->final_y > line->y)
+	if ((int)(line->x + 0.1) / SQUARE_SIZE != (int)line->x / \
+			SQUARE_SIZE && exec->data.map[(int)line->y / \
+			SQUARE_SIZE][(int)(line->x + 0.1) / SQUARE_SIZE] != '1')
+		return (2);
+	if ((int)(line->x - 0.1) / SQUARE_SIZE != (int)line->x / \
+			SQUARE_SIZE && exec->data.map[(int)line->y / \
+			SQUARE_SIZE][(int)(line->x - 0.1) / SQUARE_SIZE] != '1')
+		return (1);
+	if ((int)(line->y + 0.1) / \
+			SQUARE_SIZE != (int)line->y / SQUARE_SIZE)
 		return (3);
-	else
+	if ((int)(line->y - 0.1) / \
+			SQUARE_SIZE != (int)line->y / SQUARE_SIZE)
 		return (4);
 	return (0);
 }
+
+// void	get_dir(t_line *line, t_exec *exec)
+// {
+// 	line->v_x = exec->dx;
+// 	line->v_y = -(exec->dy); // Negative sign for Y-component
+
+// 	// Normalize the direction vector
+// 	double magnitude = sqrt(line->v_x * line->v_x) + (line->v_y * line->v_y);
+// 	line->v_x /= magnitude;
+// 	line->v_y /= magnitude;
+// }
+	// get_dir(line, exec);
 
 void	draw_all_sprites( \
 	t_exec *exec, float wall_height, t_line *line, t_line *wall_struct)
@@ -96,8 +102,8 @@ void	draw_all_sprites( \
 		draw_sprite(exec, &exec->north, wall_struct, sprite_x);
 	else if (texture == 4)
 		draw_sprite(exec, &exec->south, wall_struct, SPRITE_SIZE \
-			- fmodf(line->x, SQUARE_SIZE) * 8);
+			- fmodf(line->x, SQUARE_SIZE) * 8.5);
 	else
 		draw_sprite(exec, &exec->east, wall_struct, \
-		(fmodf(line->y, SQUARE_SIZE) * 8.5));
+		sprite_y + 50);
 }
