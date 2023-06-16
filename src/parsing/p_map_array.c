@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:01:44 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/06/14 14:50:15 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:40:04 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static void	is_open(t_scub *data, int y, int x)
 		|| (data->map[y][x + 1] && data->map[y][x + 1] == ' '))
 		ft_exit("Error\nMap open.", data);
 	if (data->map[y - 1][x] == '\n' || data->map[y + 1][x] == '\n'
-		|| data->map[y][x - 1] == '\n'|| data->map[y][x + 1] == '\n')
+		|| data->map[y][x - 1] == '\n' || data->map[y][x + 1] == '\n')
 		ft_exit("Error\nMap open.", data);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:15:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/14 13:36:32 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:41:00 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ int	split_and_check(t_scub *data, char *content, int index)
 	int		i;
 	char	**colors;
 
-	i = 0;
+	i = -1;
 	colors = ft_split(content, ',');
 	if (!colors)
 		return (printf("Error\nmalloc\n"), 1);
 	if (colors[3])
 		return (free_2d_array(colors), 1);
-	while (i < 3)
+	while (++i < 3)
 	{
 		if (ft_atoll(colors[i]) < 0 || ft_atoll(colors[i]) > 255)
 			return (free_2d_array(colors), 1);
@@ -106,14 +106,14 @@ int	split_and_check(t_scub *data, char *content, int index)
 			data->f_tab[i] = ft_atoll(colors[i]);
 		if (index == 1)
 			data->c_tab[i] = ft_atoll(colors[i]);
-		i++;
 	}
 	if (index == 0)
-		data->f_color = (data->f_tab[0] << 16) + (data->f_tab[1] << 8) + data->f_tab[2];
+		data->f_color = (data->f_tab[0] << 16) + \
+			(data->f_tab[1] << 8) + data->f_tab[2];
 	if (index == 1)
-		data->c_color = (data->c_tab[0] << 16) + (data->c_tab[1] << 8) + data->c_tab[2];
-	free_2d_array(colors);
-	return (0);
+		data->c_color = (data->c_tab[0] << 16) + \
+			(data->c_tab[1] << 8) + data->c_tab[2];
+	return (free_2d_array(colors), 0);
 }
 
 int	check_colors(t_scub *data)

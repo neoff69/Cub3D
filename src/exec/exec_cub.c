@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/16 13:09:40 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:39:53 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	exec_cub(t_exec *exec)
 	set_up_struct(exec);
 	hook(exec);
 	display_minimap(exec);
-	mlx_put_image_to_window(exec->mlx.mlx, exec->mlx.mlx_win, exec->mlx.img, 0, 0);
+	mlx_put_image_to_window(exec->mlx.mlx, exec->mlx.mlx_win, \
+		exec->mlx.img, 0, 0);
 	mlx_loop(exec->mlx.mlx);
 	return (0);
 }

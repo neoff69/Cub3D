@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/16 10:27:03 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:39:13 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 	line->xincr = line->dx / (line->step);
 	line->yincr = line->dy / (line->step);
 }
-
 
 static void	rotate_line(t_line *line, float length, float dx, float dy)
 {
@@ -45,8 +44,8 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		{
 			rotate_line(line, pixel, exec->dx, exec->dy);
 			if (my_mlx_pixel_put_rt(exec, \
-			 	(int)line->x, (int)line->y, RAY_MINIMAP))
-			 	break ;
+				(int)line->x, (int)line->y, RAY_MINIMAP))
+				break ;
 			pixel++;
 		}
 		display_environment(line, exec, ang);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/16 13:10:26 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:37:09 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ typedef struct s_mlx
 
 typedef struct s_key
 {
-	t_pressed key_w;
-	t_pressed key_a;
-	t_pressed key_s;
-	t_pressed key_d;
-	t_pressed key_r;
-	t_pressed key_l;
+	t_pressed	key_w;
+	t_pressed	key_a;
+	t_pressed	key_s;
+	t_pressed	key_d;
+	t_pressed	key_r;
+	t_pressed	key_l;
 }	t_key;
 
 typedef struct s_img
@@ -115,7 +115,6 @@ typedef struct s_img
 	int		len;
 	int		endian;
 }	t_img;
-
 
 typedef struct s_exec
 {
