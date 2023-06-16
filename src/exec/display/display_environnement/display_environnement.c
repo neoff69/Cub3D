@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   display_environnement.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:54:04 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/15 13:04:01 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 14:01:45 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	draw_offset(t_exec *exec, t_line *wall, int color, \
+void	draw_offset(t_exec *exec, t_line *wall, int color,
 	int(*pixel_put)(t_exec *, int, int, int))
 {
 	int		dx;

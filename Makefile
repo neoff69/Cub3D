@@ -13,10 +13,12 @@ SRC						=	main.c	exit.c	\
 							parsing/parsing_cub.c	parsing/p_parameters.c parsing/p_list_utils.c	\
 							parsing/p_analyse_list.c parsing/p_map_array.c	parsing/p_map_utils.c parsing/p_utils.c	\
 							exec/exec_cub.c \
+							exec/init_img.c \
 							exec/get_line.c \
 							exec/hook/hook.c \
 							exec/hook/hook_deplacement.c \
 							exec/hook/hook_rotation.c \
+							exec/hook/hook_check.c \
 							exec/display/utils/display_utils.c \
 							exec/display/utils/display_pixel.c \
 							exec/display/minimap/display_minimap.c \

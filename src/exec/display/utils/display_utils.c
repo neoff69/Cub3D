@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/16 11:17:11 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:19:17 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_if_corner(t_exec *exec, int bit, int x, int y)
 
 	if (exec->actual_y > y)
 	{
-		if (exec->actual_x > x)
+		if (exec->actual_x >= x)
 		{
 			fst_wall = exec->mlx.addr + ((y + 1) * exec->mlx.len + (x) * (bit));
 			sec_wall = exec->mlx.addr + ((y) * exec->mlx.len + (x + 1) * (bit));
@@ -38,7 +38,7 @@ int	check_if_corner(t_exec *exec, int bit, int x, int y)
 	}
 	else
 	{
-		if (exec->actual_x > x)
+		if (exec->actual_x >= x)
 		{
 			fst_wall = exec->mlx.addr + ((y - 1) * exec->mlx.len + (x) * (bit));
 			sec_wall = exec->mlx.addr + ((y) * exec->mlx.len + (x + 1) * (bit));

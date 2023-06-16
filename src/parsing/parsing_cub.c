@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:04:09 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/15 09:54:00 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:40:11 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	parsing_cub(char **arg, t_scub *data)
 		ft_return("Error\nInvalid parameters in *.cub file.", data);
 		return (1);
 	}
-	
 	return (0);
 }
 

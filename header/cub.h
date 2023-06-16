@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/15 14:38:09 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:59:31 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ void	fill_map_lst_next(char *str, t_scub *data);
 char	**fill_map_array(t_scub *data);
 void	fill_map(t_scub *data);
 
-//EXEC
+/* TIME */
 int		exec_cub(t_exec *exec);
+void	set_up_img(t_exec *exec);
 
-//DISPLAY
+/* DISPLAY */
 void	display_game(t_exec *exec);
 void	display_minimap(t_exec *exec);
 void	display_minimap_character(t_exec *exec);
@@ -65,18 +66,23 @@ void	display_environment(t_line *line, t_exec *exec, float ang);
 void	draw_all_sprites( \
 	t_exec *exec, float wall_height, t_line *line, t_line *wall_struct);
 
-//HOOK
+/* HOOK */
 void	hook(t_exec *exec);
 void	minimap_deplacement(t_exec *exec, int keycode);
 void	minimap_rotation(t_exec *exec, int keycode);
+int		draw_player_check(int x, int y, t_exec *exec);
+void	check_if_right_wall(t_exec *exec);
+void	check_if_left_wall(t_exec *exec);
+void	check_if_upper_wall(t_exec *exec);
+void	check_if_lower_wall(t_exec *exec);
 
-//LINE
+/* LINE */
 float	line_offset(float lineHeight);
 float	get_line_height(t_exec *exec, float dist);
 float	adjusted_dist(t_exec *exec, float ray_angle, float dist);
 float	get_distance(t_line *line, t_exec *exec, float ang);
 
-//UTILS
+/* UTILS */
 int		my_mlx_pixel_put(t_exec *exec, int x, int y, int color);
 int		my_mlx_pixel_put_wall(t_exec *exec, int x, int y, int color);
 int		check_if_corner(t_exec *exec, int bit, int x, int y);
@@ -84,9 +90,6 @@ int		my_mlx_pixel_put_rt(t_exec *exec, int x, int y, int color);
 int		my_mlx_put_offset(t_exec *exec, int x, int y, int color);
 int		pixel_check(t_exec *exec, int x, int y);
 void	set_image_win(t_exec *exec);
-
-
-
 char	*pixel_return(t_img *data, int x, int y);
 
 #endif
