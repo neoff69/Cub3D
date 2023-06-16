@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 13:07:37 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/16 10:08:22 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 10:10:46 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,6 @@ int	check_texture(t_line *line, t_exec *exec)
 	return (0);
 }
 
-// void	get_dir(t_line *line, t_exec *exec)
-// {
-// 	line->v_x = exec->dx;
-// 	line->v_y = -(exec->dy); // Negative sign for Y-component
-
-// 	// Normalize the direction vector
-// 	double magnitude = sqrt(line->v_x * line->v_x) + (line->v_y * line->v_y);
-// 	line->v_x /= magnitude;
-// 	line->v_y /= magnitude;
-// }
-	// get_dir(line, exec);
-
 void	draw_all_sprites( \
 	t_exec *exec, float wall_height, t_line *line, t_line *wall_struct)
 {
@@ -105,5 +93,5 @@ void	draw_all_sprites( \
 			- fmodf(line->x, SQUARE_SIZE) * 8.5);
 	else
 		draw_sprite(exec, &exec->east, wall_struct, \
-		sprite_y + 50);
+		fmodf(line->y, SQUARE_SIZE) * 8.5);
 }

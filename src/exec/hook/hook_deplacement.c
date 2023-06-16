@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/15 16:05:38 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 10:12:33 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	minimap_deplacement(t_exec *exec, int keycode)
 {	
 	if (keycode == KEY_W)
 	{
-		exec->horizontal_movement += exec->delta_x + 0.8;
+		exec->horizontal_movement += exec->delta_x;
 		exec->vertical_movement += exec->delta_y;
 		check_if_upper_wall(exec);
 	}
