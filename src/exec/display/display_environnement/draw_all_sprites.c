@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:14:08 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/16 13:41:47 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 15:42:41 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,30 @@ static void	draw_sprite(\
 
 int	check_texture(t_line *line, t_exec *exec)
 {
-	if ((int)(line->x + 0.1) / SQUARE_SIZE != (int)line->x / \
-			SQUARE_SIZE && exec->data.map[(int)line->y / \
-			SQUARE_SIZE][(int)(line->x + 0.1) / SQUARE_SIZE] != '1')
-		return (2);
-	if (((int)(line->x - 0.1) / SQUARE_SIZE != (int)line->x / \
-			SQUARE_SIZE && exec->data.map[(int)line->y / \
-			SQUARE_SIZE][(int)(line->x - 0.1) / SQUARE_SIZE] != '1'))
-		return (1);
-	if ((int)(line->y + 0.1) / \
-			SQUARE_SIZE != (int)line->y / SQUARE_SIZE)
-		return (3);
-	if ((int)(line->y - 0.1) / \
-			SQUARE_SIZE != (int)line->y / SQUARE_SIZE)
-		return (4);
+	(void)exec;
+	float x_map = line->x / 6;
+	float y_map = line->y / 6;
+	
+	x_map = x_map - (int)x_map + 0.001;
+	y_map = y_map - (int)y_map + 0.001;
+	if (x_map <= 0.015 || (x_map >= 0.99 && x_map <= 1.001))
+	{
+		if (line->old_y > line->y && (int)x_map != (int)y_map)
+			return (3);
+		else if (line->old_y < line->y && (int)x_map != (int)y_map)
+			return (4);
+		if (line->old_x > line->x)
+			return (2);
+		else
+			return (1);
+	}
+	else
+	{
+		if (line->old_y > line->y)
+			return (3);
+		else
+			return (4);
+	}
 	return (0);
 }
 

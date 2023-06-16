@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/16 13:37:09 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 15:00:32 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ typedef struct s_line
 	float	dx;
 	float	dy;
 	float	wall_height;
-	int		old_texture;
+	float	old_x;
+	float	old_y;
 }	t_line;
 
 typedef struct s_mlx
@@ -131,6 +132,7 @@ typedef struct s_exec
 	int		actual_y;
 	int		num;
 	float	angle;
+	float	ray_angle;
 	float	act;
 	float	off;
 	float	delta_x;

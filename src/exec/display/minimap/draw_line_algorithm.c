@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/16 13:39:13 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 15:04:31 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 {
+	line->old_x = 0;
+	line->old_y = 0;
 	line->dx = next_x - exec->actual_x;
 	line->dy = next_y - exec->actual_y;
 	if (fabs(line->dx) > fabs(line->dy))
@@ -38,32 +40,33 @@ void	draw(t_exec *exec, t_line *line, float ang)
 	while (exec->num <= WIDTH)
 	{
 		pixel = 0;
-		exec->dx = cos(ang);
-		exec->dy = sin(ang);
+		exec->dx = cos(exec->ray_angle);
+		exec->dy = sin(exec->ray_angle);
 		while (1)
 		{
+			
 			rotate_line(line, pixel, exec->dx, exec->dy);
 			if (my_mlx_pixel_put_rt(exec, \
 				(int)line->x, (int)line->y, RAY_MINIMAP))
 				break ;
+			line->old_x = line->x;
+			line->old_y = line->y;
 			pixel++;
 		}
 		display_environment(line, exec, ang);
-		ang += RAD * (40.0 / WIDTH);
+		exec->ray_angle += RAD * (40.0 / WIDTH);
 		exec->num ++;
 	}
 }
 
 float	get_angle(t_exec *exec)
 {
-	float	ang;
-
-	ang = exec->angle - RAD * 20;
-	if (ang < 0)
-		ang += 2 * PI;
-	else if (ang > 2 * PI)
-		ang -= 2 * PI;
-	return (ang);
+	exec->ray_angle = exec->angle - RAD * 20;
+	if (exec->ray_angle < 0)
+		exec->ray_angle += 2 * PI;
+	else if (exec->ray_angle > 2 * PI)
+		exec->ray_angle -= 2 * PI;
+	return (exec->ray_angle);
 }
 
 void	display_game(t_exec *exec)
