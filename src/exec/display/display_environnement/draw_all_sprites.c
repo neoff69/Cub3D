@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:14:08 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/16 15:42:41 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 10:10:29 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,10 @@ int	check_texture(t_line *line, t_exec *exec)
 	float x_map = line->x / 6;
 	float y_map = line->y / 6;
 	
-	x_map = x_map - (int)x_map + 0.001;
-	y_map = y_map - (int)y_map + 0.001;
-	if (x_map <= 0.015 || (x_map >= 0.99 && x_map <= 1.001))
+	x_map = x_map - (int)x_map;
+	y_map = y_map - (int)y_map;
+	if ((x_map <= 0.010 || (x_map > 0.99 && x_map < 1.001)))
 	{
-		if (line->old_y > line->y && (int)x_map != (int)y_map)
-			return (3);
-		else if (line->old_y < line->y && (int)x_map != (int)y_map)
-			return (4);
 		if (line->old_x > line->x)
 			return (2);
 		else
@@ -83,8 +79,7 @@ int	check_texture(t_line *line, t_exec *exec)
 	return (0);
 }
 
-void	draw_all_sprites( \
-	t_exec *exec, float wall_height, t_line *line, t_line *wall_struct)
+void	draw_all_sprites(t_exec *exec, float wall_height, t_line *line, t_line *wall_struct)
 {
 	float	sprite_x;
 	float	sprite_y;
