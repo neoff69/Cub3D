@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:14:08 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/19 12:54:03 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:24:05 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ static void	draw_sprite(\
 	while (i <= wall->step)
 	{
 		i++;
+		// t_x = (ray.collision.x - (int) ray.collision.x) * 256;
 		if (wall->wall_height == HEIGHT)
-			dst = pixel_return(texture, x, \
-				(SPRITE_SIZE * ((exec->act - 10 - exec->off - y) / exec->act)));
+			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - 10 - exec->off - y) / exec->act)));
 		else
-			dst = pixel_return(texture, x, \
-			(SPRITE_SIZE * (wall->wall_height - y)) / wall->wall_height - 0.5);
+			dst = pixel_return(texture, x, (SPRITE_SIZE * (wall->wall_height - y)) / wall->wall_height - 0.5);
 		y += 1;
 		my_mlx_pixel_put_wall(\
 		exec, wall->final_x, wall->final_y, *(unsigned int *)dst);
@@ -58,7 +57,7 @@ int	check_texture(t_line *line, t_exec *exec)
 {
 	(void)exec;
 	(void)line;
-	if (exec->side == 1)
+	if (exec->side == 0)
 	{
 		if (exec->dx < 0)
 			return (2);
@@ -83,7 +82,7 @@ void	draw_all_sprites(t_exec *exec, float wall_height, t_line *line, t_line *wal
 	int		texture;
 
 	wall_struct->wall_height = wall_height;
-	sprite_x = fmodf(line->x, SQUARE_SIZE) * 8;
+	sprite_x = fmodf(line->x, SQUARE_SIZE) * 8.5;
 	sprite_y = SPRITE_SIZE - fmodf(line->y, SQUARE_SIZE) * 8.5;
 	texture = check_texture(line, exec);
 	if (texture == 2)
@@ -95,5 +94,5 @@ void	draw_all_sprites(t_exec *exec, float wall_height, t_line *line, t_line *wal
 			- fmodf(line->x, SQUARE_SIZE) * 8.5);
 	else
 		draw_sprite(exec, &exec->east, wall_struct, \
-		fmodf(line->y, SQUARE_SIZE) * 8.5);
+			fmodf(line->y, SQUARE_SIZE) * 8.5);
 }
