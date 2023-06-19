@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/16 15:00:32 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 12:52:14 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_exec
 	int		actual_x;
 	int		actual_y;
 	int		num;
+	int		side;
 	float	angle;
 	float	ray_angle;
 	float	act;
@@ -139,6 +140,8 @@ typedef struct s_exec
 	float	delta_y;
 	float	dx;
 	float	dy;
+	float 	side_dist_x;
+	float 	side_dist_y;
 }	t_exec;
 
 #endif
