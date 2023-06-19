@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/16 15:04:31 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:21:18 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,21 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 	line->yincr = line->dy / (line->step);
 }
 
-static void	rotate_line(t_line *line, float length, float dx, float dy)
-{
-	line->x = line->final_x + (length / CUB) * dx;
-	line->y = line->final_y + (length / CUB) * dy;
-}
+// static void	rotate_line(t_line *line, float length, float dx, float dy)
+// {
+// 	line->x = line->final_x + (length / CUB) * dx;
+// 	line->y = line->final_y + (length / CUB) * dy;
+// }
 
-void	draw(t_exec *exec, t_line *line, float ang)
+void draw(t_exec *exec, t_line *line, float ang)
 {
-	int		pixel;
+	int pixel;
+	float delta_dist_x;
+	float delta_dist_y;
+	int step_x;
+	int step_y;
+	int map_x;
+	int map_y;
 
 	exec->num = 0;
 	while (exec->num <= WIDTH)
@@ -42,26 +48,61 @@ void	draw(t_exec *exec, t_line *line, float ang)
 		pixel = 0;
 		exec->dx = cos(exec->ray_angle);
 		exec->dy = sin(exec->ray_angle);
+		delta_dist_x = fabs(1 / exec->dx);
+		delta_dist_y = fabs(1 / exec->dy);
+		map_x = (int)line->final_x / 6.0;
+		map_y = (int)line->final_y / 6.0;
+		if (exec->dx < 0)
+		{
+			step_x = -1;
+			exec->side_dist_x = ((line->final_x / 6.0) - map_x) * delta_dist_x;
+		}
+		else
+		{
+			step_x = 1;
+			exec->side_dist_x = (map_x + 1.0 - (line->final_x / 6.0)) * delta_dist_x;
+		}
+		if (exec->dy < 0)
+		{
+			step_y = -1;
+			exec->side_dist_y = ((line->final_y / 6.0) - map_y) * delta_dist_y;
+		}
+		else
+		{
+			step_y = 1;
+			exec->side_dist_y = (map_y + 1.0 - (line->final_y / 6.0)) * delta_dist_y;
+		}
 		while (1)
 		{
-			
-			rotate_line(line, pixel, exec->dx, exec->dy);
-			if (my_mlx_pixel_put_rt(exec, \
-				(int)line->x, (int)line->y, RAY_MINIMAP))
+			if (exec->side_dist_x < exec->side_dist_y)
+			{
+				exec->side_dist_x += delta_dist_x;
+				map_x += step_x;
+				exec->side = 0;
+			}
+			else
+			{
+				exec->side_dist_y += delta_dist_y;
+				map_y += step_y;
+				exec->side = 1;
+			}
+			if (exec->data.map[map_y][map_x] == '1') // Note the change to map_y and map_x
+			{
+				line->x = map_x;
+				line->y = map_y;
 				break ;
-			line->old_x = line->x;
-			line->old_y = line->y;
-			pixel++;
+			}
+			my_mlx_pixel_put(exec, map_x * 6, map_y * 6, 0xFF0000);
 		}
 		display_environment(line, exec, ang);
 		exec->ray_angle += RAD * (40.0 / WIDTH);
-		exec->num ++;
+		exec->num++;
 	}
 }
 
 float	get_angle(t_exec *exec)
 {
-	exec->ray_angle = exec->angle - RAD * 20;
+	exec->ray_angle = exec->angle - (RAD * 20);
 	if (exec->ray_angle < 0)
 		exec->ray_angle += 2 * PI;
 	else if (exec->ray_angle > 2 * PI)
