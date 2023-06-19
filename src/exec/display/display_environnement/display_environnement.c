@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:54:04 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/19 13:35:59 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:40:03 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void	draw_floor_and_sky( \
 	draw_offset(exec, wall_struct, exec->data.c_color, &my_mlx_put_offset);
 }
 
-void	display_environment(t_line *line, t_exec *exec, float distance)
+void	display_environment(t_line *line, t_exec *exec, float ang, float distance)
 {
 	float	wall;
 	float	not_wall;
 	t_line	wall_struct;
 
+	distance = adjusted_dist(exec, ang, distance);
 	wall = get_line_height(exec, distance);
 	not_wall = line_offset(wall);
 	draw_floor_and_sky(exec, wall, not_wall, &wall_struct);
