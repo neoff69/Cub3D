@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   display_environnement.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:54:04 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/19 13:40:03 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 17:41:36 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	draw_offset(t_exec *exec, t_line *wall, int color,
-	int(*pixel_put)(t_exec *, int, int, int))
+void	draw_offset(t_exec *exec, t_line *wall, int color)
 {
 	int		dx;
 	int		dy;
@@ -30,7 +29,7 @@ void	draw_offset(t_exec *exec, t_line *wall, int color,
 	while (i <= wall->step)
 	{
 		i++;
-		if (pixel_put(exec, wall->final_x, wall->final_y, color))
+		if (my_mlx_put_offset(exec, wall->final_x, wall->final_y, color))
 			return ;
 		wall->final_x -= wall->xincr;
 		wall->final_y -= wall->yincr;
@@ -44,13 +43,14 @@ void	draw_floor_and_sky( \
 	wall_struct->final_x = wall_struct->x;
 	wall_struct->y = not_wall + wall;
 	wall_struct->final_y = HEIGHT;
-	draw_offset(exec, wall_struct, exec->data.f_color, &my_mlx_put_offset);
+	draw_offset(exec, wall_struct, exec->data.f_color);
 	wall_struct->y = not_wall;
 	wall_struct->final_y = 0.0;
-	draw_offset(exec, wall_struct, exec->data.c_color, &my_mlx_put_offset);
+	draw_offset(exec, wall_struct, exec->data.c_color);
 }
 
-void	display_environment(t_line *line, t_exec *exec, float ang, float distance)
+void	display_environment(t_line *line, \
+		t_exec *exec, float ang, float distance)
 {
 	float	wall;
 	float	not_wall;

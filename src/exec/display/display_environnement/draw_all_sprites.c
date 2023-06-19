@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:14:08 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/19 15:02:06 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/19 17:42:52 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +53,33 @@ static void	draw_sprite(\
 	}
 }
 
-int	check_texture(t_line *line, t_exec *exec)
+int	check_texture(t_exec *exec)
 {
-	(void)exec;
-	(void)line;
 	if (exec->side == 0)
 	{
 		if (exec->dx < 0)
-			return (2);
-		else
 			return (1);
+		else
+			return (2);
 	}
 	else
 	{
 		if (exec->dy < 0)
-			return (3);
-		else
 			return (4);
+		else
+			return (3);
 	}
 	return (0);
 }
 
 
-void	draw_all_sprites(t_exec *exec, float wall_height, t_line *line, t_line *wall_struct)
+void	draw_all_sprites(t_exec *exec, \
+		float wall_height, t_line *line, t_line *wall_struct)
 {
 	int		texture;
 
 	wall_struct->wall_height = wall_height;
-	texture = check_texture(line, exec);
+	texture = check_texture(exec);
 	if (texture == 2)
 		draw_sprite(exec, &exec->west, wall_struct, 0);
 	else if (texture == 3)

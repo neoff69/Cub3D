@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/19 14:37:28 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 17:43:06 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 	line->yincr = line->dy / (line->step);
 }
 
+
+
 void draw(t_exec *exec, t_line *line)
 {
-	int pixel;
 	float delta_dist_x;
 	float delta_dist_y;
 	int step_x;
@@ -39,7 +40,6 @@ void draw(t_exec *exec, t_line *line)
 	exec->num = 0;
 	while (exec->num <= WIDTH)
 	{
-		pixel = 0;
 		exec->dx = cos(exec->ray_angle);
 		exec->dy = sin(exec->ray_angle);
 		delta_dist_x = fabs(1 / exec->dx);
@@ -104,22 +104,20 @@ void draw(t_exec *exec, t_line *line)
 	}
 }
 
-float	get_angle(t_exec *exec)
+void	get_angle(t_exec *exec)
 {
 	exec->ray_angle = exec->angle - (RAD * 20);
 	if (exec->ray_angle < 0)
 		exec->ray_angle += 2 * PI;
 	else if (exec->ray_angle > 2 * PI)
 		exec->ray_angle -= 2 * PI;
-	return (exec->ray_angle);
 }
 
 void	display_game(t_exec *exec)
 {
 	t_line	line;
-	float	ang;
 
-	ang = get_angle(exec);
+	get_angle(exec);
 	set_up_variable(exec, exec->actual_x, exec->actual_y, &line);
 	line.final_x = (exec->actual_x + SQUARE_SIZE / 2);
 	line.final_y = (exec->actual_y + SQUARE_SIZE / 2);
