@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/19 13:39:32 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:53:04 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,8 @@ void	display_minimap_character(t_exec *exec);
 void	display_game(t_exec *exec);
 void	draw_square(int y, int x, int color, t_exec *exec);
 int		draw_player(int y, int x, int color, t_exec *exec);
-void	display_environment(t_line *line, t_exec *exec, float ang, float distance);
-void	draw_all_sprites( \
-	t_exec *exec, float wall_height, t_line *line, t_line *wall_struct);
+void	display_environment(t_exec *exec, float ang, float distance);
+void	draw_all_sprites(t_exec *exec, float wall_height, t_line *wall_struct);
 
 /* HOOK */
 void	hook(t_exec *exec);
