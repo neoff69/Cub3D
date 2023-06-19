@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_game.c                                     :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 16:31:55 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/31 16:33:52 by vgonnot          ###   ########.fr       */
+/*   Created: 2023/06/14 13:27:14 by jlaisne           #+#    #+#             */
+/*   Updated: 2023/06/16 14:00:07 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "libft.h"
 
-void	display_game(t_exec *exec)
+void	close_all(void)
 {
-	display_minimap(exec);
+	int	i;
+
+	i = 3;
+	while (i < 1024)
+	{
+		close(i);
+		i++;
+	}
 }

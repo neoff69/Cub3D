@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keycode.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 13:54:51 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:10:34 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,16 @@
 # define KEY_9 231
 # define KEY_ESCAPE 65307
 # define KEY_SPACE 32
-# define SQUARE_SIZE 40
+# define SQUARE_SIZE 6
+# define SQUARE_SIZE_PLAYER 3
 # define PI 3.14159265359
 # define WIDTH 1920
 # define HEIGHT 1080
-# define CUB 80
+# define CUB 20
 # define RAD 0.0174533
+# define WALL_MINIMAP 0x808080
+# define FLOOR_MINIMAP 0xFFFFFF
+# define PLAYER_MINIMAP 0x0000FF
+# define RAY_MINIMAP 0xFF0000
+# define SPRITE_SIZE 50
 #endif

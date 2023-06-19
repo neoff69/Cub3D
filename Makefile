@@ -13,16 +13,19 @@ SRC						=	main.c	exit.c	\
 							parsing/parsing_cub.c	parsing/p_parameters.c parsing/p_list_utils.c	\
 							parsing/p_analyse_list.c parsing/p_map_array.c	parsing/p_map_utils.c parsing/p_utils.c	\
 							exec/exec_cub.c \
+							exec/init_img.c \
 							exec/get_line.c \
 							exec/hook/hook.c \
 							exec/hook/hook_deplacement.c \
 							exec/hook/hook_rotation.c \
-							exec/display/display_game.c \
-							exec/display/display_utils.c \
+							exec/hook/hook_check.c \
+							exec/display/utils/display_utils.c \
+							exec/display/utils/display_pixel.c \
 							exec/display/minimap/display_minimap.c \
 							exec/display/minimap/display_minimap_character.c \
-							exec/display/minimap/display_raytracing.c \
 							exec/display/minimap/draw_line_algorithm.c \
+							exec/display/display_environnement/display_environnement.c \
+							exec/display/display_environnement/draw_all_sprites.c \
 							
 OBJECTS					= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
@@ -34,7 +37,7 @@ MINILIB_DIR				= minilibx-linux/
 
 LINUX 					= -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm -lz
 GCC						= cc
-CFLAGS					= -Wall -Werror -Wextra -g3
+CFLAGS					= -Wall -Werror -Wextra -g3 -O2
 SANITIZE				= $(CFLAGS) -g3 -fsanitize=address
 
 RM 						= rm -rf
@@ -56,7 +59,7 @@ $(NAME): 				$(OBJECTS) $(LIB_DIR)$(LIBFT)
 						$(GCC) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(MINILIB_DIR)$(MINILIB) $(LINUX)
 
 sanit :					$(OBJECTS) $(LIB_DIR)$(LIBFT)
-						$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(MINILIB_DIR)$(MINILIB)
+						$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(MINILIB_DIR)$(MINILIB) $(LINUX)
 
 lib:
 						@make -C $(LIB_DIR)

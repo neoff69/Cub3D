@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:15:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/01 11:38:40 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:41:00 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	analyse_parameters(t_scub *data)
 	t_pcub	*temp;
 	int		keys;
 	char	*str;
-	
+
 	keys = 0;
 	temp = data->cub;
 	while (temp)
@@ -87,25 +87,33 @@ int	open_content_sprites(t_scub *data)
 	return (0);
 }
 
-int	split_and_check(char *content)
+int	split_and_check(t_scub *data, char *content, int index)
 {
 	int		i;
 	char	**colors;
 
-	i = 0;
+	i = -1;
 	colors = ft_split(content, ',');
 	if (!colors)
 		return (printf("Error\nmalloc\n"), 1);
 	if (colors[3])
-		return (printf("Error\nInvalid RGB format\n"), free_2d_array(colors), 1);
-	while (i < 3)
+		return (free_2d_array(colors), 1);
+	while (++i < 3)
 	{
 		if (ft_atoll(colors[i]) < 0 || ft_atoll(colors[i]) > 255)
 			return (free_2d_array(colors), 1);
-		i++;
+		if (index == 0)
+			data->f_tab[i] = ft_atoll(colors[i]);
+		if (index == 1)
+			data->c_tab[i] = ft_atoll(colors[i]);
 	}
-	free_2d_array(colors);
-	return (0);
+	if (index == 0)
+		data->f_color = (data->f_tab[0] << 16) + \
+			(data->f_tab[1] << 8) + data->f_tab[2];
+	if (index == 1)
+		data->c_color = (data->c_tab[0] << 16) + \
+			(data->c_tab[1] << 8) + data->c_tab[2];
+	return (free_2d_array(colors), 0);
 }
 
 int	check_colors(t_scub *data)
@@ -115,9 +123,9 @@ int	check_colors(t_scub *data)
 
 	floor = get_node(data->cub, F);
 	ceilling = get_node(data->cub, C);
-	if (split_and_check(floor->content) == 1)
+	if (split_and_check(data, floor->content, 0) == 1)
 		return (1);
-	if (split_and_check(ceilling->content) == 1)
+	if (split_and_check(data, ceilling->content, 1) == 1)
 		return (1);
 	return (0);
 }

@@ -3,86 +3,125 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/02 15:20:46 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:37:28 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-typedef struct s_line
-{
-float    final_x;
-float    final_y;
-int        step;
-float    xincr;
-float    yincr;
-}    t_line;
-
 static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 {
-float    dx;
-float    dy;
-
-	dx = next_x - exec->actual_x;
-	dy = next_y - exec->actual_y;
-	if (fabs(dx) > fabs(dy))
-		line->step = fabs(dx);
+	line->old_x = 0;
+	line->old_y = 0;
+	line->dx = next_x - exec->actual_x;
+	line->dy = next_y - exec->actual_y;
+	if (fabs(line->dx) > fabs(line->dy))
+		line->step = fabs(line->dx);
 	else
-		line->step = fabs(dy);
-	line->xincr = dx / line->step;
-	line->yincr = dy / line->step;
+		line->step = fabs(line->dy);
+	line->xincr = line->dx / (line->step);
+	line->yincr = line->dy / (line->step);
 }
 
-float	rotate_line_x(t_line *origin, float length, float ang)
+void draw(t_exec *exec, t_line *line)
 {
-	int	x;
+	int pixel;
+	float delta_dist_x;
+	float delta_dist_y;
+	int step_x;
+	int step_y;
+	int map_x;
+	int map_y;
 
-	x = origin->final_x + length * cos(ang);
-	return (x);
+	exec->num = 0;
+	while (exec->num <= WIDTH)
+	{
+		pixel = 0;
+		exec->dx = cos(exec->ray_angle);
+		exec->dy = sin(exec->ray_angle);
+		delta_dist_x = fabs(1 / exec->dx);
+		delta_dist_y = fabs(1 / exec->dy);
+		map_x = (int)line->final_x / SQUARE_SIZE;
+		map_y = (int)line->final_y / SQUARE_SIZE;
+		if (exec->dx < 0)
+		{
+			step_x = -1;
+			exec->side_dist_x = ((line->final_x / SQUARE_SIZE) - map_x) * delta_dist_x;
+		}
+		else
+		{
+			step_x = 1;
+			exec->side_dist_x = (map_x + 1.0 - (line->final_x / SQUARE_SIZE)) * delta_dist_x;
+		}
+		if (exec->dy < 0)
+		{
+			step_y = -1;
+			exec->side_dist_y = ((line->final_y / SQUARE_SIZE) - map_y) * delta_dist_y;
+		}
+		else
+		{
+			step_y = 1;
+			exec->side_dist_y = (map_y + 1.0 - (line->final_y / SQUARE_SIZE)) * delta_dist_y;
+		}
+		while (1)
+		{
+			if (exec->side_dist_x < exec->side_dist_y)
+			{
+				exec->side_dist_x += delta_dist_x;
+				map_x += step_x;
+				exec->side = 0;
+			}
+			else
+			{
+				exec->side_dist_y += delta_dist_y;
+				map_y += step_y;
+				exec->side = 1;
+			}
+			if (exec->data.map[map_y][map_x] == '1')
+			{
+				line->x = map_x;
+				line->y = map_y;
+				break ;
+			}
+		}
+		float distance;
+		if(exec->side == 0) 
+		{
+			distance = (exec->side_dist_x - delta_dist_x) * 1;
+			exec->coll = (((line->final_y / SQUARE_SIZE) - ((int)line->final_y / SQUARE_SIZE)) + distance * exec->dy);
+		}
+      	else
+		{    
+			distance = (exec->side_dist_y - delta_dist_y) * 1;
+			exec->coll = (((line->final_x / SQUARE_SIZE) - ((int)line->final_x / SQUARE_SIZE)) + distance * exec->dx);
+		}
+		display_environment(line, exec, exec->ray_angle, distance);
+		exec->ray_angle += RAD * (40.0 / WIDTH);
+		exec->num++;
+	}
 }
 
-float	rotate_line_y(t_line *origin, float length, float ang)
+float	get_angle(t_exec *exec)
 {
-	int	y;
-
-	y = origin->final_y + length * sin(ang);
-	return (y);
+	exec->ray_angle = exec->angle - (RAD * 20);
+	if (exec->ray_angle < 0)
+		exec->ray_angle += 2 * PI;
+	else if (exec->ray_angle > 2 * PI)
+		exec->ray_angle -= 2 * PI;
+	return (exec->ray_angle);
 }
 
-void	draw_line(t_exec *exec)
+void	display_game(t_exec *exec)
 {
-	int		i;
 	t_line	line;
-	float	x;
-	float	y;
 	float	ang;
 
-	int num = 0;
-	ang = exec->angle - RAD * 45;
-	if (ang < 0)
-		ang += 2 * PI;
-	else if (ang > 2 * PI)
-		ang -= 2 * PI;
-	i = 0;
-	set_up_variable(exec, exec->actual_x, exec->actual_y + 10, &line);
-	while (num < 80)
-	{
-		line.final_x = ((exec->actual_x * SQUARE_SIZE + SQUARE_SIZE / 2));
-		line.final_y = ((exec->actual_y * SQUARE_SIZE + SQUARE_SIZE / 2));
-		i = 0;
-		while (i < line.step * SQUARE_SIZE)
-		{
-			x = rotate_line_x(&line, i, ang);
-			y = rotate_line_y(&line, i, ang);
-			if (x >= 1920 ||  x <= 0 || y >= 1080 || y <= 0)
-				break ;
-			my_mlx_pixel_put(exec, (int)x, (int)y, 0xFF0000);
-			i++;
-		}
-		ang += RAD;
-		num++;
-	}
+	ang = get_angle(exec);
+	set_up_variable(exec, exec->actual_x, exec->actual_y, &line);
+	line.final_x = (exec->actual_x + SQUARE_SIZE / 2);
+	line.final_y = (exec->actual_y + SQUARE_SIZE / 2);
+	draw(exec, &line);
 }

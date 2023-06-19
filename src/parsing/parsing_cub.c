@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:04:09 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/31 12:58:20 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:40:11 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ int	parsing_cub(char **arg, t_scub *data)
 	data->cub = NULL;
 	data->map = NULL;
 	data->map_fill = NULL;
+	data->first_wall = NULL;
 	if (check_arg(arg[1], ".cub") == 1)
 	{
 		printf("Error\nInvalid map format [%s]: *.cub is required.\n", arg[1]);
-		return (free(data), 1);
+		return (1);
 	}
 	if (open_arg(data, arg[1], 1) == 1)
 	{
 		printf("Error\nCannot open [%s] map.\n", arg[1]);
-		return (free(data), 1);
+		return (1);
 	}
 	if (get_parameters(data) == 1)
 	{
 		ft_return("Error\nInvalid parameters in *.cub file.", data);
 		return (1);
 	}
-	//ft_return(NULL, data); A MODIFIER SEGFAULT VU QUE JE RETURN LA STRUCT
 	return (0);
 }
 
