@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_algorithm.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/19 14:23:17 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:25:53 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void draw(t_exec *exec, t_line *line)
 			distance = (exec->side_dist_y - delta_dist_y) * 1;
 			exec->coll = (((line->final_x / 6) - ((int)line->final_x / 6)) + distance * exec->dx);
 		}
-		printf("%f\n", exec->coll);
+		//printf("%f\n", exec->coll);
 		display_environment(line, exec, exec->ray_angle, distance);
 		exec->ray_angle += RAD * (40.0 / WIDTH);
 		exec->num++;

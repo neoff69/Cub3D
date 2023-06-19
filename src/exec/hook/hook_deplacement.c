@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_deplacement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:52:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/19 13:55:20 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:41:28 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	minimap_deplacement(t_exec *exec, int keycode)
 {	
 	if (keycode == KEY_W)
 	{
-		exec->horizontal_movement += exec->delta_x;
-		exec->vertical_movement += exec->delta_y;
+		exec->horizontal_movement += (int)exec->delta_x;
+		exec->vertical_movement += (int)exec->delta_y;
 		check_if_upper_wall(exec);
 	}
 	else if (keycode == KEY_S)
 	{
-		exec->horizontal_movement -= exec->delta_x;
-		exec->vertical_movement -= exec->delta_y;
+		exec->horizontal_movement -= (int)exec->delta_x;
+		exec->vertical_movement -= (int)exec->delta_y;
 		check_if_lower_wall(exec);
 	}
 	else if (keycode == KEY_D)
