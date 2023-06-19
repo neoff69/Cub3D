@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:04:14 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/19 10:17:41 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:52:24 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	set_up_struct(t_exec *exec)
 	exec->vertical_movement = 0;
 	exec->horizontal_movement = 0;
 	set_angle(exec);
-	exec->delta_x = cos(exec->angle) * 2;
-	exec->delta_y = sin(exec->angle) * 2;
+	exec->delta_x = cos(exec->angle);
+	exec->delta_y = sin(exec->angle);
 	exec->act = 0;
 	exec->off = 0;
 	exec->key.key_w = 0;
