@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/19 13:21:18 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:37:20 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,7 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 	line->yincr = line->dy / (line->step);
 }
 
-// static void	rotate_line(t_line *line, float length, float dx, float dy)
-// {
-// 	line->x = line->final_x + (length / CUB) * dx;
-// 	line->y = line->final_y + (length / CUB) * dy;
-// }
-
-void draw(t_exec *exec, t_line *line, float ang)
+void draw(t_exec *exec, t_line *line)
 {
 	int pixel;
 	float delta_dist_x;
@@ -86,7 +80,7 @@ void draw(t_exec *exec, t_line *line, float ang)
 				map_y += step_y;
 				exec->side = 1;
 			}
-			if (exec->data.map[map_y][map_x] == '1') // Note the change to map_y and map_x
+			if (exec->data.map[map_y][map_x] == '1')
 			{
 				line->x = map_x;
 				line->y = map_y;
@@ -94,7 +88,12 @@ void draw(t_exec *exec, t_line *line, float ang)
 			}
 			my_mlx_pixel_put(exec, map_x * 6, map_y * 6, 0xFF0000);
 		}
-		display_environment(line, exec, ang);
+		float distance;
+		if(exec->side == 0) 
+			distance = (exec->side_dist_x - delta_dist_x) * 1.02;
+      	else          
+			distance = (exec->side_dist_y - delta_dist_y) * 1.02;
+		display_environment(line, exec, distance);
 		exec->ray_angle += RAD * (40.0 / WIDTH);
 		exec->num++;
 	}
@@ -119,5 +118,5 @@ void	display_game(t_exec *exec)
 	set_up_variable(exec, exec->actual_x, exec->actual_y, &line);
 	line.final_x = (exec->actual_x + SQUARE_SIZE / 2);
 	line.final_y = (exec->actual_y + SQUARE_SIZE / 2);
-	draw(exec, &line, ang);
+	draw(exec, &line);
 }

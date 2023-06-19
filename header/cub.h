@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/16 13:59:31 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:36:55 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	display_minimap_character(t_exec *exec);
 void	display_game(t_exec *exec);
 void	draw_square(int y, int x, int color, t_exec *exec);
 int		draw_player(int y, int x, int color, t_exec *exec);
-void	display_environment(t_line *line, t_exec *exec, float ang);
+void	display_environment(t_line *line, t_exec *exec, float distance);
 void	draw_all_sprites( \
 	t_exec *exec, float wall_height, t_line *line, t_line *wall_struct);
 
@@ -80,7 +80,6 @@ void	check_if_lower_wall(t_exec *exec);
 float	line_offset(float lineHeight);
 float	get_line_height(t_exec *exec, float dist);
 float	adjusted_dist(t_exec *exec, float ray_angle, float dist);
-float	get_distance(t_line *line, t_exec *exec, float ang);
 
 /* UTILS */
 int		my_mlx_pixel_put(t_exec *exec, int x, int y, int color);
