@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/19 14:23:17 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:37:28 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,27 @@ void draw(t_exec *exec, t_line *line)
 		exec->dy = sin(exec->ray_angle);
 		delta_dist_x = fabs(1 / exec->dx);
 		delta_dist_y = fabs(1 / exec->dy);
-		map_x = (int)line->final_x / 6.0;
-		map_y = (int)line->final_y / 6.0;
+		map_x = (int)line->final_x / SQUARE_SIZE;
+		map_y = (int)line->final_y / SQUARE_SIZE;
 		if (exec->dx < 0)
 		{
 			step_x = -1;
-			exec->side_dist_x = ((line->final_x / 6.0) - map_x) * delta_dist_x;
+			exec->side_dist_x = ((line->final_x / SQUARE_SIZE) - map_x) * delta_dist_x;
 		}
 		else
 		{
 			step_x = 1;
-			exec->side_dist_x = (map_x + 1.0 - (line->final_x / 6.0)) * delta_dist_x;
+			exec->side_dist_x = (map_x + 1.0 - (line->final_x / SQUARE_SIZE)) * delta_dist_x;
 		}
 		if (exec->dy < 0)
 		{
 			step_y = -1;
-			exec->side_dist_y = ((line->final_y / 6.0) - map_y) * delta_dist_y;
+			exec->side_dist_y = ((line->final_y / SQUARE_SIZE) - map_y) * delta_dist_y;
 		}
 		else
 		{
 			step_y = 1;
-			exec->side_dist_y = (map_y + 1.0 - (line->final_y / 6.0)) * delta_dist_y;
+			exec->side_dist_y = (map_y + 1.0 - (line->final_y / SQUARE_SIZE)) * delta_dist_y;
 		}
 		while (1)
 		{
@@ -86,20 +86,18 @@ void draw(t_exec *exec, t_line *line)
 				line->y = map_y;
 				break ;
 			}
-			my_mlx_pixel_put(exec, map_x * 6, map_y * 6, 0xFF0000);
 		}
 		float distance;
 		if(exec->side == 0) 
 		{
 			distance = (exec->side_dist_x - delta_dist_x) * 1;
-			exec->coll = (((line->final_y / 6) - ((int)line->final_y / 6)) + distance * exec->dy);
+			exec->coll = (((line->final_y / SQUARE_SIZE) - ((int)line->final_y / SQUARE_SIZE)) + distance * exec->dy);
 		}
       	else
 		{    
 			distance = (exec->side_dist_y - delta_dist_y) * 1;
-			exec->coll = (((line->final_x / 6) - ((int)line->final_x / 6)) + distance * exec->dx);
+			exec->coll = (((line->final_x / SQUARE_SIZE) - ((int)line->final_x / SQUARE_SIZE)) + distance * exec->dx);
 		}
-		printf("%f\n", exec->coll);
 		display_environment(line, exec, exec->ray_angle, distance);
 		exec->ray_angle += RAD * (40.0 / WIDTH);
 		exec->num++;

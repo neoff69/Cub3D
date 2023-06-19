@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:14:08 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/19 14:24:05 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:35:25 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ static void	draw_sprite(\
 	i = 0;
 	get_incrementation_and_step(wall);
 	dst = NULL;
+	(void)x;
 	while (i <= wall->step)
 	{
 		i++;
-		// t_x = (ray.collision.x - (int) ray.collision.x) * 256;
 		if (wall->wall_height == HEIGHT)
-			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - 10 - exec->off - y) / exec->act)));
+			dst = pixel_return(texture, fabs((exec->coll - (int)exec->coll) * 50), (SPRITE_SIZE * ((exec->act - 10 - exec->off - y) / exec->act)));
 		else
-			dst = pixel_return(texture, x, (SPRITE_SIZE * (wall->wall_height - y)) / wall->wall_height - 0.5);
+			dst = pixel_return(texture, fabs((exec->coll - (int)exec->coll) * 50), (SPRITE_SIZE * (wall->wall_height - y)) / wall->wall_height - 0.5);
 		y += 1;
 		my_mlx_pixel_put_wall(\
 		exec, wall->final_x, wall->final_y, *(unsigned int *)dst);
@@ -77,22 +77,20 @@ int	check_texture(t_line *line, t_exec *exec)
 
 void	draw_all_sprites(t_exec *exec, float wall_height, t_line *line, t_line *wall_struct)
 {
-	float	sprite_x;
-	float	sprite_y;
+	// float	sprite_x;
+	// float	sprite_y;
 	int		texture;
 
 	wall_struct->wall_height = wall_height;
-	sprite_x = fmodf(line->x, SQUARE_SIZE) * 8.5;
-	sprite_y = SPRITE_SIZE - fmodf(line->y, SQUARE_SIZE) * 8.5;
+	// sprite_x = fmodf(line->x, SQUARE_SIZE) * 8.5;
+	// sprite_y = SPRITE_SIZE - fmodf(line->y, SQUARE_SIZE) * 8.5;
 	texture = check_texture(line, exec);
 	if (texture == 2)
-		draw_sprite(exec, &exec->west, wall_struct, sprite_y);
+		draw_sprite(exec, &exec->west, wall_struct, 0);
 	else if (texture == 3)
-		draw_sprite(exec, &exec->north, wall_struct, sprite_x);
+		draw_sprite(exec, &exec->north, wall_struct, 0);
 	else if (texture == 4)
-		draw_sprite(exec, &exec->south, wall_struct, SPRITE_SIZE \
-			- fmodf(line->x, SQUARE_SIZE) * 8.5);
+		draw_sprite(exec, &exec->south, wall_struct, 0);
 	else
-		draw_sprite(exec, &exec->east, wall_struct, \
-			fmodf(line->y, SQUARE_SIZE) * 8.5);
+		draw_sprite(exec, &exec->east, wall_struct, 0);
 }
