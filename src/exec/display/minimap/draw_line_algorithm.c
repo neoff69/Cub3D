@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/19 13:37:20 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:39:46 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void draw(t_exec *exec, t_line *line)
 			distance = (exec->side_dist_x - delta_dist_x) * 1.02;
       	else          
 			distance = (exec->side_dist_y - delta_dist_y) * 1.02;
-		display_environment(line, exec, distance);
+		display_environment(line, exec, exec->ray_angle, distance);
 		exec->ray_angle += RAD * (40.0 / WIDTH);
 		exec->num++;
 	}
