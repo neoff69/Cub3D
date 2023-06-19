@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:18:13 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/13 11:22:47 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:36:46 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ float	get_line_height(t_exec *exec, float dist)
 {
 	float	line_height;
 
-	line_height = CUB * HEIGHT / dist;
+	line_height = HEIGHT / dist;
 	if (line_height > HEIGHT)
 	{
 		exec->act = line_height;
@@ -45,15 +45,4 @@ float	line_offset(float line_height)
 
 	line_offset = HEIGHT / 2 - line_height / 2;
 	return (line_offset);
-}
-
-float	get_distance(t_line *line, t_exec *exec, float ang)
-{
-	float	distance;
-
-	distance = ((line->final_x - line->x) * (line->final_x - line->x)) \
-			+ ((line->final_y - line->y) * (line->final_y - line->y));
-	distance = sqrt(distance);
-	distance = adjusted_dist(exec, ang, distance);
-	return (distance);
 }
