@@ -26,6 +26,7 @@ SRC						=	main.c	exit.c	\
 							exec/display/minimap/draw_line_algorithm.c \
 							exec/display/display_environnement/display_environnement.c \
 							exec/display/display_environnement/draw_all_sprites.c \
+							exec/display/minimap/draw_line_algorithm_utils.c \
 							
 OBJECTS					= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
