@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_map_list.c                                       :+:      :+:    :+:   */
+/*   p_map_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:23:45 by juleslaisne       #+#    #+#             */
-/*   Updated: 2023/05/31 10:11:42 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 10:48:15 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_pcub	*new_map_node(char *key)
 
 	new = malloc(sizeof(t_pcub));
 	if (!new)
+	{
+		key = get_next_line(0, 1);
 		return (NULL);
+	}
 	new->key = ft_strdup(key);
 	new->content = NULL;
 	if (!new->key)
