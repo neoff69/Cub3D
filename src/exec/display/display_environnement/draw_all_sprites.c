@@ -6,11 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:14:08 by jlaisne           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/19 15:04:07 by jlaisne          ###   ########.fr       */
-=======
-/*   Updated: 2023/06/20 11:17:13 by vgonnot          ###   ########.fr       */
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
+/*   Updated: 2023/06/20 11:26:57 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +26,9 @@ static void	get_incrementation_and_step(t_line *wall)
 	wall->yincr = dy / wall->step;
 }
 
-<<<<<<< HEAD
-static void	draw_sprite(t_exec *exec, t_img *texture, t_line *wall, int x)
-=======
+
 static void	draw_sprite(\
 	t_exec *exec, t_img *texture, t_line *wall)
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
 {
 	char	*dst;
 	int		i;
@@ -49,18 +42,10 @@ static void	draw_sprite(\
 	{
 		i++;
 		if (wall->wall_height == HEIGHT)
-<<<<<<< HEAD
-			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - 10 - exec->off - y) / exec->act)));
+			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - 5 - exec->off - y) / exec->act)));
 		else
 			dst = pixel_return(texture, x, (SPRITE_SIZE * (wall->wall_height - y)) / wall->wall_height - 0.5);
-=======
-			dst = pixel_return(texture, fabs((exec->coll - (int)exec->coll) \
-		* 50), (SPRITE_SIZE * ((exec->act - 10 - exec->off - y) / exec->act)));
-		else
-			dst = pixel_return(texture, fabs((exec->coll - (int)exec->coll) \
-	* 50), (SPRITE_SIZE * (wall->wall_height - y)) / wall->wall_height - 0.5);
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
-		y += 1;
+		y++;
 		my_mlx_pixel_put_wall(\
 		exec, wall->final_x, wall->final_y, *(unsigned int *)dst);
 		wall->final_x -= wall->xincr;
@@ -87,38 +72,23 @@ int	check_texture(t_exec *exec)
 	return (0);
 }
 
-<<<<<<< HEAD
-
-void	draw_all_sprites(t_exec *exec, float wall_height, t_line *wall_struct)
-=======
 void	draw_all_sprites(t_exec *exec, \
 		float wall_height, t_line *wall_struct)
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
 {
-	int	texture;
-	int	x;
+	int		texture;
+	float	x;
 
 	wall_struct->wall_height = wall_height;
-<<<<<<< HEAD
 	x = (exec->coll - (int)exec->coll) * SPRITE_SIZE;
+	if (x < 0)
+		x = SPRITE_SIZE - fabs(x);
 	texture = check_texture(exec);
 	if (texture == 2)
-		draw_sprite(exec, &exec->west, wall_struct, abs(x));
+		draw_sprite(exec, &exec->west, wall_struct, x);
 	else if (texture == 3)
-		draw_sprite(exec, &exec->north, wall_struct, abs(x));
+		draw_sprite(exec, &exec->north, wall_struct, x);
 	else if (texture == 4)
-		draw_sprite(exec, &exec->south, wall_struct, abs(x));
+		draw_sprite(exec, &exec->south, wall_struct, SPRITE_SIZE - x);
 	else
-		draw_sprite(exec, &exec->east, wall_struct, abs(x));
-=======
-	texture = check_texture(exec);
-	if (texture == 2)
-		draw_sprite(exec, &exec->west, wall_struct);
-	else if (texture == 3)
-		draw_sprite(exec, &exec->north, wall_struct);
-	else if (texture == 4)
-		draw_sprite(exec, &exec->south, wall_struct);
-	else
-		draw_sprite(exec, &exec->east, wall_struct);
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
+		draw_sprite(exec, &exec->east, wall_struct, x);
 }

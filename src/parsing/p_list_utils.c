@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:41:22 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/05/31 10:02:31 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 10:46:09 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ t_pcub	*new_node_cmd(char *key, char *content, t_type id, t_valid check)
 
 	new = malloc(sizeof(t_pcub));
 	if (!new)
+	{
+		content = get_next_line(0, 1);
 		return (NULL);
+	}
 	new->key = ft_strdup(key);
 	new->content = ft_strdup(content);
 	if (!new->content || !new->key)

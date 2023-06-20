@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:40:56 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/16 13:10:34 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 11:25:50 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@
 # define FLOOR_MINIMAP 0xFFFFFF
 # define PLAYER_MINIMAP 0x0000FF
 # define RAY_MINIMAP 0xFF0000
-# define SPRITE_SIZE 50
+# define SPRITE_SIZE 100
+
 #endif

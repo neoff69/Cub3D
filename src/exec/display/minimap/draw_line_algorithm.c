@@ -5,12 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/19 14:52:58 by jlaisne          ###   ########.fr       */
-=======
-/*   Updated: 2023/06/20 11:23:39 by vgonnot          ###   ########.fr       */
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
+/*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             *
+/*   Updated: 2023/06/20 10:31:29 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +51,7 @@ void	draw(t_exec *exec, t_line *line)
 		while (1)
 			if (incr_until_wall(line, exec, delta_dist_x, delta_dist_y))
 				break ;
-<<<<<<< HEAD
-			}
-		}
-		float distance;
-		if(exec->side == 0) 
-		{
-			distance = (exec->side_dist_x - delta_dist_x) * 1;
-			exec->coll = (((line->final_y / SQUARE_SIZE) - ((int)line->final_y / SQUARE_SIZE)) + distance * exec->dy);
-		}
-      	else
-		{    
-			distance = (exec->side_dist_y - delta_dist_y) * 1;
-			exec->coll = (((line->final_x / SQUARE_SIZE) - ((int)line->final_x / SQUARE_SIZE)) + distance * exec->dx);
-		}
-=======
 		distance = get_distance(line, exec, delta_dist_x, delta_dist_y);
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
 		display_environment(exec, exec->ray_angle, distance);
 		exec->ray_angle += RAD * (40.0 / WIDTH);
 		exec->num++;

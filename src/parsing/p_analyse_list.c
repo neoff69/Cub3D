@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:15:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/16 13:41:00 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 10:44:06 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	split_and_check(t_scub *data, char *content, int index)
 	i = -1;
 	colors = ft_split(content, ',');
 	if (!colors)
-		return (printf("Error\nmalloc\n"), 1);
+		return (1);
 	if (colors[3])
 		return (free_2d_array(colors), 1);
 	while (++i < 3)

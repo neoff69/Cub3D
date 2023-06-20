@@ -1,11 +1,11 @@
 
 
 
-NO ./assets/sprites/north.xpm
-SO ./assets/sprites/south.xpm
+NO ./assets/sprites/club.xpm
+SO ./assets/sprites/club2.xpm
 
-WE ./assets/sprites/west.xpm
-EA ./assets/sprites/east.xpm
+WE ./assets/sprites/club3.xpm
+EA ./assets/sprites/club4.xpm
 
 
 

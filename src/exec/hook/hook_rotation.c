@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hook_rotation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:23:28 by jlaisne           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/14 13:33:07 by jlaisne          ###   ########.fr       */
-=======
-/*   Updated: 2023/06/20 11:30:52 by vgonnot          ###   ########.fr       */
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
+/*   Updated: 2023/06/19 15:18:06 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	minimap_rotation(t_exec *exec, int keycode)
+void    minimap_rotation(t_exec *exec, int keycode)
 {
 	if (keycode == KEY_LEFT)
 	{
@@ -32,8 +28,6 @@ void	minimap_rotation(t_exec *exec, int keycode)
 	}
 	exec->delta_x = cos(exec->angle) * 4;
 	exec->delta_y = sin(exec->angle) * 4;
-<<<<<<< HEAD
-=======
 	if (exec->delta_x > 0.0 && exec->delta_x < 1.0)
 		exec->delta_x += 1;
 	else if (exec->delta_x < 0.0 && exec->delta_x > -1.0)
@@ -44,6 +38,5 @@ void	minimap_rotation(t_exec *exec, int keycode)
 	if (((exec->delta_x >= 3.995 && exec->delta_x <= 4.01) \
 	|| (exec->delta_x <= -3.995 && exec->delta_x >= -4.01)))
 		exec->delta_y = 0.0;
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
 	set_image_win(exec);
 }
