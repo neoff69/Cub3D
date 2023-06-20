@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:14:08 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/19 15:04:07 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 10:38:09 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,20 @@ int	check_texture(t_exec *exec)
 
 void	draw_all_sprites(t_exec *exec, float wall_height, t_line *wall_struct)
 {
-	int	texture;
-	int	x;
+	int		texture;
+	float	x;
 
 	wall_struct->wall_height = wall_height;
 	x = (exec->coll - (int)exec->coll) * SPRITE_SIZE;
+	if (x < 0)
+		x = SPRITE_SIZE - fabs(x);
 	texture = check_texture(exec);
 	if (texture == 2)
-		draw_sprite(exec, &exec->west, wall_struct, abs(x));
+		draw_sprite(exec, &exec->west, wall_struct, x);
 	else if (texture == 3)
-		draw_sprite(exec, &exec->north, wall_struct, abs(x));
+		draw_sprite(exec, &exec->north, wall_struct, x);
 	else if (texture == 4)
-		draw_sprite(exec, &exec->south, wall_struct, abs(x));
+		draw_sprite(exec, &exec->south, wall_struct, SPRITE_SIZE - x);
 	else
-		draw_sprite(exec, &exec->east, wall_struct, abs(x));
+		draw_sprite(exec, &exec->east, wall_struct, x);
 }
