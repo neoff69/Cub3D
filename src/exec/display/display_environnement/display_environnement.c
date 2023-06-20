@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_environnement.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:54:04 by vgonnot           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/19 14:52:47 by jlaisne          ###   ########.fr       */
-=======
-/*   Updated: 2023/06/20 10:02:58 by vgonnot          ###   ########.fr       */
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
+/*   Updated: 2023/06/20 11:39:17 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +43,13 @@ void	draw_floor_and_sky( \
 	wall_struct->final_x = wall_struct->x;
 	wall_struct->y = 0.0;
 	wall_struct->final_y = not_wall;
-	draw_offset(exec, wall_struct, exec->data.c_color, &my_mlx_put_offset);
+	draw_offset(exec, wall_struct, exec->data.c_color);
 	wall_struct->y = not_wall + wall;
 	wall_struct->final_y = HEIGHT;
-<<<<<<< HEAD
-	draw_offset(exec, wall_struct, exec->data.f_color, &my_mlx_put_offset);
-=======
 	draw_offset(exec, wall_struct, exec->data.f_color);
 	wall_struct->y = not_wall;
 	wall_struct->final_y = 0.0;
 	draw_offset(exec, wall_struct, exec->data.c_color);
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
 }
 
 void	display_environment(t_exec *exec, float ang, float distance)

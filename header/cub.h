@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/19 14:53:04 by jlaisne          ###   ########.fr       */
-=======
-/*   Updated: 2023/06/20 11:24:28 by vgonnot          ###   ########.fr       */
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
+/*   Updated: 2023/06/20 11:38:02 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +63,7 @@ void	display_game(t_exec *exec);
 void	draw_square(int y, int x, int color, t_exec *exec);
 int		draw_player(int y, int x, int color, t_exec *exec);
 void	display_environment(t_exec *exec, float ang, float distance);
-<<<<<<< HEAD
 void	draw_all_sprites(t_exec *exec, float wall_height, t_line *wall_struct);
-=======
-void	draw_all_sprites( \
-	t_exec *exec, float wall_height, t_line *wall_struct);
->>>>>>> 4a7d146ad59786f734da85d7adc2067081380176
 
 /* HOOK */
 void	hook(t_exec *exec);

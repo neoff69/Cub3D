@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:14:08 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/20 11:26:57 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 11:40:33 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	get_incrementation_and_step(t_line *wall)
 
 
 static void	draw_sprite(\
-	t_exec *exec, t_img *texture, t_line *wall)
+	t_exec *exec, t_img *texture, t_line *wall, int x)
 {
 	char	*dst;
 	int		i;
@@ -88,7 +88,7 @@ void	draw_all_sprites(t_exec *exec, \
 	else if (texture == 3)
 		draw_sprite(exec, &exec->north, wall_struct, x);
 	else if (texture == 4)
-		draw_sprite(exec, &exec->south, wall_struct, SPRITE_SIZE - x);
+		draw_sprite(exec, &exec->south, wall_struct, x);
 	else
 		draw_sprite(exec, &exec->east, wall_struct, x);
 }
