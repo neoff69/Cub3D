@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             */
+/*   Created: 2023/06/01 14:40:09 by vgonnot           #+#    #+#             *
 /*   Updated: 2023/06/20 10:31:29 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -26,76 +26,32 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 	line->yincr = line->dy / (line->step);
 }
 
-void draw(t_exec *exec, t_line *line)
+static void	get_delta_dist(t_line *line, t_exec *exec, \
+		float *delta_dist_x, float *delta_dist_y)
 {
-	float delta_dist_x;
-	float delta_dist_y;
-	int step_x;
-	int step_y;
-	int map_x;
-	int map_y;
+		exec->dx = cos(exec->ray_angle);
+		exec->dy = sin(exec->ray_angle);
+		*delta_dist_x = fabs(1 / exec->dx);
+		*delta_dist_y = fabs(1 / exec->dy);
+		line->map_x = (int)line->final_x / SQUARE_SIZE;
+		line->map_y = (int)line->final_y / SQUARE_SIZE;
+}
+
+void	draw(t_exec *exec, t_line *line)
+{
+	float	delta_dist_x;
+	float	delta_dist_y;
+	float	distance;
 
 	exec->num = 0;
 	while (exec->num <= WIDTH)
 	{
-		exec->dx = cos(exec->ray_angle);
-		exec->dy = sin(exec->ray_angle);
-		delta_dist_x = fabs(1 / exec->dx);
-		delta_dist_y = fabs(1 / exec->dy);
-		map_x = (int)line->final_x / SQUARE_SIZE;
-		map_y = (int)line->final_y / SQUARE_SIZE;
-		if (exec->dx < 0)
-		{
-			step_x = -1;
-			exec->side_dist_x = ((line->final_x / SQUARE_SIZE) - map_x) * delta_dist_x;
-		}
-		else
-		{
-			step_x = 1;
-			exec->side_dist_x = (map_x + 1.0 - (line->final_x / SQUARE_SIZE)) * delta_dist_x;
-		}
-		if (exec->dy < 0)
-		{
-			step_y = -1;
-			exec->side_dist_y = ((line->final_y / SQUARE_SIZE) - map_y) * delta_dist_y;
-		}
-		else
-		{
-			step_y = 1;
-			exec->side_dist_y = (map_y + 1.0 - (line->final_y / SQUARE_SIZE)) * delta_dist_y;
-		}
+		get_delta_dist(line, exec, &delta_dist_x, &delta_dist_y);
+		get_step(line, exec, delta_dist_x, delta_dist_y);
 		while (1)
-		{
-			if (exec->side_dist_x < exec->side_dist_y)
-			{
-				exec->side_dist_x += delta_dist_x;
-				map_x += step_x;
-				exec->side = 0;
-			}
-			else
-			{
-				exec->side_dist_y += delta_dist_y;
-				map_y += step_y;
-				exec->side = 1;
-			}
-			if (exec->data.map[map_y][map_x] == '1')
-			{
-				line->x = map_x;
-				line->y = map_y;
+			if (incr_until_wall(line, exec, delta_dist_x, delta_dist_y))
 				break ;
-			}
-		}
-		float distance;
-		if(exec->side == 0) 
-		{
-			distance = (exec->side_dist_x - delta_dist_x) * 1;
-			exec->coll = (((line->final_y / SQUARE_SIZE) - ((int)line->final_y / SQUARE_SIZE)) + distance * exec->dy);
-		}
-      	else
-		{    
-			distance = (exec->side_dist_y - delta_dist_y) * 1;
-			exec->coll = (((line->final_x / SQUARE_SIZE) - ((int)line->final_x / SQUARE_SIZE)) + distance * exec->dx);
-		}
+		distance = get_distance(line, exec, delta_dist_x, delta_dist_y);
 		display_environment(exec, exec->ray_angle, distance);
 		exec->ray_angle += RAD * (40.0 / WIDTH);
 		exec->num++;

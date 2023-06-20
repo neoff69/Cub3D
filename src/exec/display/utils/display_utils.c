@@ -3,60 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:38:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/16 13:19:17 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 11:15:11 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-int	check_if_corner(t_exec *exec, int bit, int x, int y)
-{
-	char	*fst_wall;
-	char	*sec_wall;
-
-	if (exec->actual_y > y)
-	{
-		if (exec->actual_x >= x)
-		{
-			fst_wall = exec->mlx.addr + ((y + 1) * exec->mlx.len + (x) * (bit));
-			sec_wall = exec->mlx.addr + ((y) * exec->mlx.len + (x + 1) * (bit));
-			if ((*(unsigned int *)fst_wall == WALL_MINIMAP) \
-				&& (*(unsigned int *)sec_wall == WALL_MINIMAP))
-				return (1);
-		}
-		else
-		{
-			fst_wall = exec->mlx.addr + ((y + 1) * exec->mlx.len + (x) * (bit));
-			sec_wall = exec->mlx.addr + ((y) * exec->mlx.len + (x - 1) * (bit));
-			if ((*(unsigned int *)fst_wall == WALL_MINIMAP) \
-				&& (*(unsigned int *)sec_wall == WALL_MINIMAP))
-				return (1);
-		}
-	}
-	else
-	{
-		if (exec->actual_x >= x)
-		{
-			fst_wall = exec->mlx.addr + ((y - 1) * exec->mlx.len + (x) * (bit));
-			sec_wall = exec->mlx.addr + ((y) * exec->mlx.len + (x + 1) * (bit));
-			if ((*(unsigned int *)fst_wall == WALL_MINIMAP) \
-				&& (*(unsigned int *)sec_wall == WALL_MINIMAP))
-				return (1);
-		}
-		else
-		{
-			fst_wall = exec->mlx.addr + ((y - 1) * exec->mlx.len + (x) * (bit));
-			sec_wall = exec->mlx.addr + ((y) * exec->mlx.len + (x - 1) * (bit));
-			if ((*(unsigned int *)fst_wall == WALL_MINIMAP) \
-				&& (*(unsigned int *)sec_wall == WALL_MINIMAP))
-				return (1);
-		}
-	}
-	return (0);
-}
 
 int	my_mlx_pixel_put_wall(t_exec *exec, int x, int y, int color)
 {

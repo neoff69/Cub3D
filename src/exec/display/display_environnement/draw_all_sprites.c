@@ -26,7 +26,9 @@ static void	get_incrementation_and_step(t_line *wall)
 	wall->yincr = dy / wall->step;
 }
 
-static void	draw_sprite(t_exec *exec, t_img *texture, t_line *wall, int x)
+
+static void	draw_sprite(\
+	t_exec *exec, t_img *texture, t_line *wall)
 {
 	char	*dst;
 	int		i;
@@ -56,21 +58,22 @@ int	check_texture(t_exec *exec)
 	if (exec->side == 0)
 	{
 		if (exec->dx < 0)
-			return (2);
-		else
 			return (1);
+		else
+			return (2);
 	}
 	else
 	{
 		if (exec->dy < 0)
-			return (3);
-		else
 			return (4);
+		else
+			return (3);
 	}
 	return (0);
 }
 
-void	draw_all_sprites(t_exec *exec, float wall_height, t_line *wall_struct)
+void	draw_all_sprites(t_exec *exec, \
+		float wall_height, t_line *wall_struct)
 {
 	int		texture;
 	float	x;

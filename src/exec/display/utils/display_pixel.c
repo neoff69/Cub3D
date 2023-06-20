@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   display_pixel.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:50:31 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/16 15:03:36 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 11:15:54 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-int	my_mlx_pixel_put_rt(t_exec *exec, int x, int y, int color)
-{
-	char	*dst;
-	int		bit;
-
-	bit = exec->mlx.bit / 8;
-	dst = exec->mlx.addr + (y * exec->mlx.len + x * (bit));
-	if (*(unsigned int *)dst == WALL_MINIMAP)
-		return (1);
-	if (check_if_corner(exec, bit, x, y))
-	{
-		*(unsigned int *)dst = color;
-		return (1);
-	}
-	*(unsigned int *)dst = color;
-	return (0);
-}
 
 int	my_mlx_pixel_put(t_exec *exec, int x, int y, int color)
 {
