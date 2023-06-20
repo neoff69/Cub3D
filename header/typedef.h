@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/19 14:15:32 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 10:45:13 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ typedef struct s_line
 	float	wall_height;
 	float	old_x;
 	float	old_y;
+	int		step_x;
+	int		step_y;
+	int		map_x;
+	int		map_y;
 }	t_line;
 
 typedef struct s_mlx
@@ -140,8 +144,8 @@ typedef struct s_exec
 	float	delta_y;
 	float	dx;
 	float	dy;
-	float 	side_dist_x;
-	float 	side_dist_y;
+	float	side_dist_x;
+	float	side_dist_y;
 	float	coll;
 }	t_exec;
 

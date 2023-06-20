@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:54:04 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/06/19 17:41:36 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/20 10:02:58 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ void	draw_floor_and_sky( \
 	draw_offset(exec, wall_struct, exec->data.c_color);
 }
 
-void	display_environment(t_line *line, \
-		t_exec *exec, float ang, float distance)
+void	display_environment(t_exec *exec, float ang, float distance)
 {
 	float	wall;
 	float	not_wall;
@@ -62,5 +61,5 @@ void	display_environment(t_line *line, \
 	draw_floor_and_sky(exec, wall, not_wall, &wall_struct);
 	wall_struct.y = not_wall;
 	wall_struct.final_y = wall + not_wall;
-	draw_all_sprites(exec, wall, line, &wall_struct);
+	draw_all_sprites(exec, wall, &wall_struct);
 }

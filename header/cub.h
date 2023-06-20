@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:05 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/19 13:39:32 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 11:24:28 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	display_minimap_character(t_exec *exec);
 void	display_game(t_exec *exec);
 void	draw_square(int y, int x, int color, t_exec *exec);
 int		draw_player(int y, int x, int color, t_exec *exec);
-void	display_environment(t_line *line, t_exec *exec, float ang, float distance);
+void	display_environment(t_exec *exec, float ang, float distance);
 void	draw_all_sprites( \
-	t_exec *exec, float wall_height, t_line *line, t_line *wall_struct);
+	t_exec *exec, float wall_height, t_line *wall_struct);
 
 /* HOOK */
 void	hook(t_exec *exec);
@@ -84,11 +84,14 @@ float	adjusted_dist(t_exec *exec, float ray_angle, float dist);
 /* UTILS */
 int		my_mlx_pixel_put(t_exec *exec, int x, int y, int color);
 int		my_mlx_pixel_put_wall(t_exec *exec, int x, int y, int color);
-int		check_if_corner(t_exec *exec, int bit, int x, int y);
-int		my_mlx_pixel_put_rt(t_exec *exec, int x, int y, int color);
 int		my_mlx_put_offset(t_exec *exec, int x, int y, int color);
 int		pixel_check(t_exec *exec, int x, int y);
 void	set_image_win(t_exec *exec);
 char	*pixel_return(t_img *data, int x, int y);
-
+float	get_distance(t_line *line, t_exec *exec, \
+		float delta_dist_x, float delta_dist_y);
+int		incr_until_wall(t_line *line, t_exec *exec, \
+		float delta_dist_x, float delta_dist_y);
+void	get_step(t_line *line, t_exec *exec, \
+		float delta_dist_x, float delta_dist_y);
 #endif

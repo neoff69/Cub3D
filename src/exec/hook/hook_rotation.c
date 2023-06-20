@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:23:28 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/19 17:30:56 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/20 11:30:52 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ void	minimap_rotation(t_exec *exec, int keycode)
 		exec->delta_x += 1;
 	else if (exec->delta_x < 0.0 && exec->delta_x > -1.0)
 		exec->delta_x -= 1;
-	if (exec->delta_y > 0.0 && exec->delta_y < 1.0)
-		exec->delta_y += 1;
-	else if (exec->delta_y < 0.0 && exec->delta_y > -1.0)
-		exec->delta_y -= 1;
-	if (exec->delta_y == 1 || exec->delta_y == -1)
+	if (((exec->delta_y >= 3.995 && exec->delta_y <= 4.01) \
+	|| (exec->delta_y <= -3.995 && exec->delta_y >= -4.01)))
+		exec->delta_x = 0.0;
+	if (((exec->delta_x >= 3.995 && exec->delta_x <= 4.01) \
+	|| (exec->delta_x <= -3.995 && exec->delta_x >= -4.01)))
 		exec->delta_y = 0.0;
-	if (exec->delta_x == 1.0 || exec->delta_x == -1.0)
-		exec->delta_x = 0.0; 
 	set_image_win(exec);
 }
