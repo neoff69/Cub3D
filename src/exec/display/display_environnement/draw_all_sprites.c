@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:14:08 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/20 11:40:33 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 11:49:59 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	get_incrementation_and_step(t_line *wall)
 	wall->yincr = dy / wall->step;
 }
 
-
 static void	draw_sprite(\
 	t_exec *exec, t_img *texture, t_line *wall, int x)
 {
@@ -42,9 +41,11 @@ static void	draw_sprite(\
 	{
 		i++;
 		if (wall->wall_height == HEIGHT)
-			dst = pixel_return(texture, x, (SPRITE_SIZE * ((exec->act - 5 - exec->off - y) / exec->act)));
+			dst = pixel_return(texture, x, \
+				(SPRITE_SIZE * ((exec->act - 5 - exec->off - y) / exec->act)));
 		else
-			dst = pixel_return(texture, x, (SPRITE_SIZE * (wall->wall_height - y)) / wall->wall_height - 0.5);
+			dst = pixel_return(texture, x, (SPRITE_SIZE * \
+				(wall->wall_height - y)) / wall->wall_height - 0.5);
 		y++;
 		my_mlx_pixel_put_wall(\
 		exec, wall->final_x, wall->final_y, *(unsigned int *)dst);

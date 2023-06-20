@@ -6,13 +6,13 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:23:28 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/19 15:18:06 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 11:49:04 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void    minimap_rotation(t_exec *exec, int keycode)
+void	minimap_rotation(t_exec *exec, int keycode)
 {
 	if (keycode == KEY_LEFT)
 	{

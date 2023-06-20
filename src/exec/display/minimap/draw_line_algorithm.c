@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:38:20 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/20 11:38:23 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/06/20 11:48:50 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static void	set_up_variable(t_exec *exec, int next_x, int next_y, t_line *line)
 static void	get_delta_dist(t_line *line, t_exec *exec, \
 		float *delta_dist_x, float *delta_dist_y)
 {
-		exec->dx = cos(exec->ray_angle);
-		exec->dy = sin(exec->ray_angle);
-		*delta_dist_x = fabs(1 / exec->dx);
-		*delta_dist_y = fabs(1 / exec->dy);
-		line->map_x = (int)line->final_x / SQUARE_SIZE;
-		line->map_y = (int)line->final_y / SQUARE_SIZE;
+	exec->dx = cos(exec->ray_angle);
+	exec->dy = sin(exec->ray_angle);
+	*delta_dist_x = fabs(1 / exec->dx);
+	*delta_dist_y = fabs(1 / exec->dy);
+	line->map_x = (int)line->final_x / SQUARE_SIZE;
+	line->map_y = (int)line->final_y / SQUARE_SIZE;
 }
 
 void	draw(t_exec *exec, t_line *line)
