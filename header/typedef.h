@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:16:25 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/06/20 10:45:13 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/06/20 18:15:04 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,8 @@ typedef struct s_exec
 	t_key	key;
 	float	vertical_movement;
 	float	horizontal_movement;
-	int		actual_x;
-	int		actual_y;
+	float	actual_x;
+	float	actual_y;
 	int		num;
 	int		side;
 	float	angle;
